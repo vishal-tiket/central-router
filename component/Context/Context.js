@@ -11,12 +11,20 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
+function eraseCookie(name) {
+  document.cookie = name + "=; Max-Age=-8640000000;";
+}
+
 export const ContextProvider = ({ children }) => {
   const [referrer, setReferrer] = useState(null);
 
   useEffect(() => {
     const referrerCookie = getCookie("referrer");
-    setReferrer(decodeURIComponent(referrerCookie));
+    if (!!referrerCookie) {
+      console.log("referrer", referrerCookie);
+      setReferrer(decodeURIComponent(referrerCookie));
+      eraseCookie("referrer");
+    }
   }, []);
 
   return (
