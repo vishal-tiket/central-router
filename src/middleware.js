@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-    console.log("middleware", request)
   const referer = request.headers.get("referer");
-  console.log("page load header", referer);
 
-  return NextResponse.next().cookies.set("referrer", referer, {
-    maxAge: 100000000000,
+  const response = NextResponse.next();
+
+  response.cookies.set("referrer", referer, {
+    maxAge: 1000 * 60 * 60 * 24 * 10,
   });
+
+  return response;
 }
 
 export const config = {
