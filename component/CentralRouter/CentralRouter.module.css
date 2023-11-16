@@ -1,0 +1,26 @@
+.checkbox {
+  display: flex;
+  margin: 20px 0;
+}
+
+.checkbox label {
+  flex: 1;
+}
+
+.checkbox label span {
+  font-weight: bold;
+}
+
+.checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.link {
+  display: block;
+}
+
+.url_input {
+  margin-top: 0;
+  height: 41.5px;
+}
