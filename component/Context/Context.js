@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
       eraseCookie("referrer");
       return;
     }
-    setReferrer(isClient && document.referrer);
+    setReferrer(document.referrer);
   }, []);
 
   return (
