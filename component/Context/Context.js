@@ -21,10 +21,11 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     const referrerCookie = getCookie("referrer");
     if (!!referrerCookie) {
-      console.log("referrer", referrerCookie);
       setReferrer(decodeURIComponent(referrerCookie));
       eraseCookie("referrer");
+      return;
     }
+    setReferrer(isClient && document.referrer);
   }, []);
 
   return (
