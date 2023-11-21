@@ -12,6 +12,7 @@ export const CentralRouter = () => {
 
   useEffect(() => {
     setIsClient(true);
+    setUrl("https://" + window.location.host);
   }, []);
 
   const currentUrl = useMemo(() => {
