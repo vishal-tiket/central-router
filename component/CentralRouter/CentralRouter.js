@@ -2,15 +2,23 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./CentralRouter.module.css";
 import { Context } from "../Context";
-import { CustomLink } from "../CustomLink";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 
 export const CentralRouter = () => {
-  const { push } = useRouter();
-  const { referrer, setReferrer } = useContext(Context);
+  const { referrer } = useContext(Context);
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const searchParams = useSearchParams();
+  const params = useParams();
+
+  const queryParams = () => {
+    let obj = {};
+    for (const [key, value] of searchParams.entries()) {
+      obj[key] = value;
+    }
+    return obj;
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -100,33 +108,6 @@ export const CentralRouter = () => {
 
       <div>
         {url && isValidUrl(url) ? (
-          <CustomLink href={url} className={styles.link}>
-            Route to (using nextjs app router)
-          </CustomLink>
-        ) : (
-          <a onClick={handleJSNavigation} className={styles.link}>
-            Route to (using nextjs app router)
-          </a>
-        )}
-
-        {url && isValidUrl(url) ? (
-          <button
-            href={url}
-            className={styles.link}
-            onClick={() => {
-              push(url);
-              setReferrer(currentUrl);
-            }}
-          >
-            Route to (using next js router.push)
-          </button>
-        ) : (
-          <a onClick={handleJSNavigation} className={styles.link}>
-            Route to (using nextjs router.push)
-          </a>
-        )}
-
-        {url && isValidUrl(url) ? (
           <a href={url} className={styles.link}>
             Route to (using html anchor)
           </a>
@@ -151,6 +132,10 @@ export const CentralRouter = () => {
       <span>{currentUrl}</span>
       <h2>Referrer</h2>
       <span>{finalReferrer}</span>
+      <h2>Query Params</h2>
+      <span>{JSON.stringify({ ...queryParams() })}</span>
+      <h2>Path Params</h2>
+      <span>{JSON.stringify({ ...params })}</span>
     </div>
   );
 };
