@@ -3,9 +3,11 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./CentralRouter.module.css";
 import { Context } from "../Context";
 import { CustomLink } from "../CustomLink";
+import { useRouter } from "next/navigation";
 
 export const CentralRouter = () => {
-  const { referrer } = useContext(Context);
+  const { push } = useRouter();
+  const { referrer, setReferrer } = useContext(Context);
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -76,10 +78,6 @@ export const CentralRouter = () => {
 
   return (
     <div>
-      <h2>Current Url</h2>
-      <span>{currentUrl}</span>
-      <h2>Referrer</h2>
-      <span>{finalReferrer}</span>
       <h2>Enter the url to route to below</h2>
       <input
         type="text"
@@ -103,11 +101,28 @@ export const CentralRouter = () => {
       <div>
         {url && isValidUrl(url) ? (
           <CustomLink href={url} className={styles.link}>
-            Route to (using app router)
+            Route to (using nextjs app router)
           </CustomLink>
         ) : (
           <a onClick={handleJSNavigation} className={styles.link}>
-            Route to (using app router)
+            Route to (using nextjs app router)
+          </a>
+        )}
+
+        {url && isValidUrl(url) ? (
+          <button
+            href={url}
+            className={styles.link}
+            onClick={() => {
+              push(url);
+              setReferrer(currentUrl);
+            }}
+          >
+            Route to (using next js router.push)
+          </button>
+        ) : (
+          <a onClick={handleJSNavigation} className={styles.link}>
+            Route to (using nextjs router.push)
           </a>
         )}
 
@@ -132,6 +147,10 @@ export const CentralRouter = () => {
           Route to (using window.location.replace)
         </button>
       </div>
+      <h2>Current Url</h2>
+      <span>{currentUrl}</span>
+      <h2>Referrer</h2>
+      <span>{finalReferrer}</span>
     </div>
   );
 };
