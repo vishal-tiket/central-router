@@ -13,7 +13,8 @@ export const CentralRouter = () => {
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
-  const { referrer, setReferrer } = useContext(Context);
+  const { referrer, setReferrer, currentUrl, setCurrentUrl } =
+    useContext(Context);
 
   const queryParams = () => {
     let obj = {};
@@ -28,9 +29,6 @@ export const CentralRouter = () => {
     setUrl("https://" + window.location.host);
   }, []);
 
-  const currentUrl = useMemo(() => {
-    return (isClient && window.location.href) || "null";
-  }, [isClient, searchParams]);
   const finalReferrer = referrer || "null";
 
   const isValidUrl = (string) => {
@@ -111,7 +109,19 @@ export const CentralRouter = () => {
 
       <div>
         {url && isValidUrl(url) ? (
-          <CustomLink href={url} className={styles.link}>
+          <CustomLink
+            href={url}
+            className={styles.link}
+            callback={() => {
+              let urlRef;
+              if (typeof url === "string") {
+                urlRef = url;
+              } else {
+                urlRef = url?.href;
+              }
+              setCurrentUrl(urlRef);
+            }}
+          >
             Route to (using nextjs app router)
           </CustomLink>
         ) : (
@@ -125,13 +135,15 @@ export const CentralRouter = () => {
             href={url}
             className={styles.link}
             onClick={() => {
-              console.log(url);
+              let urlRef;
               if (typeof url === "string") {
-                router.push(url);
+                urlRef = url;
               } else {
-                router.push(url?.href);
+                urlRef = url?.href;
               }
+              router.push(urlRef);
               setReferrer(currentUrl);
+              setCurrentUrl(urlRef);
             }}
           >
             Route to (using next js app router.push)
@@ -164,9 +176,7 @@ export const CentralRouter = () => {
         </button>
       </div>
       <h2>Current Url</h2>
-      <span>
-        {typeof currentUrl === "string" ? currentUrl : currentUrl?.href}
-      </span>
+      <span>{currentUrl}</span>
       <h2>Referrer</h2>
       <span>{finalReferrer}</span>
       <h2>Query Params</h2>

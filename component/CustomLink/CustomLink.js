@@ -17,11 +17,12 @@ export const CustomLink = (props) => {
     if (isClient) {
       const currentUrl = window.location.href || "null";
       setReferrer(currentUrl);
+      props?.callback();
     }
   };
 
   return (
-    <Link {...props} onClick={handleReferrerForAppRouter}>
+    <Link {...props} onClick={handleReferrerForAppRouter} callback={undefined}>
       {children}
     </Link>
   );

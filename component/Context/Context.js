@@ -17,6 +17,7 @@ function eraseCookie(name) {
 
 export const ContextProvider = ({ children }) => {
   const [referrer, setReferrer] = useState(null);
+  const [currentUrl, setCurrentUrl] = useState(null);
 
   useEffect(() => {
     const referrerCookie = getCookie("referrer");
@@ -26,10 +27,13 @@ export const ContextProvider = ({ children }) => {
       return;
     }
     setReferrer(document.referrer);
+    setCurrentUrl(window.location.href);
   }, []);
 
   return (
-    <Context.Provider value={{ referrer, setReferrer }}>
+    <Context.Provider
+      value={{ referrer, setReferrer, currentUrl, setCurrentUrl }}
+    >
       {children}
     </Context.Provider>
   );
