@@ -30,7 +30,7 @@ export const CentralRouter = () => {
 
   const currentUrl = useMemo(() => {
     return (isClient && window.location.href) || "null";
-  }, [isClient]);
+  }, [isClient, searchParams]);
   const finalReferrer = referrer || "null";
 
   const isValidUrl = (string) => {
