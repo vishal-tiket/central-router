@@ -3,14 +3,17 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./CentralRouter.module.css";
 import { Context } from "../Context";
 import { useSearchParams, useParams } from "next/navigation";
+import { CustomLink } from "../CustomLink";
+import { useRouter } from "next/navigation";
 
 export const CentralRouter = () => {
-  const { referrer } = useContext(Context);
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
   const params = useParams();
+  const router = useRouter();
+  const { referrer, setReferrer } = useContext(Context);
 
   const queryParams = () => {
     let obj = {};
@@ -22,7 +25,7 @@ export const CentralRouter = () => {
 
   useEffect(() => {
     setIsClient(true);
-    setUrl("https://" + window.location.host);
+    setUrl("http://" + window.location.host);
   }, []);
 
   const currentUrl = useMemo(() => {
@@ -108,6 +111,38 @@ export const CentralRouter = () => {
 
       <div>
         {url && isValidUrl(url) ? (
+          <CustomLink href={url} className={styles.link}>
+            Route to (using nextjs app router)
+          </CustomLink>
+        ) : (
+          <a onClick={handleJSNavigation} className={styles.link}>
+            Route to (using nextjs app router)
+          </a>
+        )}
+
+        {url && isValidUrl(url) ? (
+          <button
+            href={url}
+            className={styles.link}
+            onClick={() => {
+              console.log(url);
+              if (typeof url === "string") {
+                router.push(url);
+              } else {
+                router.push(url?.href);
+              }
+              setReferrer(currentUrl);
+            }}
+          >
+            Route to (using next js app router.push)
+          </button>
+        ) : (
+          <a onClick={handleJSNavigation} className={styles.link}>
+            Route to (using nextjs app router.push)
+          </a>
+        )}
+
+        {url && isValidUrl(url) ? (
           <a href={url} className={styles.link}>
             Route to (using html anchor)
           </a>
@@ -129,7 +164,9 @@ export const CentralRouter = () => {
         </button>
       </div>
       <h2>Current Url</h2>
-      <span>{currentUrl}</span>
+      <span>
+        {typeof currentUrl === "string" ? currentUrl : currentUrl?.href}
+      </span>
       <h2>Referrer</h2>
       <span>{finalReferrer}</span>
       <h2>Query Params</h2>
