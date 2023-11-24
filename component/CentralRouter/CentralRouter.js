@@ -176,7 +176,7 @@ export const CentralRouter = () => {
         </button>
       </div>
       <h2>Current Url</h2>
-      <span>{currentUrl}</span>
+      <span>{currentUrl || (isClient && window.location.href)}</span>
       <h2>Referrer</h2>
       <span>{finalReferrer}</span>
       <h2>Query Params</h2>
