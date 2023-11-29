@@ -24,9 +24,13 @@ export const CentralRouter = () => {
     return obj;
   };
 
+  const [countrycode, language] = params?.["countrycode-language"]?.split("-");
+
   useEffect(() => {
     setIsClient(true);
-    setUrl("https://" + window.location.host);
+    setUrl(
+      "https://" + window.location.host + "/" + countrycode + "-" + language
+    );
   }, []);
 
   const finalReferrer = referrer || "null";
@@ -182,7 +186,14 @@ export const CentralRouter = () => {
       <h2>Query Params</h2>
       <span>{JSON.stringify({ ...queryParams() })}</span>
       <h2>Path Params</h2>
-      <span>{JSON.stringify({ ...params })}</span>
+      <span>
+        {JSON.stringify({
+          ...params,
+          "countrycode-language": undefined,
+          countrycode,
+          language,
+        })}
+      </span>
     </div>
   );
 };
