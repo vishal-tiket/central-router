@@ -1,5 +1,5 @@
 import { CentralRouter } from "../../../component/CentralRouter";
 
-export default function Home() {
+export default function App() {
   return <CentralRouter />;
 }

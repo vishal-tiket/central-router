@@ -24,13 +24,18 @@ export const CentralRouter = () => {
     return obj;
   };
 
-  const [countrycode, language] = params?.["countrycode-language"]?.split("-");
+  const [countrycode, language] =
+    (params && params?.["countrycode-language"]?.split("-")) || [];
 
   useEffect(() => {
     setIsClient(true);
-    setUrl(
-      "https://" + window.location.host + "/" + countrycode + "-" + language
-    );
+    if (countrycode && language) {
+      setUrl(
+        "https://" + window.location.host + "/" + countrycode + "-" + language
+      );
+    } else {
+      setUrl("https://" + window.location.host);
+    }
   }, []);
 
   const finalReferrer = referrer || "null";
