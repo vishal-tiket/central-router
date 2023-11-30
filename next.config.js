@@ -3,10 +3,18 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/apple-app-site-association',
-        destination: '/apple-app-site-association.json',
+        source: "/apple-app-site-association",
+        destination: "/apple-app-site-association.json",
       },
-    ]
+    ];
+  },
+  headers() {
+    return [
+      {
+        source: "/apple-app-site-association",
+        headers: [{ key: "content-type", value: "application/json" }],
+      },
+    ];
   },
   async redirects() {
     return [
