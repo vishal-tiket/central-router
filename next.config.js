@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/apple-app-site-association',
+        destination: '/apple-app-site-association.json',
+      },
+    ]
+  },
   async redirects() {
     return [
       {

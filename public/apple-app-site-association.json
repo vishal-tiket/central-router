@@ -1,0 +1,53 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "r8emkfhgh9.com.mobile.ios.tiket.dev",
+        "paths": [
+          "/",
+          "/account",
+          "/account/delete",
+          "/delete",
+          "/fallback",
+          "/flight/pdp/:id",
+          "/flight/search",
+          "/flight/srp",
+          "/flight",
+          "/hotel",
+          "/hotel/:country/:hotelId",
+          "/hotel/pdp/:id",
+          "/hotel/search",
+          "/hotel/srp",
+          "/login",
+          "/order-detail",
+          "/orders",
+          "/orders/detail",
+          "/orders/history",
+          "/payment",
+          "/pesawat",
+          "/pesawat/pdp/:id",
+          "/pesawat/search",
+          "/pesawat/srp",
+          "/redirect301",
+          "/redirect302",
+          "/redirect307",
+          "/redirect308",
+          "/register",
+          "/settings",
+          "/settings/detail",
+          "/settings/landing",
+          "/settings-detail",
+          "/to-do",
+          "/to-do/pdp/:id",
+          "/to-do/search",
+          "/to-do/srp",
+          "/ttd",
+          "/ttd/search",
+          "/ttd/srp",
+          "/voucher-box"
+        ]
+      }
+    ]
+  }
+}
