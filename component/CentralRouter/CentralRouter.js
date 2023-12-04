@@ -34,10 +34,10 @@ export const CentralRouter = ({ referrerHeader }) => {
       !(countrycode === "%23%23" && language === "%23%23")
     ) {
       setUrl(
-        "http://" + window.location.host + "/" + countrycode + "-" + language
+        "https://" + window.location.host + "/" + countrycode + "-" + language
       );
     } else {
-      setUrl("http://" + window.location.host);
+      setUrl("https://" + window.location.host);
     }
   }, []);
 
