@@ -1,20 +1,18 @@
 "use client";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CentralRouter.module.css";
-import { Context } from "../Context";
 import { useSearchParams, useParams } from "next/navigation";
-import { CustomLink } from "../CustomLink";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export const CentralRouter = () => {
+export const CentralRouter = ({ referrerHeader }) => {
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
-  const { referrer, setReferrer, currentUrl, setCurrentUrl } =
-    useContext(Context);
 
   const queryParams = () => {
     let obj = {};
@@ -29,16 +27,19 @@ export const CentralRouter = () => {
 
   useEffect(() => {
     setIsClient(true);
-    if (countrycode && language) {
+    setCurrentUrl(window.location.href);
+    if (
+      countrycode &&
+      language &&
+      !(countrycode === "%23%23" && language === "%23%23")
+    ) {
       setUrl(
-        "https://" + window.location.host + "/" + countrycode + "-" + language
+        "http://" + window.location.host + "/" + countrycode + "-" + language
       );
     } else {
-      setUrl("https://" + window.location.host);
+      setUrl("http://" + window.location.host);
     }
   }, []);
-
-  const finalReferrer = referrer || "null";
 
   const isValidUrl = (string) => {
     try {
@@ -118,21 +119,9 @@ export const CentralRouter = () => {
 
       <div>
         {url && isValidUrl(url) ? (
-          <CustomLink
-            href={url}
-            className={styles.link}
-            callback={() => {
-              let urlRef;
-              if (typeof url === "string") {
-                urlRef = url;
-              } else {
-                urlRef = url?.href;
-              }
-              setCurrentUrl(urlRef);
-            }}
-          >
+          <Link href={url} className={styles.link}>
             Route to (using nextjs app router)
-          </CustomLink>
+          </Link>
         ) : (
           <a onClick={handleJSNavigation} className={styles.link}>
             Route to (using nextjs app router)
@@ -151,8 +140,6 @@ export const CentralRouter = () => {
                 urlRef = url?.href;
               }
               router.push(urlRef);
-              setReferrer(currentUrl);
-              setCurrentUrl(urlRef);
             }}
           >
             Route to (using next js app router.push)
@@ -185,9 +172,9 @@ export const CentralRouter = () => {
         </button>
       </div>
       <h2>Current Url</h2>
-      <span>{currentUrl || (isClient && window.location.href)}</span>
+      <span>{currentUrl}</span>
       <h2>Referrer</h2>
-      <span>{finalReferrer}</span>
+      <span>{referrerHeader || "null"}</span>
       <h2>Query Params</h2>
       <span>{JSON.stringify({ ...queryParams() })}</span>
       <h2>Path Params</h2>
@@ -195,8 +182,10 @@ export const CentralRouter = () => {
         {JSON.stringify({
           ...params,
           "countrycode-language": undefined,
-          countrycode,
-          language,
+          ...(countrycode === "%23%23"
+            ? { countrycode: undefined }
+            : { countrycode }),
+          ...(language === "%23%23" ? { language: undefined } : { language }),
         })}
       </span>
     </div>

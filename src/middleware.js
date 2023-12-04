@@ -1,14 +1,31 @@
 import { NextResponse } from "next/server";
+import { ACCEPTED_COUNTRY_CODES, ACCEPTED_LANGUAGES } from "./constant";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-  const referer = request.headers.get("referer");
+  const pathname = request.nextUrl.pathname;
+  const [countryCode, language] = pathname?.split("/")?.[1]?.split("-");
+
+  if (countryCode && language && !(countryCode === "to" && language === "do")) {
+    const isValidCountryCode = ACCEPTED_COUNTRY_CODES?.find((val) => {
+      if (val?.code?.toLowerCase() === countryCode?.toLowerCase()) return true;
+    });
+    const isValidLangauge = ACCEPTED_LANGUAGES?.find((val) => {
+      if (val?.code?.toLowerCase() === language?.toLowerCase()) return true;
+    });
+
+    if (!isValidCountryCode || !isValidLangauge) {
+      console.log("not valid");
+      request.nextUrl.pathname = `${countryCode}-${language}/not-found`;
+      return NextResponse.rewrite(request.nextUrl);
+    }
+  } else if (countryCode || language) {
+    request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
+    const response = NextResponse.rewrite(request.nextUrl);
+    return response;
+  }
 
   const response = NextResponse.next();
-
-  response.cookies.set("referrer", referer, {
-    maxAge: 1000 * 60 * 60 * 24 * 10,
-  });
 
   return response;
 }
