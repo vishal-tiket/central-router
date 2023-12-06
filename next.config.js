@@ -6,6 +6,10 @@ const nextConfig = {
         source: "/apple-app-site-association",
         destination: "/apple-app-site-association.json",
       },
+      {
+        source: "/storage/index.html",
+        destination: "/storage/index.html",
+      },
     ];
   },
   headers() {
