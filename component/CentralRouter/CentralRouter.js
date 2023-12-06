@@ -4,6 +4,7 @@ import styles from "./CentralRouter.module.css";
 import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { set } from "../../lib/react-common-storage";
 
 export const CentralRouter = ({ referrerHeader }) => {
   const [url, setUrl] = useState("");
@@ -28,6 +29,7 @@ export const CentralRouter = ({ referrerHeader }) => {
   useEffect(() => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
+    set("sample-tiket-com-analytic", "dummy value");
     if (
       countrycode &&
       language &&
