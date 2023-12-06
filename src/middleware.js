@@ -4,6 +4,16 @@ import { ACCEPTED_COUNTRY_CODES, ACCEPTED_LANGUAGES } from "./constant";
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
   const pathname = request.nextUrl.pathname;
+
+  if (
+    pathname === "/apple-app-site-association" ||
+    pathname === "/storage/index.html"
+  ) {
+    const response = NextResponse.next();
+
+    return response;
+  }
+
   const [countryCode, language] = pathname?.split("/")?.[1]?.split("-");
 
   if (countryCode && language && !(countryCode === "to" && language === "do")) {
@@ -15,7 +25,6 @@ export function middleware(request) {
     });
 
     if (!isValidCountryCode || !isValidLangauge) {
-      console.log("not valid");
       request.nextUrl.pathname = `${countryCode}-${language}/not-found`;
       return NextResponse.rewrite(request.nextUrl);
     }
