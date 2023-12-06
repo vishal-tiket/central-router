@@ -29,7 +29,18 @@ export const CentralRouter = ({ referrerHeader }) => {
   useEffect(() => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
-    set("sample-tiket-com-analytic", "dummy value");
+
+    const callSharedStorage =
+      window.location.href.includes("/ttd/pdp/11") ||
+      window.location.href.includes("/ttd/pdp/12") ||
+      window.location.href.includes("/ttd/pdp/13") ||
+      window.location.href.includes("/ttd/pdp/14") ||
+      window.location.href.includes("/ttd/pdp/15");
+
+    if (callSharedStorage) {
+      set("sample-tiket-com-analytic", "dummy value");
+    }
+
     if (
       countrycode &&
       language &&
