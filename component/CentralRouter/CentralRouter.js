@@ -143,13 +143,13 @@ export const CentralRouter = ({ referrerHeader }) => {
         let carRequest = {};
         let carProperties;
         if (isiOS) {
-          carRequest.displayedInfo = "[phone,address]";
-          carProperties = "phoneNumbers,emailAddresses,givenName";
+          carRequest.displayedInfo = "[phone]";
+          carProperties = "phoneNumbers,givenName";
         } else {
-          carRequest.type = "phone/email";
-          carProperties = "data1,data1,display_name";
+          carRequest.type = "phone";
+          carProperties = "data1,display_name";
         }
-        window.location.href = `/cross-app-request/{car-request-type}?car-request=${JSON.stringify(
+        window.location.href = `/cross-app-request/contact-picker?car-request=${JSON.stringify(
           carRequest
         )}&car-properties=${carProperties}`;
       }
