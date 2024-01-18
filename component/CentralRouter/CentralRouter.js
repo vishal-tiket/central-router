@@ -11,6 +11,7 @@ export const CentralRouter = ({ referrerHeader }) => {
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
+  const [contactWebResponse, setContactWebResponse] = useState("");
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
@@ -52,6 +53,19 @@ export const CentralRouter = ({ referrerHeader }) => {
     } else {
       setUrl("https://" + window.location.host);
     }
+
+    /**
+     * CAR Cross App Routing event listener For Contact Picker;
+     */
+    const CARCallback = (event) => {
+      console.log("Webview CARCallback event.data", { response: event?.data });
+      setContactWebResponse(JSON.stringify(event?.data));
+    };
+    document.addEventListener("onCrossAppRoutingResponse", CARCallback);
+
+    return () => {
+      document.removeEventListener("onCrossAppRoutingResponse", CARCallback);
+    };
   }, []);
 
   const isValidUrl = (string) => {
@@ -106,6 +120,59 @@ export const CentralRouter = ({ referrerHeader }) => {
       return;
     }
     window.location.href = url;
+  };
+
+  /**
+   * CAR Cross App Routing event listener For Contact Picker;
+   * Detect in case of webview if it is android or ios.
+   */
+
+  const TIKET_APP_UA = ["tiketcom/android-version", "tiketcom/ios-version"];
+  function isiOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+  const isWebview = () => {
+    return new RegExp(TIKET_APP_UA.join("|")).test(navigator.userAgent);
+  };
+  const getContacts = () => {
+    if (typeof window !== "undefined") {
+      /**
+       * Webview CAR handling
+       */
+      if (isWebview()) {
+        let carRequest = {};
+        let carProperties;
+        if (isiOS) {
+          carRequest.displayedInfo = "[phone,address]";
+          carProperties = "phoneNumbers,emailAddresses,givenName";
+        } else {
+          carRequest.type = "phone/email";
+          carProperties = "data1,data1,display_name";
+        }
+        window.location.href = `/cross-app-request/{car-request-type}?car-request=${JSON.stringify(
+          carRequest
+        )}&car-properties=${carProperties}`;
+      }
+
+      // Check if the Contact Picker API is supported in the browser
+      if ("contacts" in navigator && "select" in navigator.contacts) {
+        // Use the Contact Picker API
+        navigator.contacts
+          .select(["tel", "email", "name"])
+          .then((contacts) => {
+            setContactWebResponse(JSON.stringify(contacts));
+          })
+          .catch((error) => {
+            // Handle errors
+            setContactWebResponse(JSON.stringify(error));
+          });
+      } else {
+        // Fallback for browsers that do not support the Contact Picker API
+        setContactWebResponse(
+          "Contact Picker API is not supported in this browser"
+        );
+      }
+    }
   };
 
   return (
@@ -183,7 +250,12 @@ export const CentralRouter = ({ referrerHeader }) => {
         >
           Route to (using window.location.replace)
         </button>
+        <button className={styles.link} onClick={getContacts}>
+          Get Contacts
+        </button>
       </div>
+      <h2>CAR Response</h2>
+      <span>{contactWebResponse}</span>
       <h2>Current Url</h2>
       <span>{currentUrl}</span>
       <h2>Referrer</h2>
