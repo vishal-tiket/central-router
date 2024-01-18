@@ -152,6 +152,7 @@ export const CentralRouter = ({ referrerHeader }) => {
         window.location.href = `/cross-app-request/contact-picker?car-request=${JSON.stringify(
           carRequest
         )}&car-properties=${carProperties}`;
+        return;
       }
 
       // Check if the Contact Picker API is supported in the browser
