@@ -126,43 +126,41 @@ export const CentralRouter = ({ referrerHeader }) => {
    * CAR Cross App Routing event listener For Contact Picker;
    * Detect in case of webview if it is android or ios.
    */
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-  }
+  const getMobileOS = () => {
+    var userAgent = navigator.userAgent || window.opera;
+
+    if (/android/i.test(userAgent)) {
+      return "android";
+    }
+
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return "iOS";
+    }
+
+    return false;
+  };
 
   const getContacts = async () => {
     if (typeof window !== "undefined") {
       /**
        * Webview CAR handling
        */
-      const device_type = getCookie("device_type");
-      let carRequest = {};
-      let carProperties;
-      if (device_type === "ios") {
-        carRequest.displayedInfo = "[phone]";
-        carProperties = "phoneNumbers,givenName";
-
+      if (getMobileOS()) {
+        let carRequest = {};
+        let carProperties;
+        if (getMobileOS() === "ios") {
+          carRequest.displayedInfo = "[phone]";
+          carProperties = "phoneNumbers,givenName";
+        }
+        if (getMobileOS() === "android") {
+          carRequest.type = "phone";
+          carProperties = "data1,display_name";
+        }
         window.location.href = `${
           window.location.origin
         }/cross-app-request/contact-picker?car-request=${JSON.stringify(
           carRequest
         )}&car-properties=${carProperties}`;
-
-        return;
-      }
-      if (device_type === "android") {
-        carRequest.type = "phone";
-        carProperties = "data1,display_name";
-
-        window.location.href = `${
-          window.location.origin
-        }/cross-app-request/contact-picker?car-request=${JSON.stringify(
-          carRequest
-        )}&car-properties=${carProperties}`;
-
-        return;
       }
 
       // Check if the Contact Picker API is supported in the browser
