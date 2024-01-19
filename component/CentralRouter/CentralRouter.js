@@ -126,47 +126,55 @@ export const CentralRouter = ({ referrerHeader }) => {
    * CAR Cross App Routing event listener For Contact Picker;
    * Detect in case of webview if it is android or ios.
    */
-
-  const TIKET_APP_UA = ["tiketcom/android-version", "tiketcom/ios-version"];
-  function isiOS() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
   }
-  const isWebview = () => {
-    return new RegExp(TIKET_APP_UA.join("|")).test(navigator.userAgent);
-  };
-  const getContacts = () => {
+
+  const getContacts = async () => {
     if (typeof window !== "undefined") {
       /**
        * Webview CAR handling
        */
-      if (isWebview()) {
-        let carRequest = {};
-        let carProperties;
-        if (isiOS) {
-          carRequest.displayedInfo = "[phone]";
-          carProperties = "phoneNumbers,givenName";
-        } else {
-          carRequest.type = "phone";
-          carProperties = "data1,display_name";
-        }
-        window.location.href = `/cross-app-request/contact-picker?car-request=${JSON.stringify(
+      const device_type = getCookie("device_type");
+      let carRequest = {};
+      let carProperties;
+      if (device_type === "ios") {
+        carRequest.displayedInfo = "[phone]";
+        carProperties = "phoneNumbers,givenName";
+
+        window.location.href = `${
+          window.location.origin
+        }/cross-app-request/contact-picker?car-request=${JSON.stringify(
           carRequest
         )}&car-properties=${carProperties}`;
+
+        return;
+      }
+      if (device_type === "android") {
+        carRequest.type = "phone";
+        carProperties = "data1,display_name";
+
+        window.location.href = `${
+          window.location.origin
+        }/cross-app-request/contact-picker?car-request=${JSON.stringify(
+          carRequest
+        )}&car-properties=${carProperties}`;
+
         return;
       }
 
       // Check if the Contact Picker API is supported in the browser
-      if ("contacts" in navigator && "select" in navigator.contacts) {
-        // Use the Contact Picker API
-        navigator.contacts
-          .select(["tel", "email", "name"])
-          .then((contacts) => {
-            setContactWebResponse(JSON.stringify(contacts));
-          })
-          .catch((error) => {
-            // Handle errors
-            setContactWebResponse(JSON.stringify(error));
-          });
+      const opts = { multiple: true };
+      if ("contacts" in navigator) {
+        try {
+          const contacts = await navigator.contacts.select(props, opts);
+          setContactWebResponse(JSON.stringify(contacts));
+        } catch (ex) {
+          // Handle any errors here.
+          setContactWebResponse(JSON.stringify(ex));
+        }
       } else {
         // Fallback for browsers that do not support the Contact Picker API
         setContactWebResponse(
