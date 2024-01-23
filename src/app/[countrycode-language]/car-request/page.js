@@ -8,14 +8,32 @@ export default function Delete() {
 
   return (
     <>
-      <Script id="car-functions">
-        {`function carPayload(payload) {
-            return {payload: JSON.stringify(payload || {}), dataRecieved: true};
-        }`}
-        {`window.carPayloadWithWindow = (payload) => {
-            return {payload: JSON.stringify(payload || {}), dataRecieved: true};
-        }`}
-      </Script>
+      <Script
+        id="car-functions-3"
+        dangerouslySetInnerHTML={{
+          __html: `function carPayload(payload){
+          return JSON.stringify({payload, val: true});
+        }`,
+        }}
+      />
+
+      <Script
+        id="car-functions-2"
+        dangerouslySetInnerHTML={{
+          __html: `function handleBackPressed(payload){
+          return JSON.stringify({payload, val: true});
+        }`,
+        }}
+      />
+
+      <Script
+        id="car-functions-1"
+        dangerouslySetInnerHTML={{
+          __html: `window.carPayloadWithWindow = function(payload){
+          return JSON.stringify({payload, val: true});
+        }`,
+        }}
+      />
       <CentralRouter referrerHeader={referrer} />
     </>
   );
