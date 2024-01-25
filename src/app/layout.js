@@ -20,6 +20,34 @@ export default function RootLayout({ children }) {
           rel="apple-app-site-association file"
           href="/apple-app-site-association.json"
         />
+
+        <script
+          id="car-functions-3"
+          dangerouslySetInnerHTML={{
+            __html: `function carPayload(payload){
+            console.log("inside script carPayload");
+            var customEvent = new CustomEvent("customEvent2", {
+              detail: { payload },
+            });
+            document.dispatchEvent(customEvent);
+            return JSON.stringify({ payload, val: true });
+        }`,
+          }}
+        />
+
+        <script
+          id="car-functions-2"
+          dangerouslySetInnerHTML={{
+            __html: `function handleBackPressed(payload){
+            console.log("inside script handleBackPressed");
+            const customEvent = new CustomEvent("customEvent3", {
+              detail: { payload },
+            });
+            document.dispatchEvent(customEvent);
+            return JSON.stringify({ payload, val: true });
+        }`,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <div id="layout">{children}</div>
