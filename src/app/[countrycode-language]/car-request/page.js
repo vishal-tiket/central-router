@@ -12,7 +12,8 @@ export default function Delete() {
         id="car-functions-3"
         dangerouslySetInnerHTML={{
           __html: `function carPayload(payload){
-            var customEvent = new CustomEvent("customEvent", {
+            console.log("inside script carPayload");
+            var customEvent = new CustomEvent("customEvent2", {
               detail: { payload },
             });
             document.dispatchEvent(customEvent);
@@ -25,7 +26,8 @@ export default function Delete() {
         id="car-functions-2"
         dangerouslySetInnerHTML={{
           __html: `function handleBackPressed(payload){
-            const customEvent = new CustomEvent("customEvent", {
+            console.log("inside script handleBackPressed");
+            const customEvent = new CustomEvent("customEvent3", {
               detail: { payload },
             });
             document.dispatchEvent(customEvent);

@@ -32,7 +32,8 @@ export const CentralRouter = ({ referrerHeader }) => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
     window.carPayloadWithWindow = (payload) => {
-      const customEvent = new CustomEvent("customEvent", {
+      console.log("inside window carPayloadWithWindow");
+      const customEvent = new CustomEvent("customEvent1", {
         detail: { payload },
       });
       document.dispatchEvent(customEvent);
@@ -70,16 +71,33 @@ export const CentralRouter = ({ referrerHeader }) => {
       setContactWebResponse(JSON.stringify(event?.data));
     };
 
-    const customEventHandler = (event) => {
+    const customEventHandler = (event, log) => {
+      console.log(log);
       console.log("inside event handler", event.detail);
       setPayloadFromApps(JSON.stringify(event.detail));
     };
 
     document.addEventListener("onCrossAppRoutingResponse", CARCallback);
-    document.addEventListener("customEvent", customEventHandler);
+    document.addEventListener("customEvent1", (event) =>
+      customEventHandler(event, "window function")
+    );
+    document.addEventListener("customEvent2", (event) =>
+      customEventHandler(event, "script function")
+    );
+    document.addEventListener("customEvent3", (event) =>
+      customEventHandler(event, "script function")
+    );
 
     return () => {
-      document.removeEventListener("customEvent", customEventHandler);
+      document.removeEventListener("customEvent1", (event) =>
+        customEventHandler(event, "window function")
+      );
+      document.removeEventListener("customEvent2", (event) =>
+        customEventHandler(event, "script function")
+      );
+      document.removeEventListener("customEvent3", (event) =>
+        customEventHandler(event, "script function")
+      );
       document.removeEventListener("onCrossAppRoutingResponse", CARCallback);
     };
   }, []);
