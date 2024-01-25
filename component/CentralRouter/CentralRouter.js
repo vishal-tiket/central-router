@@ -12,6 +12,7 @@ export const CentralRouter = ({ referrerHeader }) => {
   const [isClient, setIsClient] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
   const [contactWebResponse, setContactWebResponse] = useState("");
+  const [payloadFromApps, setPayloadFromApps] = useState("");
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
@@ -30,6 +31,13 @@ export const CentralRouter = ({ referrerHeader }) => {
   useEffect(() => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
+    window.carPayloadWithWindow = (payload) => {
+      const customEvent = new CustomEvent("customEvent", {
+        detail: { payload },
+      });
+      document.dispatchEvent(customEvent);
+      return JSON.stringify({ payload, val: true });
+    };
 
     const callSharedStorage =
       window.location.href.includes("/ttd/pdp/11") ||
@@ -61,9 +69,17 @@ export const CentralRouter = ({ referrerHeader }) => {
       console.log("Webview CARCallback event.data", { response: event?.data });
       setContactWebResponse(JSON.stringify(event?.data));
     };
+
+    const customEventHandler = (event) => {
+      console.log("inside event handler", event.detail);
+      setPayloadFromApps(JSON.stringify(event.detail));
+    };
+
     document.addEventListener("onCrossAppRoutingResponse", CARCallback);
+    document.addEventListener("customEvent", customEventHandler);
 
     return () => {
+      document.removeEventListener("customEvent", customEventHandler);
       document.removeEventListener("onCrossAppRoutingResponse", CARCallback);
     };
   }, []);
@@ -262,7 +278,7 @@ export const CentralRouter = ({ referrerHeader }) => {
         </button>
       </div>
       <h2>CAR Response</h2>
-      <span>{contactWebResponse}</span>
+      <span>{contactWebResponse || payloadFromApps}</span>
       <h2>Current Url</h2>
       <span>{currentUrl}</span>
       <h2>Referrer</h2>

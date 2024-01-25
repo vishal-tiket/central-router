@@ -12,7 +12,11 @@ export default function Delete() {
         id="car-functions-3"
         dangerouslySetInnerHTML={{
           __html: `function carPayload(payload){
-          return JSON.stringify({payload, val: true});
+            var customEvent = new CustomEvent("customEvent", {
+              detail: { payload },
+            });
+            document.dispatchEvent(customEvent);
+            return JSON.stringify({ payload, val: true });
         }`,
         }}
       />
@@ -21,16 +25,11 @@ export default function Delete() {
         id="car-functions-2"
         dangerouslySetInnerHTML={{
           __html: `function handleBackPressed(payload){
-          return JSON.stringify({payload, val: true});
-        }`,
-        }}
-      />
-
-      <Script
-        id="car-functions-1"
-        dangerouslySetInnerHTML={{
-          __html: `window.carPayloadWithWindow = function(payload){
-          return JSON.stringify({payload, val: true});
+            const customEvent = new CustomEvent("customEvent", {
+              detail: { payload },
+            });
+            document.dispatchEvent(customEvent);
+            return JSON.stringify({ payload, val: true });
         }`,
         }}
       />
