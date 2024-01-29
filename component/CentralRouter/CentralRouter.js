@@ -41,7 +41,7 @@ export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
         detail: { payload },
       });
       document.dispatchEvent(customEvent);
-      return JSON.stringify({ payload, val: true });
+      return true;
     };
 
     window.handleBackPressed = () => {
