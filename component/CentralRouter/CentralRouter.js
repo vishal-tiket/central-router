@@ -5,14 +5,17 @@ import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { set } from "../../lib/react-common-storage";
+import { callGenericJSICommand } from "../../lib/react-common-jsi/jsi/invokeJSI";
 
-export const CentralRouter = ({ referrerHeader }) => {
+export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
   const [contactWebResponse, setContactWebResponse] = useState("");
   const [payloadFromApps, setPayloadFromApps] = useState("");
+  const [authenticationJSI, setAuthenticationJSI] = useState("");
+  const [trackerJSI, setTrackerJSI] = useState("");
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
@@ -31,6 +34,7 @@ export const CentralRouter = ({ referrerHeader }) => {
   useEffect(() => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
+
     window.carPayloadWithWindow = (payload) => {
       console.log("inside window carPayloadWithWindow");
       const customEvent = new CustomEvent("customEvent1", {
@@ -38,6 +42,10 @@ export const CentralRouter = ({ referrerHeader }) => {
       });
       document.dispatchEvent(customEvent);
       return JSON.stringify({ payload, val: true });
+    };
+
+    window.handleBackPressed = () => {
+      return queryParams()?.["back"] === "true" ? true : false;
     };
 
     const callSharedStorage =
@@ -216,8 +224,30 @@ export const CentralRouter = ({ referrerHeader }) => {
     }
   };
 
+  const callAuthenticationJSI = async () => {
+    console.log("callAuthenticationJSI jsi");
+    const response = await callGenericJSICommand({
+      request: "getAuthenticatedUserDetails",
+    });
+    setAuthenticationJSI(JSON.stringify(response));
+  };
+
+  const callTrackerJSI = async () => {
+    console.log("call tracker jsi");
+    const response = await callGenericJSICommand({
+      request: "trackAnalyticEvent",
+      payload: {
+        event: "click",
+        eventCategory: "ctaClick",
+        text: "promo",
+      },
+    });
+    setTrackerJSI(JSON.stringify(response));
+  };
+
   return (
     <div>
+      {handleBack && <button onClick={() => router.back()}>Back</button>}
       <h2>Enter the url to route to below</h2>
       <input
         type="text"
@@ -295,6 +325,23 @@ export const CentralRouter = ({ referrerHeader }) => {
           Get Contacts
         </button>
       </div>
+      {callJSI && (
+        <>
+          <button onClick={callAuthenticationJSI}>
+            Call getAuthenticatedUserDetails
+          </button>
+          <br />
+          <button onClick={callTrackerJSI}>Call trackAnalyticEvent</button>
+        </>
+      )}
+      {callJSI && (
+        <>
+          <h2>trackAnalyticEvent Response</h2>
+          <span>{trackerJSI}</span>
+          <h2>getAuthenticatedUserDetails Response</h2>
+          <span>{authenticationJSI}</span>
+        </>
+      )}
       <h2>CAR Response</h2>
       <span>{contactWebResponse || payloadFromApps}</span>
       <h2>Current Url</h2>
