@@ -122,27 +122,10 @@ export const CentralRouter = ({
     window.location.href = url;
   };
 
-  /**
-   * CAR Cross App Routing event listener For Contact Picker;
-   * Detect in case of webview if it is android or ios.
-   */
-  const getMobileOS = () => {
-    var userAgent = navigator.userAgent || window.opera;
-
-    if (/android/i.test(userAgent)) {
-      return "android";
-    }
-
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      return "iOS";
-    }
-
-    return false;
-  };
-
   const getContacts = async () => {
     if (typeof window !== "undefined") {
-      const response = await ContactPicker.get(["name", "phoneNumbers"]);
+      const carProperties = queryParams()?.["car-properties"]?.split(",");
+      const response = await ContactPicker.get(carProperties);
       setContactWebResponse(JSON.stringify(response));
     }
   };
@@ -244,9 +227,11 @@ export const CentralRouter = ({
         >
           Route to (using window.location.replace)
         </button>
-        <button className={styles.link} onClick={getContacts}>
-          Get Contacts
-        </button>
+        {carRequest && (
+          <button className={styles.link} onClick={getContacts}>
+            Get Contacts
+          </button>
+        )}
       </div>
       {callJSI && (
         <>
