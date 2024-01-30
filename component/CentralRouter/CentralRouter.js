@@ -6,14 +6,19 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { set } from "../../lib/react-common-storage";
 import { callGenericJSICommand } from "../../lib/react-common-jsi/jsi/invokeJSI";
+import { ContactPicker } from "../../lib/react-common-navigator-permission";
 
-export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
+export const CentralRouter = ({
+  referrerHeader,
+  callJSI,
+  handleBack,
+  carRequest,
+}) => {
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
   const [contactWebResponse, setContactWebResponse] = useState("");
-  const [payloadFromApps, setPayloadFromApps] = useState("");
   const [authenticationJSI, setAuthenticationJSI] = useState("");
   const [trackerJSI, setTrackerJSI] = useState("");
   const searchParams = useSearchParams();
@@ -34,15 +39,6 @@ export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
   useEffect(() => {
     setIsClient(true);
     setCurrentUrl(window.location.href);
-
-    window.carPayloadWithWindow = (payload) => {
-      console.log("inside window carPayloadWithWindow");
-      const customEvent = new CustomEvent("customEvent1", {
-        detail: { payload },
-      });
-      document.dispatchEvent(customEvent);
-      return true;
-    };
 
     window.handleBackPressed = () => {
       return queryParams()?.["back"] === "true" ? true : false;
@@ -70,44 +66,6 @@ export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
     } else {
       setUrl("https://" + window.location.host);
     }
-
-    /**
-     * CAR Cross App Routing event listener For Contact Picker;
-     */
-    const CARCallback = (event) => {
-      console.log("Webview CARCallback event.data", { response: event?.data });
-      setContactWebResponse(JSON.stringify(event?.data));
-    };
-
-    const customEventHandler = (event, log) => {
-      console.log(log);
-      console.log("inside event handler", event.detail);
-      setPayloadFromApps(JSON.stringify(event.detail));
-    };
-
-    document.addEventListener("onCrossAppRoutingResponse", CARCallback);
-    document.addEventListener("customEvent1", (event) =>
-      customEventHandler(event, "window function")
-    );
-    document.addEventListener("customEvent2", (event) =>
-      customEventHandler(event, "script function")
-    );
-    document.addEventListener("customEvent3", (event) =>
-      customEventHandler(event, "script function")
-    );
-
-    return () => {
-      document.removeEventListener("customEvent1", (event) =>
-        customEventHandler(event, "window function")
-      );
-      document.removeEventListener("customEvent2", (event) =>
-        customEventHandler(event, "script function")
-      );
-      document.removeEventListener("customEvent3", (event) =>
-        customEventHandler(event, "script function")
-      );
-      document.removeEventListener("onCrossAppRoutingResponse", CARCallback);
-    };
   }, []);
 
   const isValidUrl = (string) => {
@@ -184,43 +142,8 @@ export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
 
   const getContacts = async () => {
     if (typeof window !== "undefined") {
-      /**
-       * Webview CAR handling
-       */
-      if (getMobileOS()) {
-        let carRequest = {};
-        let carProperties;
-        if (getMobileOS() === "ios") {
-          carRequest.displayedInfo = "[phone]";
-          carProperties = "phoneNumbers,givenName";
-        }
-        if (getMobileOS() === "android") {
-          carRequest.type = "phone";
-          carProperties = "data1,display_name";
-        }
-        window.location.href = `${
-          window.location.origin
-        }/cross-app-request/contact-picker?car-request=${JSON.stringify(
-          carRequest
-        )}&car-properties=${carProperties}`;
-      }
-
-      // Check if the Contact Picker API is supported in the browser
-      const opts = { multiple: true };
-      if ("contacts" in navigator) {
-        try {
-          const contacts = await navigator.contacts.select(props, opts);
-          setContactWebResponse(JSON.stringify(contacts));
-        } catch (ex) {
-          // Handle any errors here.
-          setContactWebResponse(JSON.stringify(ex));
-        }
-      } else {
-        // Fallback for browsers that do not support the Contact Picker API
-        setContactWebResponse(
-          "Contact Picker API is not supported in this browser"
-        );
-      }
+      const response = await ContactPicker.get(["name", "phoneNumbers"]);
+      setContactWebResponse(JSON.stringify(response));
     }
   };
 
@@ -343,7 +266,7 @@ export const CentralRouter = ({ referrerHeader, callJSI, handleBack }) => {
         </>
       )}
       <h2>CAR Response</h2>
-      <span>{contactWebResponse || payloadFromApps}</span>
+      <span>{contactWebResponse}</span>
       <h2>Current Url</h2>
       <span>{currentUrl}</span>
       <h2>Referrer</h2>

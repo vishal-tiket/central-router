@@ -1,6 +1,5 @@
 import { headers } from "next/headers";
 import { CentralRouter } from "../../../../component/CentralRouter";
-import Script from "next/script";
 
 export default function Delete() {
   const headersList = headers();
@@ -8,7 +7,7 @@ export default function Delete() {
 
   return (
     <>
-      <CentralRouter referrerHeader={referrer} />
+      <CentralRouter referrerHeader={referrer} carRequest={true} />
     </>
   );
 }
