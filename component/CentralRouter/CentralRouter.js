@@ -250,8 +250,12 @@ export const CentralRouter = ({
           <span>{authenticationJSI}</span>
         </>
       )}
-      <h2>CAR Response</h2>
-      <span>{contactWebResponse}</span>
+      {carRequest && (
+        <>
+          <h2>CAR Response</h2>
+          <span>{contactWebResponse}</span>
+        </>
+      )}
       <h2>Current Url</h2>
       <span>{currentUrl}</span>
       <h2>Referrer</h2>
