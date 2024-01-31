@@ -124,9 +124,15 @@ export const CentralRouter = ({
 
   const getContacts = async () => {
     if (typeof window !== "undefined") {
-      const carProperties = queryParams()?.["car-properties"]?.split(",");
-      const response = await ContactPicker.get(carProperties);
-      setContactWebResponse(JSON.stringify(response));
+      try {
+        const carProperties = queryParams()?.["car-properties"]?.split(",");
+        console.log("car properties from url", carProperties);
+        const response = await ContactPicker.get(carProperties);
+        setContactWebResponse(JSON.stringify(response));
+      } catch (e) {
+        console.log("possibly car properties are not defined");
+        console.log("error", JSON.stringify(e));
+      }
     }
   };
 
