@@ -5,8 +5,9 @@ import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { set } from "../../lib/react-common-storage";
-import { callGenericJSICommand } from "../../lib/react-common-jsi/jsi/invokeJSI";
+import { callGenericJSI } from "@tiket/react-common-jsi";
 import { ContactPicker } from "../../lib/react-common-navigator-permission";
+import { handleJSNavigation, isValidUrl, queryParams } from "./helper";
 
 export const CentralRouter = ({
   referrerHeader,
@@ -25,25 +26,21 @@ export const CentralRouter = ({
   const params = useParams();
   const router = useRouter();
 
-  const queryParams = () => {
-    let obj = {};
-    for (const [key, value] of searchParams.entries()) {
-      obj[key] = value;
-    }
-    return obj;
-  };
-
+  /** get country code and language code from url parameters */
   const [countrycode, language] =
     (params && params?.["countrycode-language"]?.split("-")) || [];
 
   useEffect(() => {
+    /** to handle csr actions */
     setIsClient(true);
     setCurrentUrl(window.location.href);
 
+    /** back navigation handling ( show confirmation popup on back press )  */
     window.handleBackPressed = () => {
-      return queryParams()?.["back"] === "true" ? true : false;
+      return queryParams(searchParams)?.["back"] === "true" ? true : false;
     };
 
+    /** replicate iOS callback issue for storage.tiket.com on these urls */
     const callSharedStorage =
       window.location.href.includes("/ttd/pdp/11") ||
       window.location.href.includes("/ttd/pdp/12") ||
@@ -55,6 +52,7 @@ export const CentralRouter = ({
       set("sample-tiket-com-analytic", "dummy value");
     }
 
+    /** support url field placeholder for both old and new tiket url schemes */
     if (
       countrycode &&
       language &&
@@ -68,15 +66,7 @@ export const CentralRouter = ({
     }
   }, []);
 
-  const isValidUrl = (string) => {
-    try {
-      new URL(string);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };
-
+  /** url field onChange handler */
   const handleUrlInput = (e) => {
     if (isValidUrl(e.target.value)) {
       const validateUrl = new URL(e.target.value);
@@ -92,6 +82,7 @@ export const CentralRouter = ({
     setUrl(e.target.value);
   };
 
+  /** clearTop checkbox onChange handler */
   const handleClearTopFlag = (e) => {
     if (!isValidUrl(url) && isClient) {
       window.alert("Please enter a valid url");
@@ -110,22 +101,11 @@ export const CentralRouter = ({
     });
   };
 
-  const handleJSNavigation = (isReplace = false) => {
-    if (!isValidUrl(url) && isClient) {
-      window.alert("Please enter a valid url");
-      return;
-    }
-    if (isReplace) {
-      window.location.replace(url);
-      return;
-    }
-    window.location.href = url;
-  };
-
   const getContacts = async () => {
     if (typeof window !== "undefined") {
       try {
-        const carProperties = queryParams()?.["car-properties"]?.split(",");
+        const carProperties =
+          queryParams(searchParams)?.["car-properties"]?.split(",");
         console.log("car properties from url", carProperties);
         const response = await ContactPicker.get(carProperties);
         setContactWebResponse(JSON.stringify(response));
@@ -138,16 +118,16 @@ export const CentralRouter = ({
 
   const callAuthenticationJSI = async () => {
     console.log("callAuthenticationJSI jsi");
-    const response = await callGenericJSICommand({
-      request: "getAuthenticatedUserDetails",
+    const response = await callGenericJSI({
+      command: "getAuthenticatedUserDetails",
     });
     setAuthenticationJSI(JSON.stringify(response));
   };
 
   const callTrackerJSI = async () => {
     console.log("call tracker jsi");
-    const response = await callGenericJSICommand({
-      request: "trackAnalyticEvent",
+    const response = await callGenericJSI({
+      command: "trackAnalyticEvent",
       payload: {
         event: "click",
         eventCategory: "ctaClick",
@@ -267,7 +247,7 @@ export const CentralRouter = ({
       <h2>Referrer</h2>
       <span>{referrerHeader || "null"}</span>
       <h2>Query Params</h2>
-      <span>{JSON.stringify({ ...queryParams() })}</span>
+      <span>{JSON.stringify({ ...queryParams(searchParams) })}</span>
       <h2>Path Params</h2>
       <span>
         {JSON.stringify({
