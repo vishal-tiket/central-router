@@ -5,9 +5,14 @@ import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { set } from "../../lib/react-common-storage";
-import { callGenericJSI } from "@tiket/react-common-jsi";
 import { ContactPicker } from "../../lib/react-common-navigator-permission";
-import { handleJSNavigation, isValidUrl, queryParams } from "./helper";
+import {
+  callAuthenticationJSI,
+  callTrackerJSI,
+  handleJSNavigation,
+  isValidUrl,
+  queryParams,
+} from "./helper";
 
 export const CentralRouter = ({
   referrerHeader,
@@ -64,6 +69,21 @@ export const CentralRouter = ({
     } else {
       setUrl("https://" + window.location.host);
     }
+
+    /** handle window.gtm.push method for analytics */
+    window.dataLayer = [];
+    const originalDataLayerPush = window?.dataLayer?.push?.bind(
+      window?.dataLayer
+    );
+    window.dataLayer.push = (event) => {
+      originalDataLayerPush(event);
+      if (event === "tracker") {
+        callTrackerJSI(setTrackerJSI);
+      } else {
+        callAuthenticationJSI(setAuthenticationJSI);
+      }
+      return window?.dataLayer?.length;
+    };
   }, []);
 
   /** url field onChange handler */
@@ -114,27 +134,6 @@ export const CentralRouter = ({
         console.log("error", JSON.stringify(e));
       }
     }
-  };
-
-  const callAuthenticationJSI = async () => {
-    console.log("callAuthenticationJSI jsi");
-    const response = await callGenericJSI({
-      command: "getAuthenticatedUserDetails",
-    });
-    setAuthenticationJSI(JSON.stringify(response));
-  };
-
-  const callTrackerJSI = async () => {
-    console.log("call tracker jsi");
-    const response = await callGenericJSI({
-      command: "trackAnalyticEvent",
-      payload: {
-        event: "click",
-        eventCategory: "ctaClick",
-        text: "promo",
-      },
-    });
-    setTrackerJSI(JSON.stringify(response));
   };
 
   return (
@@ -221,11 +220,13 @@ export const CentralRouter = ({
       </div>
       {callJSI && (
         <>
-          <button onClick={callAuthenticationJSI}>
+          <button onClick={() => window.dataLayer.push("auth")}>
             Call getAuthenticatedUserDetails
           </button>
           <br />
-          <button onClick={callTrackerJSI}>Call trackAnalyticEvent</button>
+          <button onClick={() => window.dataLayer.push("tracker")}>
+            Call trackAnalyticEvent
+          </button>
         </>
       )}
       {callJSI && (

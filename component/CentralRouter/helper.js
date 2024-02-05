@@ -1,3 +1,5 @@
+import { callGenericJSI } from "@tiket/react-common-jsi";
+
 /** get url query parameters */
 export const queryParams = (searchParams) => {
   let obj = {};
@@ -28,4 +30,27 @@ export const handleJSNavigation = (isReplace = false) => {
     return;
   }
   window.location.href = url;
+};
+
+/** tracker jsi */
+export const callTrackerJSI = async (setTrackerJSI) => {
+  console.log("call tracker jsi");
+  const response = await callGenericJSI({
+    command: "trackAnalyticEvent",
+    payload: {
+      event: "click",
+      eventCategory: "ctaClick",
+      text: "promo",
+    },
+  });
+  setTrackerJSI(JSON.stringify(response));
+};
+
+/** authentication jsi */
+export const callAuthenticationJSI = async (setAuthenticationJSI) => {
+  console.log("callAuthenticationJSI jsi");
+  const response = await callGenericJSI({
+    command: "getAuthenticatedUserDetails",
+  });
+  setAuthenticationJSI(JSON.stringify(response));
 };
