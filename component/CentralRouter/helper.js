@@ -44,6 +44,7 @@ export const callTrackerJSI = async (setTrackerJSI) => {
     },
   });
   setTrackerJSI(JSON.stringify(response));
+  console.log("received tracker jsi response", JSON.stringify(response));
 };
 
 /** authentication jsi */
@@ -53,4 +54,8 @@ export const callAuthenticationJSI = async (setAuthenticationJSI) => {
     command: "getAuthenticatedUserDetails",
   });
   setAuthenticationJSI(JSON.stringify(response));
+  console.log(
+    "received callAuthenticationJSI response",
+    JSON.stringify(response)
+  );
 };
