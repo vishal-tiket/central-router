@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tiket/react-common-jsi": "^0.0.0-alpha-440-20240204161822",
+    "@tiket/react-common-jsi": "^0.0.0-alpha-440-20240206114250",
     "@tiket/react-common-navigator-permission": "^0.0.0-alpha-449-20240206113644",
     "next": "14.0.3",
     "react": "^18",
