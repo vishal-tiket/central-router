@@ -36,6 +36,47 @@ export const CentralRouter = ({
     (params && params?.["countrycode-language"]?.split("-")) || [];
 
   useEffect(() => {
+    /** car properties mapping */
+    window.CARProperties = {
+      android: {
+        "contact-picker": {
+          phoneNumbers: "phoneNumbers",
+          emailAddresses: "emailAddresses",
+          name: "givenName",
+          organizationName: "organizationName",
+          departmentName: "departmentName",
+          postalAddress: "postalAddresses",
+          birthday: "birthday",
+          contactRelations: "contactRelations",
+        },
+      },
+
+      ios: {
+        "contact-picker": {
+          phoneNumbers: "phoneNumbers",
+          emailAddresses: "emailAddresses",
+          name: "givenName",
+          organizationName: "organizationName",
+          departmentName: "departmentName",
+          postalAddress: "postalAddresses",
+          birthday: "birthday",
+          contactRelations: "contactRelations",
+          namePrefix: "namePrefix",
+          middleName: "middleName",
+          familyName: "familyName",
+        },
+      },
+
+      web: {
+        "contact-picker": {
+          phoneNumbers: "tel",
+          name: "name",
+          emailAddresses: "email",
+          postalAddress: "address",
+        },
+      },
+    };
+    
     /** to handle csr actions */
     setIsClient(true);
     setCurrentUrl(window.location.href);
