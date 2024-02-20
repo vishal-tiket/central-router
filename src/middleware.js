@@ -7,7 +7,8 @@ export function middleware(request) {
 
   if (
     pathname === "/apple-app-site-association" ||
-    pathname === "/storage/index.html"
+    pathname === "/storage/index.html" ||
+    pathname === "/test-jsi"
   ) {
     const response = NextResponse.next();
 
