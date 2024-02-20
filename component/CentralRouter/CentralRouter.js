@@ -76,7 +76,7 @@ export const CentralRouter = ({
         },
       },
     };
-    
+
     /** to handle csr actions */
     setIsClient(true);
     setCurrentUrl(window.location.href);
@@ -201,17 +201,20 @@ export const CentralRouter = ({
       </div>
 
       <div>
-        {url && isValidUrl(url) ? (
-          <Link href={url} className={styles.link}>
-            Route to (using nextjs app router)
-          </Link>
-        ) : (
-          <a onClick={handleJSNavigation} className={styles.link}>
-            Route to (using nextjs app router)
-          </a>
-        )}
+        {/* <>
+          {url && isValidUrl(url) ? (
+            <Link href={url} className={styles.link}>
+              Route to (using nextjs app router)
+            </Link>
+          ) : (
+            <a onClick={handleJSNavigation} className={styles.link}>
+              Route to (using nextjs app router)
+            </a>
+          )}
+          </>
+        */}
 
-        {url && isValidUrl(url) ? (
+        {/* {url && isValidUrl(url) ? (
           <button
             href={url}
             className={styles.link}
@@ -231,19 +234,19 @@ export const CentralRouter = ({
           <a onClick={handleJSNavigation} className={styles.link}>
             Route to (using nextjs app router.push)
           </a>
-        )}
+        )} */}
 
         {url && isValidUrl(url) ? (
           <a href={url} className={styles.link}>
-            Route to (using html anchor)
+            Route to
           </a>
         ) : (
           <a onClick={handleJSNavigation} className={styles.link}>
-            Route to (using html anchor)
+            Route to
           </a>
         )}
 
-        <button className={styles.link} onClick={handleJSNavigation}>
+        {/* <button className={styles.link} onClick={handleJSNavigation}>
           Route to (using window.location.href)
         </button>
 
@@ -252,7 +255,7 @@ export const CentralRouter = ({
           onClick={() => handleJSNavigation(true)}
         >
           Route to (using window.location.replace)
-        </button>
+        </button> */}
         {carRequest && (
           <button className={styles.link} onClick={getContacts}>
             Get Contacts
