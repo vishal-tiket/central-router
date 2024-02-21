@@ -28,9 +28,14 @@ export function middleware(request) {
     });
 
     if (!isValidCountryCode || !isValidLangauge) {
+      console.log("redirecting to 404", request.nextUrl.pathname);
       request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
-      return NextResponse.rewrite(request.nextUrl);
+      return NextResponse.rewrite(request.nextUrl);PageTransitionEvent
     }
+  } else {
+    console.log("redirecting", request.nextUrl.pathname);
+    request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
+    return NextResponse.rewrite(request.nextUrl);
   }
 
   const response = NextResponse.next();
