@@ -17,7 +17,9 @@ export function middleware(request) {
 
   const [countryCode, language] = pathname?.split("/")?.[1]?.split("-");
 
-  if (countryCode && language && !(countryCode === "to" && language === "do")) {
+  console.log("countryCode", countryCode, "language", language);
+
+  if (countryCode && language) {
     const isValidCountryCode = ACCEPTED_COUNTRY_CODES?.find((val) => {
       if (val?.code?.toLowerCase() === countryCode?.toLowerCase()) return true;
     });
@@ -26,13 +28,9 @@ export function middleware(request) {
     });
 
     if (!isValidCountryCode || !isValidLangauge) {
-      request.nextUrl.pathname = `${countryCode}-${language}/not-found`;
+      request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
       return NextResponse.rewrite(request.nextUrl);
     }
-  } else if (countryCode || language) {
-    request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
-    const response = NextResponse.rewrite(request.nextUrl);
-    return response;
   }
 
   const response = NextResponse.next();
