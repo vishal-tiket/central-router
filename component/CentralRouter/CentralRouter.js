@@ -79,7 +79,7 @@ export const CentralRouter = ({
 
     /** to handle csr actions */
     setIsClient(true);
-    setCurrentUrl(window.location.href);
+    setCurrentUrl(decodeURIComponent(window.location.href));
 
     /** back navigation handling ( show confirmation popup on back press )  */
     window.handleBackPressed = () => {
@@ -296,12 +296,17 @@ export const CentralRouter = ({
       <h2>Path Params</h2>
       <span>
         {JSON.stringify({
-          ...params,
+          ...Object.keys(params).reduce((acc, key) => {
+            acc[key] = decodeURIComponent(params[key]);
+            return acc;
+          }, {}),
           "countrycode-language": undefined,
           ...(countrycode === "%23%23"
             ? { countrycode: undefined }
-            : { countrycode }),
-          ...(language === "%23%23" ? { language: undefined } : { language }),
+            : { countrycode: decodeURIComponent(countrycode) }),
+          ...(language === "%23%23"
+            ? { language: undefined }
+            : { language: decodeURIComponent(language) }),
         })}
       </span>
     </div>

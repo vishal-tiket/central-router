@@ -17,8 +17,6 @@ export function middleware(request) {
 
   const [countryCode, language] = pathname?.split("/")?.[1]?.split("-");
 
-  console.log("countryCode", countryCode, "language", language);
-
   if (countryCode && language) {
     const isValidCountryCode = ACCEPTED_COUNTRY_CODES?.find((val) => {
       if (val?.code?.toLowerCase() === countryCode?.toLowerCase()) return true;
@@ -28,12 +26,10 @@ export function middleware(request) {
     });
 
     if (!isValidCountryCode || !isValidLangauge) {
-      console.log("redirecting to 404", request.nextUrl.pathname);
       request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
-      return NextResponse.rewrite(request.nextUrl);PageTransitionEvent
+      return NextResponse.rewrite(request.nextUrl);
     }
   } else {
-    console.log("redirecting", request.nextUrl.pathname);
     request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
     return NextResponse.rewrite(request.nextUrl);
   }
