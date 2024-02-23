@@ -173,6 +173,7 @@ export const CentralRouter = ({
       } catch (e) {
         console.log("possibly car properties are not defined");
         console.log("error", JSON.stringify(e));
+        setContactWebResponse(JSON.stringify(e));
       }
     }
   };
