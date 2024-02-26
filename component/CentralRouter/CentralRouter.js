@@ -140,7 +140,7 @@ export const CentralRouter = ({
         setIsClearTopFlag(false);
       }
     }
-    setUrl(e.target.value);
+    setUrl(e.target.value || "");
   };
 
   /** clearTop checkbox onChange handler */
@@ -239,10 +239,10 @@ export const CentralRouter = ({
 
         {url && isValidUrl(url) ? (
           <a href={url} className={styles.link}>
-            Route to
+            Route to valid
           </a>
         ) : (
-          <a onClick={handleJSNavigation} className={styles.link}>
+          <a onClick={() => handleJSNavigation(url)} className={styles.link}>
             Route to
           </a>
         )}

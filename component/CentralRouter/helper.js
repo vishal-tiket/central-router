@@ -11,6 +11,14 @@ export const queryParams = (searchParams) => {
 
 /** check if entered url is valid or not */
 export const isValidUrl = (string) => {
+  // Regular expression pattern for URL validation
+  var pattern =
+    /^(https?:\/\/)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[a-zA-Z0-9_\-/.]*)*(\?[a-zA-Z0-9_&=]+)?$/;
+
+  if (!pattern.test(string)) {
+    return false;
+  }
+
   try {
     new URL(string);
     return true;
@@ -20,8 +28,8 @@ export const isValidUrl = (string) => {
 };
 
 /** navigation using window object */
-export const handleJSNavigation = (isReplace = false) => {
-  if (!isValidUrl(url) && isClient) {
+export const handleJSNavigation = (url, isReplace = false) => {
+  if (!isValidUrl(url)) {
     window.alert("Please enter a valid url");
     return;
   }
