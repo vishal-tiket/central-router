@@ -239,7 +239,7 @@ export const CentralRouter = ({
 
         {url && isValidUrl(url) ? (
           <a href={url} className={styles.link}>
-            Route to valid
+            Route to
           </a>
         ) : (
           <a onClick={() => handleJSNavigation(url)} className={styles.link}>
