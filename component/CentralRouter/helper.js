@@ -13,7 +13,7 @@ export const queryParams = (searchParams) => {
 export const isValidUrl = (string) => {
   // Regular expression pattern for URL validation
   var pattern =
-    /^(https?|router):\/\/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[a-zA-Z0-9_\-/.]*)*(\?[a-zA-Z0-9_&=-]*)?$/;
+    /^(https?|router):\/\/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[a-zA-Z0-9_\-/.]*)*(\?[a-zA-Z0-9_,&=-]*)?$/;
 
   if (!pattern.test(string)) {
     return false;
