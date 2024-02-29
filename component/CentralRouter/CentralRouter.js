@@ -181,6 +181,9 @@ export const CentralRouter = ({
   return (
     <div>
       {handleBack && <button onClick={() => router.back()}>Back</button>}
+      {handleBack && (
+        <button onClick={() => history.back()}>Back using history.back</button>
+      )}
       <h2>Enter the url to route to below</h2>
       <input
         type="text"
