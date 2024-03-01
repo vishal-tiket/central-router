@@ -42,17 +42,26 @@ export const handleJSNavigation = (url, isReplace = false) => {
 
 /** tracker jsi */
 export const callTrackerJSI = async (setTrackerJSI) => {
-  console.log("call tracker jsi");
-  const response = await callGenericJSI({
-    command: "trackAnalyticEvent",
-    payload: {
-      event: "click",
-      eventCategory: "ctaClick",
-      text: "promo",
-    },
-  });
-  setTrackerJSI(JSON.stringify(response));
-  console.log("received tracker jsi response", JSON.stringify(response));
+  try {
+    console.log("call tracker jsi");
+    const response = await callGenericJSI({
+      command: "trackAnalyticEvent",
+      payload: {
+        event: "click",
+        eventCategory: "ctaClick",
+        text: "promo",
+      },
+    });
+    console.log(
+      "received tracker jsi response 1",
+      response,
+      JSON.stringify(response)
+    );
+    setTrackerJSI(JSON.stringify(response));
+    console.log("received tracker jsi response 2", JSON.stringify(response));
+  } catch (e) {
+    console.log("error in callTrackerJSI", e, JSON.stringify(e));
+  }
 };
 
 /** authentication jsi */
