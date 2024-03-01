@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styles from "./CentralRouter.module.css";
 import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { set } from "../../lib/react-common-storage";
 import { ContactPicker } from "@tiket/react-common-navigator-permission";
 import {

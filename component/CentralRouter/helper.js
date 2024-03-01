@@ -1,4 +1,4 @@
-import { callGenericJSI } from "@tiket/react-common-jsi";
+import { callGenericJSI } from "../../lib/react-common-jsi";
 
 /** get url query parameters */
 export const queryParams = (searchParams) => {
