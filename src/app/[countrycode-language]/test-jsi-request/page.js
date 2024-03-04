@@ -1,7 +1,13 @@
 import { TestComponent } from "../../../../component/TestJSI";
 
 const TestJSIRequestIdPage = () => {
-  return <TestComponent />;
+  return (
+    <>
+      <TestComponent />
+      <TestComponent />
+      <TestComponent />
+    </>
+  );
 };
 
 export default TestJSIRequestIdPage;
