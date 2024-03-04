@@ -1,5 +1,3 @@
-import { callGenericJSI } from "../../lib/react-common-jsi";
-
 /** get url query parameters */
 export const queryParams = (searchParams) => {
   let obj = {};
@@ -41,7 +39,7 @@ export const handleJSNavigation = (url, isReplace = false) => {
 };
 
 /** tracker jsi */
-export const callTrackerJSI = async (setTrackerJSI) => {
+export const callTrackerJSI = async (setTrackerJSI, callGenericJSI) => {
   try {
     console.log("call tracker jsi");
     const response = await callGenericJSI({
@@ -65,7 +63,10 @@ export const callTrackerJSI = async (setTrackerJSI) => {
 };
 
 /** authentication jsi */
-export const callAuthenticationJSI = async (setAuthenticationJSI) => {
+export const callAuthenticationJSI = async (
+  setAuthenticationJSI,
+  callGenericJSI
+) => {
   console.log("callAuthenticationJSI jsi");
   const response = await callGenericJSI({
     command: "getAuthenticatedUserDetails",
