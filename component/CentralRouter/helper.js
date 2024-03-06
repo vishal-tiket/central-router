@@ -43,22 +43,14 @@ export const callTrackerJSI = async (setTrackerJSI, callGenericJSI) => {
   try {
     console.log("call tracker jsi");
     const response = await callGenericJSI({
-      command: "trackAnalyticEvent",
-      payload: {
-        event: "click",
-        eventCategory: "ctaClick",
-        text: "promo",
-      },
+      event: "click",
+      eventCategory: "ctaClick",
+      text: "promo",
     });
-    console.log(
-      "received tracker jsi response 1",
-      response,
-      JSON.stringify(response)
-    );
     setTrackerJSI(JSON.stringify(response));
-    console.log("received tracker jsi response 2", JSON.stringify(response));
   } catch (e) {
     console.log("error in callTrackerJSI", e, JSON.stringify(e));
+    setTrackerJSI(JSON.stringify(e));
   }
 };
 
@@ -67,13 +59,15 @@ export const callAuthenticationJSI = async (
   setAuthenticationJSI,
   callGenericJSI
 ) => {
-  console.log("callAuthenticationJSI jsi");
-  const response = await callGenericJSI({
-    command: "getAuthenticatedUserDetails",
-  });
-  setAuthenticationJSI(JSON.stringify(response));
-  console.log(
-    "received callAuthenticationJSI response",
-    JSON.stringify(response)
-  );
+  try {
+    console.log("callAuthenticationJSI jsi");
+    const response = await callGenericJSI();
+    setAuthenticationJSI(JSON.stringify(response));
+  } catch (e) {
+    console.log(
+      "received callAuthenticationJSI response",
+      JSON.stringify(response)
+    );
+    setAuthenticationJSI(JSON.stringify(e));
+  }
 };

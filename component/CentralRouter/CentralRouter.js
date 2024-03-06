@@ -12,7 +12,10 @@ import {
   isValidUrl,
   queryParams,
 } from "./helper";
-import { useGenericJSI } from "@tiket/react-common-jsi";
+import {
+  useGetAuthenticatedUserDetails,
+  trackAnalyticEvent,
+} from "@tiket/react-common-jsi";
 
 export const CentralRouter = ({
   referrerHeader,
@@ -20,7 +23,7 @@ export const CentralRouter = ({
   handleBack,
   carRequest,
 }) => {
-  const callGenericJSI = useGenericJSI();
+  const getAuthenticatedUserDetails = useGetAuthenticatedUserDetails();
   const [url, setUrl] = useState("");
   const [clearTopFlag, setIsClearTopFlag] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -120,9 +123,12 @@ export const CentralRouter = ({
     window.dataLayer.push = (event) => {
       originalDataLayerPush(event);
       if (event === "tracker") {
-        callTrackerJSI(setTrackerJSI, callGenericJSI);
+        callTrackerJSI(setTrackerJSI, trackAnalyticEvent);
       } else {
-        callAuthenticationJSI(setAuthenticationJSI, callGenericJSI);
+        callAuthenticationJSI(
+          setAuthenticationJSI,
+          getAuthenticatedUserDetails
+        );
       }
       return window?.dataLayer?.length;
     };
