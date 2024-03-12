@@ -15,7 +15,7 @@ export function middleware(request) {
     return response;
   }
 
-  const [countryCode, language] = pathname?.split("/")?.[1]?.split("-");
+  const [language, countryCode] = pathname?.split("/")?.[1]?.split("-");
 
   if (countryCode && language) {
     const isValidCountryCode = ACCEPTED_COUNTRY_CODES?.find((val) => {

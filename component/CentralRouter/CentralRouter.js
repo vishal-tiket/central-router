@@ -36,8 +36,8 @@ export const CentralRouter = ({
   const router = useRouter();
 
   /** get country code and language code from url parameters */
-  const [countrycode, language] =
-    (params && params?.["countrycode-language"]?.split("-")) || [];
+  const [language, countrycode] =
+    (params && params?.["language-countrycode"]?.split("-")) || [];
 
   useEffect(() => {
     /** car properties mapping */
@@ -109,7 +109,7 @@ export const CentralRouter = ({
       !(countrycode === "%23%23" && language === "%23%23")
     ) {
       setUrl(
-        "https://" + window.location.host + "/" + countrycode + "-" + language
+        "https://" + window.location.host + "/" + language + "-" + countrycode
       );
     } else {
       setUrl("https://" + window.location.host);
