@@ -311,7 +311,7 @@ export const CentralRouter = ({
             acc[key] = decodeURIComponent(params[key]);
             return acc;
           }, {}),
-          "countrycode-language": undefined,
+          "language-countrycode": undefined,
           ...(countrycode === "%23%23"
             ? { countrycode: undefined }
             : { countrycode: decodeURIComponent(countrycode) }),
