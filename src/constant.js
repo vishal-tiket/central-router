@@ -1731,3 +1731,5 @@ export const ACCEPTED_LANGUAGES = [
     code: "zu",
   },
 ];
+
+export const EXCLUDED_LANGUAGES_AND_COUNTRIES = ["to-do"];
