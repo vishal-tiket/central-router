@@ -66,7 +66,7 @@ export const callAuthenticationJSI = async (
   } catch (e) {
     console.log(
       "received callAuthenticationJSI response",
-      JSON.stringify(response)
+      JSON.stringify(e)
     );
     setAuthenticationJSI(JSON.stringify(e));
   }
