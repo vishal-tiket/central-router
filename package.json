@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tiket/react-common-jsi": "^0.0.0-alpha-477-20240315085207",
-    "@tiket/react-common-navigator-permission": "^0.0.0-alpha-449-20240319083846",
+    "@tiket/react-common-navigator-permission": "^0.0.0-alpha-449-20240319090710",
     "@tiket/react-common-utilities": "^2.3.6",
     "next": "14.0.3",
     "react": "^18",
