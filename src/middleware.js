@@ -29,21 +29,20 @@ export function middleware(request) {
     });
 
     const isExcluded = EXCLUDED_LANGUAGES_AND_COUNTRIES?.includes(
-      `${language}-${countryCode}`
+      `${language}-${countryCode}`?.toLowerCase()
     );
 
     if (!isValidCountryCode || !isValidLangauge || isExcluded) {
-      request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
+      request.nextUrl.pathname = `/##-##${request.nextUrl.pathname?.toLowerCase()}`;
       return NextResponse.rewrite(request.nextUrl);
     }
   } else {
-    request.nextUrl.pathname = `/##-##${request.nextUrl.pathname}`;
+    request.nextUrl.pathname = `/##-##${request.nextUrl.pathname?.toLowerCase()}`;
     return NextResponse.rewrite(request.nextUrl);
   }
 
-  const response = NextResponse.next();
-
-  return response;
+  request.nextUrl.pathname = request.nextUrl.pathname?.toLowerCase();
+  return NextResponse.rewrite(request.nextUrl);
 }
 
 export const config = {
