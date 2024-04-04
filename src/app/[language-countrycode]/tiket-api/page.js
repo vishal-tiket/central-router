@@ -45,7 +45,13 @@ function Page() {
           <div>
             <h2>Headers Sent</h2>
             <span>
-              <pre>{JSON.stringify(getCommonHeaders({}), undefined, 2)}</pre>
+              <pre>
+                {JSON.stringify(
+                  { ...getCommonHeaders({}), "X-Cookie-Session-V2": undefined },
+                  undefined,
+                  2
+                )}
+              </pre>
             </span>
             <h2>Cookies available</h2>
             <span>
