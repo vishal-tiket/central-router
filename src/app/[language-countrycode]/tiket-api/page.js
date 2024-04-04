@@ -11,18 +11,8 @@ function Page() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://m.gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
-          {
-            opts: {
-              headers: {
-                "X-Country-Code": "IDN",
-                "X-Channel-Id": "MOBILE_WEB",
-                "X-Currency": "IDR",
-                Authorization:
-                  "Bearer eyJraWQiOiJTVnZZbjhYMFphMmZENDIzN3FLdjBwVXdRRkRrUWdtTSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBlOTJmNTE5MTk2ODMyMzNmMTZjZjciLCJuYmYiOjE3MTIyMzExNTcsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODAxMTE1N30.oFmFuNh4Jw7SAFQu2L0x6GTyG5jJfsOx0YzCaukIFcwl1ZjG2idVFl7XQRESbKxr",
-              },
-            },
-          }
+          `https://lb1-testing.tiket.com/gateway/tix-member-session/v1/session`,
+          {}
         );
         const jsonData = await response.json();
         setData(jsonData);
