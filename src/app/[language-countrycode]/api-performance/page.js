@@ -56,21 +56,19 @@ export default function ApiPerformance() {
       console.log("stringify detail", JSON.stringify(e?.detail));
       const data = JSON.parse(e?.detail?.response?.data);
 
-      if (data?.code) {
-        // get start time
-        const startTimeInMs = window.JSIStartTime || 0;
-        // end time
-        const endTimeInMs = new Date().getTime();
+      // get start time
+      const startTimeInMs = window.JSIStartTime || 0;
+      // end time
+      const endTimeInMs = new Date().getTime();
 
-        setJsiFetchData({
-          method: "JSI",
-          startTimeInMs,
-          endTimeInMs,
-          durationInMs: endTimeInMs - startTimeInMs,
-          response: data,
-        });
-        window.JSIStartTime = undefined;
-      }
+      setJsiFetchData({
+        method: "JSI",
+        startTimeInMs,
+        endTimeInMs,
+        durationInMs: endTimeInMs - startTimeInMs,
+        response: data,
+      });
+      window.JSIStartTime = undefined;
 
       return;
     };
