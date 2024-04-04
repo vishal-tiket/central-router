@@ -17,13 +17,7 @@ export default function ApiPerformance() {
 
     const endTimeInMs = new Date().getTime();
 
-    setFeFetchData({
-      method: "FE Fetch",
-      startTimeInMs,
-      endTimeInMs,
-      durationInMs: endTimeInMs - startTimeInMs,
-      response: jsonResponse,
-    });
+    setFeFetchData(`fe-fetch-api-duration: ${endTimeInMs - startTimeInMs}`);
   };
 
   const callApiJsi = async () => {
@@ -55,10 +49,6 @@ export default function ApiPerformance() {
 
   useEffect(() => {
     const handleNativeJSICallback = (e) => {
-      console.log("stringify", JSON.stringify(e?.detail?.response?.data));
-      console.log("stringify response", JSON.stringify(e?.detail?.response));
-      console.log("stringify detail", JSON.stringify(e?.detail));
-      console.log("event", e);
       const data = JSON.parse(e?.detail?.response?.data);
 
       // get start time
@@ -66,13 +56,7 @@ export default function ApiPerformance() {
       // end time
       const endTimeInMs = new Date().getTime();
 
-      setJsiFetchData({
-        method: "JSI",
-        startTimeInMs,
-        endTimeInMs,
-        durationInMs: endTimeInMs - startTimeInMs,
-        response: data,
-      });
+      setJsiFetchData(`jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`);
       window.JSIStartTime = undefined;
 
       return;
@@ -91,14 +75,14 @@ export default function ApiPerformance() {
         Call Api - FE Fetch
       </button>
       <pre style={{ wordBreak: "break-all" }} id="api-response-fe">
-        {JSON.stringify(feFetchData, null, 2)}
+        {feFetchData}
       </pre>
 
       <button onClick={callApiJsi} id="call-api-jsi">
         Call Api - JSI
       </button>
       <pre style={{ wordBreak: "break-all" }} id="api-response-jsi">
-        {JSON.stringify(jsiFetchData, null, 2)}
+        {jsiFetchData}
       </pre>
     </>
   );
