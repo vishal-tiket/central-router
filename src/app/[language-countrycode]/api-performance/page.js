@@ -42,6 +42,7 @@ export default function ApiPerformance() {
           data: "",
           headers: {
             ...getCommonHeaders({}),
+            "Cache-Control": "no-cache",
           },
           isCritical: true,
           page: "SamplePage",
