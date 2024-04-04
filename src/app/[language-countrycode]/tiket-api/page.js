@@ -1,6 +1,7 @@
 "use client";
 import { getCommonHeaders } from "@tiket/react-common-utilities";
 import { useEffect, useState } from "react";
+import { fetch } from "../../../../lib/fetch";
 
 function Page() {
   const [data, setData] = useState(null);
