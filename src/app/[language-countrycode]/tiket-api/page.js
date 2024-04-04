@@ -15,6 +15,8 @@ function Page() {
             "X-Country-Code": "IDN",
             "X-Channel-Id": "MOBILE_WEB",
             "X-Currency": "IDR",
+            Authorization:
+              "Bearer eyJraWQiOiJTVnZZbjhYMFphMmZENDIzN3FLdjBwVXdRRkRrUWdtTSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBlOTJmNTE5MTk2ODMyMzNmMTZjZjciLCJuYmYiOjE3MTIyMzExNTcsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODAxMTE1N30.oFmFuNh4Jw7SAFQu2L0x6GTyG5jJfsOx0YzCaukIFcwl1ZjG2idVFl7XQRESbKxr",
           }
         );
         const jsonData = await response.json();
