@@ -51,6 +51,9 @@ export default function ApiPerformance() {
 
   useEffect(() => {
     const handleNativeJSICallback = (e) => {
+      console.log("stringify", JSON.stringify(e?.detail?.response?.data));
+      console.log("stringify response", JSON.stringify(e?.detail?.response));
+      console.log("stringify detail", JSON.stringify(e?.detail));
       const data = JSON.parse(e?.detail?.response?.data);
 
       if (data?.code) {
