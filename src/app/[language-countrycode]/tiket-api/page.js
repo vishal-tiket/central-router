@@ -12,7 +12,11 @@ function Page() {
       try {
         const response = await fetch(
           `https://m.gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
-          {}
+          {
+            opts: {
+              credentials: "include",
+            },
+          }
         );
         const jsonData = await response.json();
         setData(jsonData);
