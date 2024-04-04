@@ -11,10 +11,13 @@ function Page() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://lb1-testing.tiket.com/gateway/tix-member-session/v1/session`,
+          `https://m.gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
           {
             opts: {
-              method: "POST",
+              headers: {
+                Authorization:
+                  "Bearer eyJraWQiOiJMSUR2VElxMjVVSHhxWERSTktVVUVnLTQyVGkwbWI2VCJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBlM2VhNzdjZmRkZjFhMDM2MjdhNDIiLCJuYmYiOjE3MTIyMDk1NzUsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjgxNDM3NX0.pnk3eMS9LG-smR96Zr4gS0V1xCT86SiLlcyQ_3X9TozEFQe6yAsNiQ_bm4z8Y8ns",
+              },
             },
           }
         );
