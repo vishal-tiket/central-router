@@ -54,6 +54,7 @@ export default function ApiPerformance() {
       console.log("stringify", JSON.stringify(e?.detail?.response?.data));
       console.log("stringify response", JSON.stringify(e?.detail?.response));
       console.log("stringify detail", JSON.stringify(e?.detail));
+      console.log("stringify event", JSON.stringify(e));
       const data = JSON.parse(e?.detail?.response?.data);
 
       // get start time
