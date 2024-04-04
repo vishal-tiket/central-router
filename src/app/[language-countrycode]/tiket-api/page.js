@@ -12,7 +12,11 @@ function Page() {
       try {
         const response = await fetch(
           `https://lb1-testing.tiket.com/gateway/tix-member-session/v1/session`,
-          {}
+          {
+            opts: {
+              method: "POST",
+            },
+          }
         );
         const jsonData = await response.json();
         setData(jsonData);
