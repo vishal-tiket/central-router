@@ -124,7 +124,7 @@ export default function ApiPerformance() {
       const endTimeInMs = new Date().getTime();
 
       window.JSIStartTime = undefined;
-      if (data?.userId === 1) {
+      if (data?.userId) {
         setJsiFetchData(
           `jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`
         );
