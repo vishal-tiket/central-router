@@ -96,8 +96,7 @@ export default function ApiPerformance() {
         command: "fetchApi",
         request: {
           // url: `https://www.tiket.com/ms-gateway/tix-promotion-page/promos/multicurrency?areaSize=6&brandSize=6&category=pesawat&inventorySize=6&promoCodeSize=10`,
-          // url: `https://gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
-          url: `https://lb1-testing.tiket.com/gateway/tix-member-session/v1/session`,
+          url: `https://gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
           protocolConfig: {
             config: "",
             method: "GET",
@@ -106,11 +105,9 @@ export default function ApiPerformance() {
           data: "",
           headers: {
             ...getCommonHeaders({}),
-            // Authorization:
+            Authorization:
               // "Bearer eyJraWQiOiJ3YzVZVU5OS0l1Sk1LV0otcFBaX1d0XzFnblhIc2JYRiJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjVmMDYxNTM1NDZmOGVkMzQ2N2EiLCJuYmYiOjE3MTIzMDU2NDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODA4NTY0OH0.acgykb-xKhocu9O2d2twJGIprKAop0PCQPGWFrDHEpDRXyEExBLeWYx-fHvq2ouL",
-
-              // GK
-              // "Bearer eyJraWQiOiJkUjd5OW9iMkhYcm4tQ21MRHRoZ1l6REFRaEQtVnhVeCJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjlhNDZjMGNmNTMxNWRlNmM2NjgiLCJuYmYiOjE3MTIzMDY1OTYsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjkxMTM5Nn0.fDkHLI-OBehKRjEuX0DVJqsbNvpEZ600kTbBzDpNQHvMR3KrQPGGVg9hJaGiwcLl",
+              "Bearer eyJraWQiOiJkUjd5OW9iMkhYcm4tQ21MRHRoZ1l6REFRaEQtVnhVeCJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjlhNDZjMGNmNTMxNWRlNmM2NjgiLCJuYmYiOjE3MTIzMDY1OTYsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjkxMTM5Nn0.fDkHLI-OBehKRjEuX0DVJqsbNvpEZ600kTbBzDpNQHvMR3KrQPGGVg9hJaGiwcLl",
             "Cache-Control": "no-cache",
           },
           isCritical: true,
