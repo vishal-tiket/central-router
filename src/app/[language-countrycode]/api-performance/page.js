@@ -10,7 +10,6 @@ export default function ApiPerformance() {
 
   // states for JSI Fetch
   const [jsiFetchData, setJsiFetchData] = useState(null);
-  const [jsiFetchTiketData, setJsiFetchTiketData] = useState(null);
 
   const callApi = async () => {
     const startTimeInMs = new Date().getTime();
@@ -166,7 +165,7 @@ export default function ApiPerformance() {
         Call Tiket Api - JSI
       </button>
       <pre style={{ wordBreak: "break-all" }} id="api-response-tiket-jsi">
-        {jsiFetchTiketData}
+        {jsiFetchData}
       </pre>
     </>
   );
