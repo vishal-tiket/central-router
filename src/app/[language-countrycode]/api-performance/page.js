@@ -64,6 +64,7 @@ export default function ApiPerformance() {
               Authorization:
                 "Bearer eyJraWQiOiI3SUcyQUxSd0pCWE04RHJLN19uUS1FV0tjLXZaTFhOYSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmOWYyMGVmOWQ3MzMxYjgzMzJjNWYiLCJuYmYiOjE3MTIyOTk4MDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjkwNDYwOH0.nPwSUbYMTnqdZ4dTJCeSoYqZuw_TSz9iEQbO5tZGrHH_NZ11itRXrtIHWg49Foi-",
             },
+            credentials: "omit",
           },
         }
       );
@@ -96,6 +97,7 @@ export default function ApiPerformance() {
           protocolConfig: {
             config: "",
             method: "GET",
+            credentials: "omit",
           },
           data: "",
           headers: {

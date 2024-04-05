@@ -19,6 +19,7 @@ function Page() {
                   "Bearer eyJraWQiOiJGbGpkRExkSjA3VmhNUU00clh1Nk5fMTNfX2U4ajFsayJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmODZiMjEyODFiNTY0ZjUwMGY3ZGMiLCJuYmYiOjE3MTIyOTM1NTQsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjg5ODM1NH0.IuWz7PXT6alVLLh29O9HQR80xAPTmCUxRfhBzNXwJRk2lx7tbWh-MAp99TL4lOvl",
               },
             },
+            credentials: "omit",
           }
         );
         const jsonData = await response.json();
