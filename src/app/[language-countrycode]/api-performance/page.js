@@ -10,6 +10,7 @@ export default function ApiPerformance() {
 
   // states for JSI Fetch
   const [jsiFetchData, setJsiFetchData] = useState(null);
+  const [jsiFetchTiketData, setJsiFetchTiketData] = useState(null);
 
   const callApi = async () => {
     const startTimeInMs = new Date().getTime();
@@ -123,7 +124,15 @@ export default function ApiPerformance() {
       const endTimeInMs = new Date().getTime();
 
       window.JSIStartTime = undefined;
-      setJsiFetchData(`jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`);
+      if (data?.userId === 1) {
+        setJsiFetchData(
+          `jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`
+        );
+      } else {
+        setJsiFetchTiketData(
+          `jsi-fetch-tiket-api-duration: ${endTimeInMs - startTimeInMs}`
+        );
+      }
 
       return;
     };
@@ -166,7 +175,7 @@ export default function ApiPerformance() {
         Call Tiket Api - JSI
       </button>
       <pre style={{ wordBreak: "break-all" }} id="api-response-tiket-jsi">
-        {jsiFetchData}
+        {jsiFetchTiketData}
       </pre>
     </>
   );
