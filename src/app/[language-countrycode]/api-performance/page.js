@@ -57,12 +57,12 @@ export default function ApiPerformance() {
     const startTimeInMs = new Date().getTime();
     try {
       const response = await fetch(
-        `https://gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
+        `https://www.tiket.com/ms-gateway/tix-promotion-page/promos/multicurrency?areaSize=6&brandSize=6&category=pesawat&inventorySize=6&promoCodeSize=10`,
         {
           opts: {
             headers: {
               Authorization:
-                "Bearer eyJraWQiOiI3SUcyQUxSd0pCWE04RHJLN19uUS1FV0tjLXZaTFhOYSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmOWYyMGVmOWQ3MzMxYjgzMzJjNWYiLCJuYmYiOjE3MTIyOTk4MDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjkwNDYwOH0.nPwSUbYMTnqdZ4dTJCeSoYqZuw_TSz9iEQbO5tZGrHH_NZ11itRXrtIHWg49Foi-",
+                "Bearer eyJraWQiOiJ3YzVZVU5OS0l1Sk1LV0otcFBaX1d0XzFnblhIc2JYRiJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjVmMDYxNTM1NDZmOGVkMzQ2N2EiLCJuYmYiOjE3MTIzMDU2NDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODA4NTY0OH0.acgykb-xKhocu9O2d2twJGIprKAop0PCQPGWFrDHEpDRXyEExBLeWYx-fHvq2ouL",
             },
             credentials: "omit",
           },
@@ -93,7 +93,7 @@ export default function ApiPerformance() {
       const jsiArg = {
         command: "fetchApi",
         request: {
-          url: `https://gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
+          url: `https://www.tiket.com/ms-gateway/tix-promotion-page/promos/multicurrency?areaSize=6&brandSize=6&category=pesawat&inventorySize=6&promoCodeSize=10`,
           protocolConfig: {
             config: "",
             method: "GET",
@@ -103,7 +103,7 @@ export default function ApiPerformance() {
           headers: {
             ...getCommonHeaders({}),
             Authorization:
-              "Bearer eyJraWQiOiI3SUcyQUxSd0pCWE04RHJLN19uUS1FV0tjLXZaTFhOYSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmOWYyMGVmOWQ3MzMxYjgzMzJjNWYiLCJuYmYiOjE3MTIyOTk4MDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjkwNDYwOH0.nPwSUbYMTnqdZ4dTJCeSoYqZuw_TSz9iEQbO5tZGrHH_NZ11itRXrtIHWg49Foi-",
+              "Bearer eyJraWQiOiJ3YzVZVU5OS0l1Sk1LV0otcFBaX1d0XzFnblhIc2JYRiJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjVmMDYxNTM1NDZmOGVkMzQ2N2EiLCJuYmYiOjE3MTIzMDU2NDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODA4NTY0OH0.acgykb-xKhocu9O2d2twJGIprKAop0PCQPGWFrDHEpDRXyEExBLeWYx-fHvq2ouL",
             "Cache-Control": "no-cache",
           },
           isCritical: true,
