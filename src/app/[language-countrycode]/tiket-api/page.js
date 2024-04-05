@@ -14,7 +14,10 @@ function Page() {
           `https://m.gatotkaca.tiket.com/ms-gateway/tix-promotion-page/promos/ferry-test?areaSize=6&brandSize=6&category=campaign&inventorySize=6&promoCodeSize=10`,
           {
             opts: {
-              credentials: "include",
+              headers: {
+                Authorization:
+                  "Bearer eyJraWQiOiJGbGpkRExkSjA3VmhNUU00clh1Nk5fMTNfX2U4ajFsayJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmODZiMjEyODFiNTY0ZjUwMGY3ZGMiLCJuYmYiOjE3MTIyOTM1NTQsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcxMjg5ODM1NH0.IuWz7PXT6alVLLh29O9HQR80xAPTmCUxRfhBzNXwJRk2lx7tbWh-MAp99TL4lOvl",
+              },
             },
           }
         );
