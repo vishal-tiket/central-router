@@ -114,6 +114,7 @@ export default function ApiPerformance() {
 
   useEffect(() => {
     const handleNativeJSICallback = (e) => {
+      console.log("stringify e.detail", JSON.stringify(e?.detail));
       const data = JSON.parse(e?.detail?.response?.data);
 
       // get start time
