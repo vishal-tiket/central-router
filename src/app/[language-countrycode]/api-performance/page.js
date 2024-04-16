@@ -119,7 +119,7 @@ export default function ApiPerformance() {
             method: "POST",
             credentials: "omit",
           },
-          data: JSON.stringify({
+          data: {
             room: 2,
             adult: 2,
             childAges: [],
@@ -135,7 +135,7 @@ export default function ApiPerformance() {
             groupFilterKeyword: "",
             ABTest: { enableNHAStarRatingCalculation: "true" },
             additionalData: ["hotelInfo", "imageGallery"],
-          }),
+          },
           headers: {
             ...getCommonHeaders({}),
             Authorization:
