@@ -61,7 +61,7 @@ export default function ApiPerformance() {
         `https://lb1-ms.tiket.com/gateway/tix-hotel-search/v2/search`,
         {
           opts: {
-            method: 'POST',
+            method: "POST",
             headers: {
               Authorization:
                 "Bearer eyJraWQiOiJoa1lwUzVfazZxRUc5TGRHZVdVRi1vWGxFSlBFRVoyciJ9.eyJhdWQiOiJ0aWtldC5jb20vcnQiLCJzdWIiOiI2NjFlNWJkN2I5MGUzOTY1NzExNjM0NzgiLCJuYmYiOjE3MTMyNjU2MjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTc0NDgyNTYyM30.rlpF3GOhpWEeGaXqq0B9sikQqL-Tk6taM1kaz9pVbVaxIjMRINhZP8iQtFCahmTf",
@@ -112,17 +112,34 @@ export default function ApiPerformance() {
       const jsiArg = {
         command: "fetchApi",
         request: {
-          url: `https://www.tiket.com/ms-gateway/tix-promotion-page/promos/multicurrency?areaSize=6&brandSize=6&category=pesawat&inventorySize=6&promoCodeSize=10`,
+          // url: `https://www.tiket.com/ms-gateway/tix-promotion-page/promos/multicurrency?areaSize=6&brandSize=6&category=pesawat&inventorySize=6&promoCodeSize=10`,
+          url: `https://lb1-ms.tiket.com/gateway/tix-hotel-search/v2/search`,
           protocolConfig: {
             config: "",
-            method: "GET",
+            method: "POST",
             credentials: "omit",
           },
-          data: "",
+          data: JSON.stringify({
+            room: 2,
+            adult: 2,
+            childAges: [],
+            searchType: "REGION",
+            searchValue: "jakarta-108001534490276204",
+            sort: "popularity",
+            startDate: "2024-04-16",
+            night: 2,
+            page: 1,
+            showAlternate: true,
+            priorityRankingType: "NORMAL_SEARCH",
+            filter: {},
+            groupFilterKeyword: "",
+            ABTest: { enableNHAStarRatingCalculation: "true" },
+            additionalData: ["hotelInfo", "imageGallery"],
+          }),
           headers: {
             ...getCommonHeaders({}),
             Authorization:
-              "Bearer eyJraWQiOiJ3YzVZVU5OS0l1Sk1LV0otcFBaX1d0XzFnblhIc2JYRiJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjBmYjVmMDYxNTM1NDZmOGVkMzQ2N2EiLCJuYmYiOjE3MTIzMDU2NDgsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTcyODA4NTY0OH0.acgykb-xKhocu9O2d2twJGIprKAop0PCQPGWFrDHEpDRXyEExBLeWYx-fHvq2ouL",
+              "Bearer eyJraWQiOiJoa1lwUzVfazZxRUc5TGRHZVdVRi1vWGxFSlBFRVoyciJ9.eyJhdWQiOiJ0aWtldC5jb20vcnQiLCJzdWIiOiI2NjFlNWJkN2I5MGUzOTY1NzExNjM0NzgiLCJuYmYiOjE3MTMyNjU2MjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTc0NDgyNTYyM30.rlpF3GOhpWEeGaXqq0B9sikQqL-Tk6taM1kaz9pVbVaxIjMRINhZP8iQtFCahmTf",
             "Cache-Control": "no-cache",
           },
           isCritical: true,
