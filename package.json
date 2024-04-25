@@ -11,7 +11,7 @@
   "dependencies": {
     "@tiket/react-common-eagle-eye": "^1.2.0",
     "@tiket/react-common-jsi": "^1.0.0",
-    "@tiket/react-common-navigator-permission": "^0.0.0-alpha-556-20240425085238",
+    "@tiket/react-common-navigator-permission": "^1.0.0",
     "@tiket/react-common-utilities": "^2.3.6",
     "next": "14.0.3",
     "react": "^18",
