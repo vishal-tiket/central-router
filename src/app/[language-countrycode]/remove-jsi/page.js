@@ -3,7 +3,11 @@
 export default function RemoveJSI() {
   return (
     <div>
-      <button onClick={() => (window.location.href = `tel:+91 9999999999`)}>
+      <button
+        onClick={() => {
+          window.location.href = `tel:+91 9999999999`;
+        }}
+      >
         Open phone Phone dialer with phone number entered
       </button>
 
@@ -25,7 +29,7 @@ export default function RemoveJSI() {
         Open Pdf Viewer
       </button>
 
-      <button onClick={() => window.open("geo:37.7749,-122.4194")}>
+      <button onClick={() => window.open("maps://?q=37.7749,-122.4194")}>
         Open Map
       </button>
 
