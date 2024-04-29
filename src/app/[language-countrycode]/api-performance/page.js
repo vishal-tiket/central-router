@@ -64,7 +64,7 @@ export default function ApiPerformance() {
             method: "POST",
             headers: {
               Authorization:
-                "Bearer eyJraWQiOiJoa1lwUzVfazZxRUc5TGRHZVdVRi1vWGxFSlBFRVoyciJ9.eyJhdWQiOiJ0aWtldC5jb20vcnQiLCJzdWIiOiI2NjFlNWJkN2I5MGUzOTY1NzExNjM0NzgiLCJuYmYiOjE3MTMyNjU2MjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTc0NDgyNTYyM30.rlpF3GOhpWEeGaXqq0B9sikQqL-Tk6taM1kaz9pVbVaxIjMRINhZP8iQtFCahmTf",
+                "Bearer eyJraWQiOiJ0XzA5cklsNnlFNE8zbzNpeWJLdFZyYXJtTDFpRFZDRSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjJmN2U2ZmZmNTdkYjA5NTgzNjNjYjAiLCJuYmYiOjE3MTQzODg1OTEsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDE2ODU5MX0.lzSqwObCxTzY2C_JomHI42oKfJ1tdameQPhHxy2ZjurD2ZALY2Pe5MHeHz_6v59Z",
             },
             body: JSON.stringify({
               room: 2,
@@ -139,7 +139,7 @@ export default function ApiPerformance() {
           headers: {
             ...getCommonHeaders({}),
             Authorization:
-              "Bearer eyJraWQiOiJoa1lwUzVfazZxRUc5TGRHZVdVRi1vWGxFSlBFRVoyciJ9.eyJhdWQiOiJ0aWtldC5jb20vcnQiLCJzdWIiOiI2NjFlNWJkN2I5MGUzOTY1NzExNjM0NzgiLCJuYmYiOjE3MTMyNjU2MjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTc0NDgyNTYyM30.rlpF3GOhpWEeGaXqq0B9sikQqL-Tk6taM1kaz9pVbVaxIjMRINhZP8iQtFCahmTf",
+              "Bearer eyJraWQiOiJ0XzA5cklsNnlFNE8zbzNpeWJLdFZyYXJtTDFpRFZDRSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjJmN2U2ZmZmNTdkYjA5NTgzNjNjYjAiLCJuYmYiOjE3MTQzODg1OTEsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDE2ODU5MX0.lzSqwObCxTzY2C_JomHI42oKfJ1tdameQPhHxy2ZjurD2ZALY2Pe5MHeHz_6v59Z",
             "Cache-Control": "no-cache",
           },
           isCritical: true,
