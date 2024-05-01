@@ -11,7 +11,21 @@ export default function RemoveJSI() {
         Open phone Phone dialer with phone number entered
       </button>
 
-      <button onClick={() => navigator.share("https://www.tiket.com")}>
+      <button
+        onClick={async () => {
+          const shareData = {
+            title: "MDN",
+            text: "Learn web development on MDN!",
+            url: "https://developer.mozilla.org",
+          };
+          try {
+            await navigator.share(shareData);
+            alert("MDN shared successfully");
+          } catch (err) {
+            alert(`Error: ${err}`);
+          }
+        }}
+      >
         Share text
       </button>
 
