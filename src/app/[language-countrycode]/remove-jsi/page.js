@@ -32,7 +32,7 @@ export default function RemoveJSI() {
       <button
         onClick={() => {
           window.location.href =
-            "https://www.google.com/maps?q=29.1492,75.7217";
+            "maps://maps.google.com/maps?daddr=29.1492,75.7217";
         }}
       >
         Open Map
