@@ -28,6 +28,14 @@ export default function RemoveJSI() {
     );
   }
 
+  const event = {
+    title: "My Event",
+    startDate: "2024-05-01T10:00:00",
+    endDate: "2024-05-01T11:00:00",
+    location: "123 Main St",
+    description: "An important event",
+  };
+
   return (
     <div>
       <button
@@ -86,7 +94,7 @@ export default function RemoveJSI() {
         Open Calendar and add event
       </button>
 
-      <AddToCalendarButton />
+      <AddToCalendarButton event={event} />
     </div>
   );
 }
