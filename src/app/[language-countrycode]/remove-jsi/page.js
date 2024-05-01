@@ -1,6 +1,33 @@
 "use client";
 
 export default function RemoveJSI() {
+  function createCalendarEventURL(event) {
+    const { title, startDate, endDate, location, description } = event;
+    const icsContent = `
+    BEGIN:VCALENDAR
+    VERSION:2.0
+    BEGIN:VEVENT
+    SUMMARY:${title}
+    DTSTART:${new Date(startDate).toISOString().replace(/-|:|\.\d+/g, "")}
+    DTEND:${new Date(endDate).toISOString().replace(/-|:|\.\d+/g, "")}
+    LOCATION:${location}
+    DESCRIPTION:${description}
+    END:VEVENT
+    END:VCALENDAR`;
+
+    const base64Encoded = btoa(icsContent);
+    return `data:text/calendar;charset=utf8;base64,${base64Encoded}`;
+  }
+  function AddToCalendarButton({ event }) {
+    const calendarEventURL = createCalendarEventURL(event);
+
+    return (
+      <a href={calendarEventURL} download={`${event.title}.ics`}>
+        Add to Calendar
+      </a>
+    );
+  }
+
   return (
     <div>
       <button
@@ -58,6 +85,8 @@ export default function RemoveJSI() {
       >
         Open Calendar and add event
       </button>
+
+      <AddToCalendarButton />
     </div>
   );
 }
