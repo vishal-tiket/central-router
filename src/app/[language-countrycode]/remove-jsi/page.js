@@ -29,7 +29,11 @@ export default function RemoveJSI() {
         Open Pdf Viewer
       </button>
 
-      <button onClick={() => window.open("maps://?q=29.1492,75.7217")}>
+      <button
+        onClick={() => {
+          window.location.href = "geo:29.1492,75.7217";
+        }}
+      >
         Open Map
       </button>
 
