@@ -31,13 +31,7 @@ export default function RemoveJSI() {
 
       <button
         onClick={() => {
-          try {
-            window.open(
-              "intent:/path/to/your/file.pdf#Intent;action=android.intent.action.VIEW;type=application/pdf;end"
-            );
-          } catch (e) {
-            window.open("/path/to/your/file.pdf");
-          }
+          window.location.href = "file:///dummy.pdf";
         }}
       >
         Open Pdf Viewer
