@@ -1,28 +1,32 @@
 "use client";
 
 export default function RemoveJSI() {
-  function createCalendarEventURL(event) {
-    const { title, startDate, endDate, location, description } = event;
+  function createICSFile(event) {
+    // Create the iCalendar file content
     const icsContent = `
-    BEGIN:VCALENDAR
-    VERSION:2.0
-    BEGIN:VEVENT
-    SUMMARY:${title}
-    DTSTART:${new Date(startDate).toISOString().replace(/-|:|\.\d+/g, "")}
-    DTEND:${new Date(endDate).toISOString().replace(/-|:|\.\d+/g, "")}
-    LOCATION:${location}
-    DESCRIPTION:${description}
-    END:VEVENT
-    END:VCALENDAR`;
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${event.title}
+DTSTART:${new Date(event.startDate).toISOString().replace(/-|:|\.\d+/g, "")}
+DTEND:${new Date(event.endDate).toISOString().replace(/-|:|\.\d+/g, "")}
+LOCATION:${event.location}
+DESCRIPTION:${event.description}
+END:VEVENT
+END:VCALENDAR
+`;
 
-    const base64Encoded = btoa(icsContent);
-    return `data:text/calendar;charset=utf8;base64,${base64Encoded}`;
+    // Create a Blob from the iCalendar content
+    const blob = new Blob([icsContent], { type: "text/calendar" });
+    return URL.createObjectURL(blob);
   }
+
   function AddToCalendarButton({ event }) {
-    const calendarEventURL = createCalendarEventURL(event);
+    // Generate the download URL for the .ics file
+    const icsFileURL = createICSFile(event);
 
     return (
-      <a href={calendarEventURL} download={`${event.title}.ics`}>
+      <a href={icsFileURL} download={`${event.title}.ics`}>
         Add to Calendar
       </a>
     );
