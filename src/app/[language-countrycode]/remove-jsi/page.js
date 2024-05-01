@@ -1,5 +1,5 @@
 "use client";
-import AddToCalendarButton from "add-to-calendar-button";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 export default function RemoveJSI() {
   return (
@@ -54,7 +54,7 @@ export default function RemoveJSI() {
         timeZone="America/Los_Angeles"
         location="World Wide Web"
         description="Check out the maybe easiest way to include Add to Calendar Buttons to your web projects:[br]→ [url]https://add-to-calendar-button.com/|Click here![/url]"
-        options="'Apple','Google','iCal','Outlook.com','Microsoft 365','Microsoft Teams','Yahoo'"
+        options="'Apple'"
         lightMode="bodyScheme"
       />
     </div>
