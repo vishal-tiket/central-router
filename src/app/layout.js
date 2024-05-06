@@ -16,6 +16,11 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <link rel="preconnect" href="https://jsonplaceholder.typicode.com" />
+        <link rel="preconnect" href="https://lb1-ms.tiket.com" />
+        <link rel="preconnect" href="https://www.tiket.com" />
+        <link rel="preconnect" href="https://en.tiket.com" />
+        <link rel="preconnect" href="https://m.tiket.com" />
         <link
           rel="apple-app-site-association file"
           href="/apple-app-site-association.json"

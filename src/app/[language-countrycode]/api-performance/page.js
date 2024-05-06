@@ -16,7 +16,13 @@ export default function ApiPerformance() {
     const startTimeInMs = new Date().getTime();
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/todos/1",
-      {}
+      {
+        opts: {
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        },
+      }
     );
     const jsonResponse = await response.json();
 
@@ -64,7 +70,8 @@ export default function ApiPerformance() {
             method: "POST",
             headers: {
               Authorization:
-                "Bearer eyJraWQiOiJ0XzA5cklsNnlFNE8zbzNpeWJLdFZyYXJtTDFpRFZDRSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjJmN2U2ZmZmNTdkYjA5NTgzNjNjYjAiLCJuYmYiOjE3MTQzODg1OTEsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDE2ODU5MX0.lzSqwObCxTzY2C_JomHI42oKfJ1tdameQPhHxy2ZjurD2ZALY2Pe5MHeHz_6v59Z",
+                "Bearer eyJraWQiOiJ2TElYR0tsc2FXbjRlWVREV01nUFQwZVNoUnVvZnBtaSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjM4OGRiM2E0YzEyZTRmMjM0NTIxYzIiLCJuYmYiOjE3MTQ5ODIzMjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDc2MjMyM30.qZxcGkEswESqYRL1ktQfzB5qRCw0qlGI2JMkBPNYwcRvusdozSjF-uUlg2X9VDbc",
+              "Cache-Control": "no-cache",
             },
             body: JSON.stringify({
               room: 2,
@@ -139,7 +146,7 @@ export default function ApiPerformance() {
           headers: {
             ...getCommonHeaders({}),
             Authorization:
-              "Bearer eyJraWQiOiJ0XzA5cklsNnlFNE8zbzNpeWJLdFZyYXJtTDFpRFZDRSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjJmN2U2ZmZmNTdkYjA5NTgzNjNjYjAiLCJuYmYiOjE3MTQzODg1OTEsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDE2ODU5MX0.lzSqwObCxTzY2C_JomHI42oKfJ1tdameQPhHxy2ZjurD2ZALY2Pe5MHeHz_6v59Z",
+              "Bearer eyJraWQiOiJ2TElYR0tsc2FXbjRlWVREV01nUFQwZVNoUnVvZnBtaSJ9.eyJhdWQiOiJ0aWtldC5jb20iLCJzdWIiOiI2NjM4OGRiM2E0YzEyZTRmMjM0NTIxYzIiLCJuYmYiOjE3MTQ5ODIzMjMsImlzcyI6Imh0dHBzOi8vd3d3LnRpa2V0LmNvbSIsImV4cCI6MTczMDc2MjMyM30.qZxcGkEswESqYRL1ktQfzB5qRCw0qlGI2JMkBPNYwcRvusdozSjF-uUlg2X9VDbc",
             "Cache-Control": "no-cache",
           },
           isCritical: true,
