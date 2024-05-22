@@ -8,6 +8,7 @@ export default function GenericJSI() {
     setTimeout(() => {
       const startTime = localStorage.getItem("startTime");
       const finalTime = new Date().getTime();
+      localStorage.removeItem("startTime");
       setTime(finalTime - startTime);
       onPageRendered({
         url: window.location.href,
