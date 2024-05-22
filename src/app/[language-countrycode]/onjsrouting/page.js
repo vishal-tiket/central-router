@@ -21,11 +21,14 @@ export default function GenericJSI() {
       </Link>
 
       <a
-        onClick={() =>
+        onClick={() => {
+          if (typeof window !== "undefined") {
+            localStorage.setItem("startTime", new Date().getTime());
+          }
           onJSRouting({
             url: `${window.location.origin}/onpagerendered`,
-          })
-        }
+          });
+        }}
         href="/onpagerendered"
         style={{ display: "block" }}
       >
