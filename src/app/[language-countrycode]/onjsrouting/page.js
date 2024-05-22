@@ -8,7 +8,7 @@ export default function GenericJSI() {
       <Link
         onClick={() => {
           if (typeof window !== "undefined") {
-            localStorage.setItem("startTime", new Date().getTime);
+            localStorage.setItem("startTime", new Date().getTime());
           }
           onJSRouting({
             url: `${window.location.origin}/onpagerendered`,
