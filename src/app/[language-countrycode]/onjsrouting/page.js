@@ -1,8 +1,29 @@
 "use client";
-import { onJSRouting } from "@tiket/react-common-jsi";
+import { onJSRouting, onPageRendered } from "@tiket/react-common-jsi";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function GenericJSI() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const startTime = new Date().getTime();
+    // js routing JSI call
+    onJSRouting({
+      url: `${window.location.href}`,
+    });
+
+    // on page rendered jsi call after 2 seconds
+    setTimeout(() => {
+      const finalTime = new Date().getTime();
+      onPageRendered({
+        url: window.location.href,
+        message: "message is not confirmed yet",
+        status: "SUCCESS",
+      });
+      setTime(finalTime - startTime);
+    }, 2000);
+  }, []);
+
   return (
     <>
       <Link
@@ -34,6 +55,8 @@ export default function GenericJSI() {
       >
         normal router
       </a>
+
+      <h2>Time Taken = {time}</h2>
     </>
   );
 }
