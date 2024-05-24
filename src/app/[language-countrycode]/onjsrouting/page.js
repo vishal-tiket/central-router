@@ -1,5 +1,9 @@
 "use client";
-import { onJSRouting, onPageRendered } from "@tiket/react-common-jsi";
+import {
+  logWebApi,
+  onJSRouting,
+  onPageRendered,
+} from "@tiket/react-common-jsi";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,6 +14,25 @@ export default function GenericJSI() {
     // js routing JSI call
     onJSRouting({
       url: `${window.location.href}`,
+    });
+
+    logWebApi({
+      uri: "12",
+    });
+    logWebApi({
+      uri: "13",
+    });
+    logWebApi({
+      uri: "14",
+    });
+    logWebApi({
+      uri: "15",
+    });
+    logWebApi({
+      uri: "16",
+    });
+    logWebApi({
+      uri: "17",
     });
 
     // on page rendered jsi call after 2 seconds
