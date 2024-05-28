@@ -6,7 +6,7 @@ export default function Refresh() {
 
   return (
     <>
-      <button onClick={() => router.push("/reload2")}>
+      <button onClick={() => router.push("/en-in/reload2")}>
         Redirect to reload2
       </button>
       <button onClick={() => window.location.reload()}>Reload</button>
