@@ -1,8 +1,13 @@
 import { useRouter } from "next/router";
 import "./globals.css";
+import { useEffect } from "react";
 
 export default function Refresh() {
   const router = useRouter();
+
+  useEffect(() => {
+    console.log("useEffect");
+  }, []);
 
   return (
     <>
