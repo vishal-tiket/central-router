@@ -8,6 +8,9 @@ export default function Refresh() {
     <>
       <button onClick={() => window.location.reload()}>Reload</button>
       <button onClick={() => router.reload()}>Router Reload</button>
+      <button onClick={() => router.replace(router.asPath)}>
+        Router Replace
+      </button>
     </>
   );
 }
