@@ -11,7 +11,7 @@ export default function Refresh() {
       <button onClick={() => router.replace(router.asPath)}>
         Router Replace
       </button>
-      <button onClick={() => history.back(-2)}>History Back</button>
+      <button onClick={() => history.back(-3)}>History Back</button>
     </>
   );
 }
