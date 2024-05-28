@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+#layout {
+  max-width: 768px;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+a,
+button,
+input {
+  width: 100%;
+  margin-top: 20px;
+}
+
+a,
+button {
+  background-color: #42a5f2;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  min-height: 41.5px;
+  font-size: 16px;
+}
+
+span,
+p,
+h2,
+div {
+  word-break: break-all;
+}
+
+span {
+  color: #42A5F2;
+}
