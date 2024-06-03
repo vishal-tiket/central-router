@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tiket/react-common-eagle-eye": "^1.2.0",
-    "@tiket/react-common-jsi": "^0.0.0-alpha-576-20240524044830",
+    "@tiket/react-common-jsi": "^0.0.0-alpha-576-20240603112322",
     "@tiket/react-common-navigator-permission": "^0.0.0-alpha-556-20240425122041",
     "@tiket/react-common-utilities": "^2.3.6",
     "add-to-calendar-button": "^2.6.14",
