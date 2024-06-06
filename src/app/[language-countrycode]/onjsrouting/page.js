@@ -14,6 +14,10 @@ export default function GenericJSI() {
     }, 2000);
   }, []);
 
+  if (!code) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <>
       <Link
@@ -30,12 +34,10 @@ export default function GenericJSI() {
         normal router
       </a>
 
-      {code && (
-        <PageRenderPerformanceMarker
-          respCode={code}
-          message={"page rendered successfully"}
-        />
-      )}
+      <PageRenderPerformanceMarker
+        respCode={code}
+        message={"page rendered successfully"}
+      />
     </>
   );
 }
