@@ -2,12 +2,12 @@
 import {
   PageRenderPerformanceMarker,
   logWebApi,
-  onNavigationStart,
 } from "@tiket/react-common-jsi";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function GenericJSI() {
+  const router = useRouter();
   const [code, setCode] = useState(null);
   useEffect(() => {
     logWebApi({
@@ -56,38 +56,25 @@ export default function GenericJSI() {
 
   if (!code) {
     return <h1>Loading...</h1>;
+  } else {
+    return (
+      <>
+        <button onClick={() => router.back()}>Go Back</button>
+        <h1>Page Rendered 1</h1>
+        <Link
+          onClick={() => {
+            onNavigationStart({ url: "/onpagerendered2" });
+          }}
+          href="/onpagerendered2"
+          style={{ display: "block" }}
+        >
+          next js router page 2
+        </Link>
+        <PageRenderPerformanceMarker
+          respCode={code}
+          message={"page rendered successfully"}
+        />
+      </>
+    );
   }
-
-  return (
-    <>
-      <Link
-        onClick={() => {
-          onNavigationStart({ url: "/onpagerendered" });
-        }}
-        href="/onpagerendered"
-        style={{ display: "block" }}
-      >
-        next js router
-      </Link>
-
-      <a href="/onpagerendered" style={{ display: "block" }}>
-        normal router
-      </a>
-
-      <Link
-        href="/redirect307"
-        onClick={() => {
-          onNavigationStart({ url: "/redirect307" });
-        }}
-        style={{ display: "block" }}
-      >
-        Soft Redirect (document redirect)
-      </Link>
-
-      <PageRenderPerformanceMarker
-        respCode={code}
-        message={"page rendered successfully"}
-      />
-    </>
-  );
 }
