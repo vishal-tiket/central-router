@@ -34,6 +34,26 @@ export default function GenericJSI() {
         normal router
       </a>
 
+      <Link
+        href="/redirect307"
+        onClick={() => {
+          onNavigationStart({ url: "/redirect307" });
+        }}
+      >
+        Soft Redirect (document redirect)
+      </Link>
+
+      <Link
+        href="/softRedirect"
+        onClick={() => {
+          onNavigationStart({ url: "/softRedirect" });
+        }}
+      >
+        Soft Redirect (router.push)
+      </Link>
+
+      <a href="/hardRedirect">Hard Redirect</a>
+
       <PageRenderPerformanceMarker
         respCode={code}
         message={"page rendered successfully"}
