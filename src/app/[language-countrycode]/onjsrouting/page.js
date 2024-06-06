@@ -70,6 +70,16 @@ export default function GenericJSI() {
         next js router
       </Link>
 
+      <Link
+        onClick={() => {
+          onNavigationStart({ url: "/errorscreen" });
+        }}
+        href="/errorscreen"
+        style={{ display: "block" }}
+      >
+        next js redirect to error screen
+      </Link>
+
       <a href="/onpagerendered" style={{ display: "block" }}>
         normal router
       </a>
