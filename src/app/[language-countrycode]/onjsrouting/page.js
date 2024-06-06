@@ -1,8 +1,19 @@
 "use client";
-import { onNavigationStart } from "@tiket/react-common-jsi";
+import {
+  PageRenderPerformanceMarker,
+  onNavigationStart,
+} from "@tiket/react-common-jsi";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function GenericJSI() {
+  const [code, setCode] = useState(null);
+  useEffect(() => {
+    setTimeout(() => {
+      setCode(200);
+    }, 2000);
+  }, []);
+
   return (
     <>
       <Link
@@ -18,6 +29,13 @@ export default function GenericJSI() {
       <a href="/onpagerendered" style={{ display: "block" }}>
         normal router
       </a>
+
+      {code && (
+        <PageRenderPerformanceMarker
+          respCode={code}
+          message={"page rendered successfully"}
+        />
+      )}
     </>
   );
 }
