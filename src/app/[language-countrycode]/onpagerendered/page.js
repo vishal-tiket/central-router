@@ -1,22 +1,26 @@
 "use client";
-import { onPageRendered } from "@tiket/react-common-jsi";
+import { PageRenderPerformanceMarker } from "@tiket/react-common-jsi";
 import { useEffect, useState } from "react";
 
 export default function GenericJSI() {
-  const [time, setTime] = useState("");
+  const [code, setCode] = useState(null);
   useEffect(() => {
     setTimeout(() => {
-      const startTime = localStorage.getItem("startTime");
-      const finalTime = new Date().getTime();
-      localStorage.removeItem("startTime");
-      setTime(finalTime - startTime);
-      onPageRendered({
-        url: window.location.href,
-        message: "message is not confirmed yet",
-        status: "SUCCESS",
-      });
+      setCode(200);
     }, 2000);
   }, []);
 
-  return <h1>Testing on page rendered jsi, Time Taken = {time}</h1>;
+  if (!code) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <>
+        <h1>Page Rendered</h1>
+        <PageRenderPerformanceMarker
+          respCode={code}
+          message={"page rendered successfully"}
+        />
+      </>
+    );
+  }
 }
