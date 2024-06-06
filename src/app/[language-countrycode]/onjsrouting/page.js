@@ -39,6 +39,7 @@ export default function GenericJSI() {
         onClick={() => {
           onNavigationStart({ url: "/redirect307" });
         }}
+        style={{ display: "block" }}
       >
         Soft Redirect (document redirect)
       </Link>
@@ -48,11 +49,14 @@ export default function GenericJSI() {
         onClick={() => {
           onNavigationStart({ url: "/softRedirect" });
         }}
+        style={{ display: "block" }}
       >
         Soft Redirect (router.push)
       </Link>
 
-      <a href="/hardRedirect">Hard Redirect</a>
+      <a href="/hardRedirect" style={{ display: "block" }}>
+        Hard Redirect
+      </a>
 
       <PageRenderPerformanceMarker
         respCode={code}
