@@ -49,6 +49,7 @@ export const CentralRouter = ({
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     logWebApi({
       exception: "none",
@@ -61,6 +62,7 @@ export const CentralRouter = ({
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     logWebApi({
       exception: "none",
@@ -73,6 +75,7 @@ export const CentralRouter = ({
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     setTimeout(() => {
       setCode(200);

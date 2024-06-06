@@ -21,6 +21,7 @@ export default function GenericJSI() {
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     logWebApi({
       exception: "none",
@@ -33,6 +34,7 @@ export default function GenericJSI() {
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     logWebApi({
       exception: "none",
@@ -45,6 +47,7 @@ export default function GenericJSI() {
       businessCode: 400,
       businessMsg: "none",
       respPayloadSize: 20000,
+      correlationId: "1234",
     });
     setTimeout(() => {
       setCode(200);
