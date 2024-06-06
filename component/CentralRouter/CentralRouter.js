@@ -15,6 +15,7 @@ import {
 import {
   useGetAuthenticatedUserDetails,
   trackAnalyticEvent,
+  PageRenderPerformanceMarker,
 } from "@tiket/react-common-jsi";
 
 export const CentralRouter = ({
@@ -34,6 +35,12 @@ export const CentralRouter = ({
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
+  const [code, setCode] = useState(null);
+  useEffect(() => {
+    setTimeout(() => {
+      setCode(200);
+    }, 2000);
+  }, []);
 
   /** get country code and language code from url parameters */
   const [language, countrycode] =
@@ -184,9 +191,13 @@ export const CentralRouter = ({
       }
     }
   };
+  if (!code) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <div>
+      <PageRenderPerformanceMarker respCode={code} message="Success" />
       {handleBack && <button onClick={() => router.back()}>Back</button>}
       {handleBack && (
         <button onClick={() => history.back()}>Back using history.back</button>
