@@ -2,6 +2,7 @@
 import {
   PageRenderPerformanceMarker,
   logWebApi,
+  onNavigationStart,
 } from "@tiket/react-common-jsi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -57,25 +58,25 @@ export default function GenericJSI() {
 
   if (!code) {
     return <h1>Loading...</h1>;
-  } else {
-    return (
-      <>
-        <button onClick={() => router.back()}>Go Back</button>
-        <h1>Page Rendered</h1>
-        <Link
-          onClick={() => {
-            onNavigationStart({ url: "/onpagerendered1" });
-          }}
-          href="/onpagerendered1"
-          style={{ display: "block" }}
-        >
-          next js router page 1
-        </Link>
-        <PageRenderPerformanceMarker
-          respCode={code}
-          message={"page rendered successfully"}
-        />
-      </>
-    );
   }
+
+  return (
+    <>
+      <button onClick={() => router.back()}>Go Back</button>
+      <h1>Page Rendered</h1>
+      <Link
+        onClick={() => {
+          onNavigationStart({ url: "/onpagerendered1" });
+        }}
+        href="/onpagerendered1"
+        style={{ display: "block" }}
+      >
+        next js router page 1
+      </Link>
+      <PageRenderPerformanceMarker
+        respCode={code}
+        message={"page rendered successfully"}
+      />
+    </>
+  );
 }

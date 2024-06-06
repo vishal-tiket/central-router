@@ -2,6 +2,7 @@
 import {
   PageRenderPerformanceMarker,
   logWebApi,
+  onNavigationStart,
 } from "@tiket/react-common-jsi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
