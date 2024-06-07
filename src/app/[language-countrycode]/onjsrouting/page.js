@@ -94,7 +94,9 @@ export default function GenericJSI() {
         Redirect - next js (document redirect)
       </Link>
 
-      <a href="/redirect307">Redirect - href</a>
+      <a href="/redirect307" style={{ display: "block" }}>
+        Redirect - href
+      </a>
 
       <PageRenderPerformanceMarker
         respCode={code}
