@@ -91,7 +91,7 @@ export default function GenericJSI() {
         }}
         style={{ display: "block" }}
       >
-        Soft Redirect (document redirect)
+        Redirect (document redirect)
       </Link>
 
       <PageRenderPerformanceMarker
