@@ -3,30 +3,34 @@
 import { useState } from "react";
 
 export default function Permissions() {
-  const [camera, setCamera] = useState({});
+  const videoRef = useRef();
+  const [camera, setCamera] = useState(null);
   const [microphone, setMicrophone] = useState({});
   const [location, setLocation] = useState({});
 
   const startCamera = async () => {
     console.log("startCamera");
-    if (
-      "mediaDevices" in navigator &&
-      "getUserMedia" in navigator.mediaDevices
-    ) {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "user",
-          height: 220,
-        },
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
       });
-      setCamera(stream);
+      setCamera(mediaStream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+      }
+    } catch (error) {
+      console.error("Error accessing media devices.", error);
     }
   };
+
   const stopCamera = async () => {
     console.log("stopCamera");
-    if (camera.getTracks) {
+    if (camera) {
       camera.getTracks().forEach((track) => track.stop());
-      setCamera({});
+      setCamera(null);
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
     }
   };
 
@@ -66,7 +70,7 @@ export default function Permissions() {
       <button onClick={startCamera}>Play</button>
       <button onClick={stopCamera}>Pause</button>
       <video
-        src={camera}
+        ref={videoRef}
         autoPlay
         style={{
           border: "1px solid black",
