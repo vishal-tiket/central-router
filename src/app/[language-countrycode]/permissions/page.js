@@ -19,7 +19,7 @@ export default function Permissions() {
           height: 220,
         },
       });
-      setCamera(URL.createObjectURL(stream));
+      setCamera(stream);
     }
   };
   const stopCamera = async () => {
