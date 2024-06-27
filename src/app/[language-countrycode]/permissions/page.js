@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Permissions() {
   const [camera, setCamera] = useState({});
@@ -68,6 +68,7 @@ export default function Permissions() {
       <button onClick={stopCamera}>Pause</button>
       <video
         src={camera}
+        autoPlay
         style={{
           border: "1px solid black",
           margin: "20px 0",
@@ -99,6 +100,9 @@ export default function Permissions() {
           })}
         </div>
       )}
+
+      <h3>File Upload</h3>
+      <input type="file" />
     </>
   );
 }
