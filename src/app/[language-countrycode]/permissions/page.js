@@ -16,11 +16,10 @@ export default function Permissions() {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: "user",
-          width: "100%",
           height: 220,
         },
       });
-      setCamera(stream);
+      setCamera(window.URL.createObjectURL(stream));
     }
   };
   const stopCamera = async () => {
