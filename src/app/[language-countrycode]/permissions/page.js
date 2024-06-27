@@ -21,8 +21,8 @@ export default function Permissions() {
           height: 220,
         },
       });
-      cameraRef.current.srcObject = stream;
       setCameraState(true);
+      cameraRef.current.srcObject = stream;
     }
   };
   const stopCamera = async () => {
@@ -41,8 +41,8 @@ export default function Permissions() {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
-      microphoneRef.current.srcObject = stream;
       setMicrophoneState(true);
+      microphoneRef.current.srcObject = stream;
     }
   };
   const stopMicrophone = async () => {
