@@ -121,6 +121,9 @@ export default function Permissions() {
       <h3>FE Contact Picker</h3>
       <button onClick={getContacts}>Get Contacts</button>
       <div style={{ margin: "20px 0" }}>{JSON.stringify(contacts)}</div>
+
+      <h3>Open Phone Dialer with given phone number</h3>
+      <a href="tel:+91 1234567890">Call 1234567890</a>
     </>
   );
 }
