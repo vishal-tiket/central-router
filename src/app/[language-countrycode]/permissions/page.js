@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 export default function Permissions() {
   const videoRef = useRef();
   const [camera, setCamera] = useState(null);
-  const [microphone, setMicrophone] = useState({});
+  const [microphone, setMicrophone] = useState(null);
   const [location, setLocation] = useState({});
 
   const startCamera = async () => {
@@ -13,6 +13,7 @@ export default function Permissions() {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: true,
+        audio: true,
       });
       setCamera(mediaStream);
       if (videoRef.current) {
@@ -36,22 +37,21 @@ export default function Permissions() {
 
   const startMicrophone = async () => {
     console.log("startMicrophone");
-    if (
-      "mediaDevices" in navigator &&
-      "getUserMedia" in navigator.mediaDevices
-    ) {
-      const stream = await navigator.mediaDevices.getUserMedia({
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
-      setMicrophone(stream);
+      setMicrophone(mediaStream);
+    } catch (error) {
+      console.error("Error accessing audio devices.", error);
     }
   };
+
   const stopMicrophone = async () => {
     console.log("stopMicrophone");
-    if (microphone.getTracks) {
+    if (microphone) {
       microphone.getTracks().forEach((track) => track.stop());
-
-      setMicrophone({});
+      setMicrophone(null);
     }
   };
 
@@ -83,15 +83,7 @@ export default function Permissions() {
       <h3>Microphone</h3>
       <button onClick={startMicrophone}>Play</button>
       <button onClick={stopMicrophone}>Pause</button>
-      <audio
-        src={microphone}
-        style={{
-          border: "1px solid black",
-          margin: "20px 0",
-          width: "100%",
-          height: "30px",
-        }}
-      />
+      {microphone && <div>Microphone should be working</div>}
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
