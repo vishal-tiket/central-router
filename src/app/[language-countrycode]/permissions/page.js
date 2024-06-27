@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef, useState } from "react";
+import "./style.css";
 
 export default function Permissions() {
   const videoRef = useRef();
   const [camera, setCamera] = useState(null);
   const [microphone, setMicrophone] = useState(null);
   const [location, setLocation] = useState({});
+  const [contacts, setContacts] = useState([]);
 
   const startCamera = async () => {
     console.log("startCamera");
@@ -63,6 +65,21 @@ export default function Permissions() {
       });
     }
   };
+
+  const getContacts = async () => {
+    if ("contacts" in navigator && "select" in navigator.contacts) {
+      const props = ["name", "tel"];
+      const opts = { multiple: true };
+
+      try {
+        const contacts = await navigator.contacts.select(props, opts);
+        setContacts(contacts);
+      } catch (e) {
+        setContacts(e);
+      }
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -83,7 +100,9 @@ export default function Permissions() {
       <h3>Microphone</h3>
       <button onClick={startMicrophone}>Play</button>
       <button onClick={stopMicrophone}>Pause</button>
-      {microphone && <div>Microphone should be working</div>}
+      {microphone && (
+        <div style={{ margin: "20px 0" }}>Microphone should be working</div>
+      )}
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
@@ -97,7 +116,11 @@ export default function Permissions() {
       )}
 
       <h3>File Upload</h3>
-      <input type="file" />
+      <input type="file" style={{ margin: "20px 0" }} />
+
+      <h3>FE Contact Picker</h3>
+      <button onClick={getContacts}>Get Contacts</button>
+      <div style={{ margin: "20px 0" }}>{JSON.stringify(contacts)}</div>
     </>
   );
 }
