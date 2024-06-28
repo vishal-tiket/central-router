@@ -168,7 +168,7 @@ export default function Permissions() {
       <div style={{ margin: "20px 0" }}>{notificationError}</div>
 
       <h3>Set Calendar Events</h3>
-      <button></button>
+      <a href="webcal://m.vipul-pandit.in/event.ics">Add to Calendar</a>
     </>
   );
 }
