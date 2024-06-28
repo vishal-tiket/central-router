@@ -81,20 +81,33 @@ export default function Permissions() {
     }
   };
 
+  function showNotification() {
+    let title = "I love Educative.io";
+    let icon = "https://homepages.cae.wisc.edu/~ece533/images/zelda.png"; //this is a large image may take more time to show notifiction, replace with small size icon
+    let body = "Message to be displayed";
+
+    let notification = new Notification(title, { body, icon });
+
+    notification.onclick = () => {
+      notification.close();
+      window.parent.focus();
+    };
+  }
+
   const getNotification = () => {
     console.log("getNotification", "Notification" in window);
     if (!("Notification" in window)) {
       console.log("This browser does not support notification");
     } else if (Notification.permission === "granted") {
       console.log("Notification permission is granted show notification");
-      const notification = new Notification("Hi there!");
+      showNotification();
     } else if (Notification.permission !== "denied") {
       console.log("Notification permission is not denied, request permission");
       Notification.requestPermission().then((permission) => {
         console.log("Notification permission", permission);
         if (permission === "granted") {
           console.log("Notification permission is granted show notification");
-          const notification = new Notification("Hi there!");
+          showNotification();
         }
       });
     } else {
