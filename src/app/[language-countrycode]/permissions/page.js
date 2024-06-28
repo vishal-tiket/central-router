@@ -9,6 +9,7 @@ export default function Permissions() {
   const [microphone, setMicrophone] = useState(null);
   const [location, setLocation] = useState({});
   const [contacts, setContacts] = useState([]);
+  const [notificationError, setNotificationError] = useState("");
 
   const startCamera = async () => {
     console.log("startCamera");
@@ -80,6 +81,35 @@ export default function Permissions() {
     }
   };
 
+  const showNotification = () => {
+    const notification = new Notification("Hello! There", {
+      body: "This is a browser notification.",
+    });
+
+    notification.onclick = () => {
+      window.open("https://badhtml.com/");
+    };
+  };
+
+  const getNotification = () => {
+    if (!("Notification" in window)) {
+      setNotificationError(
+        "This browser does not support desktop notification"
+      );
+      if (Notification.permission === "granted") {
+        showNotification();
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            showNotification();
+          } else {
+            setNotificationError("Permission denied");
+          }
+        });
+      }
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -124,6 +154,10 @@ export default function Permissions() {
 
       <h3>Open Phone Dialer with given phone number</h3>
       <a href="tel:+91 1234567890">Call 1234567890</a>
+
+      <h3>Notification</h3>
+      <button onClick={getNotification}>Show Notification</button>
+      <div style={{ margin: "20px 0" }}>{notificationError}</div>
     </>
   );
 }
