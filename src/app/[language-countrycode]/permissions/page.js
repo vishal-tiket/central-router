@@ -93,7 +93,7 @@ export default function Permissions() {
   };
 
   const getNotification = () => {
-    console.log("getNotification");
+    console.log("getNotification", "Notification" in window);
     if (!("Notification" in window)) {
       console.log("This browser does not support desktop notification");
       setNotificationError(
