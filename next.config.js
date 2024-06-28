@@ -11,7 +11,7 @@ const nextConfig = {
         destination: "/storage/index.html",
       },
       {
-        source: "/event",
+        source: "/event.ics",
         destination: "/event.ics",
       },
     ];
@@ -23,7 +23,7 @@ const nextConfig = {
         headers: [{ key: "content-type", value: "application/json" }],
       },
       {
-        source: "/event",
+        source: "/event.ics",
         headers: [{ key: "content-type", value: "text/calendar" }],
       },
     ];
