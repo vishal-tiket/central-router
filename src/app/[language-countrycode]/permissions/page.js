@@ -83,10 +83,9 @@ export default function Permissions() {
 
   function showNotification() {
     let title = "I love Educative.io";
-    let icon = "https://homepages.cae.wisc.edu/~ece533/images/zelda.png"; //this is a large image may take more time to show notifiction, replace with small size icon
     let body = "Message to be displayed";
 
-    let notification = new Notification(title, { body, icon });
+    let notification = new Notification(title, { body });
 
     notification.onclick = () => {
       notification.close();
