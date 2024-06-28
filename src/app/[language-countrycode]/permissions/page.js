@@ -81,40 +81,25 @@ export default function Permissions() {
     }
   };
 
-  const showNotification = () => {
-    console.log("showNotification");
-    const notification = new Notification("Hello! There", {
-      body: "This is a browser notification.",
-    });
-
-    notification.onclick = () => {
-      window.open("https://badhtml.com/");
-    };
-  };
-
   const getNotification = () => {
     console.log("getNotification", "Notification" in window);
     if (!("Notification" in window)) {
-      console.log("This browser does not support desktop notification");
-      setNotificationError(
-        "This browser does not support desktop notification"
-      );
-      if (Notification.permission === "granted") {
-        console.log("Permission granted");
-        showNotification();
-      } else if (Notification.permission !== "denied") {
-        console.log("Requesting permission");
-        Notification.requestPermission().then((permission) => {
-          console.log("Permission", permission);
-          if (permission === "granted") {
-            console.log("Permission granted");
-            showNotification();
-          } else {
-            console.log("Permission denied");
-            setNotificationError("Permission denied");
-          }
-        });
-      }
+      console.log("This browser does not support notification");
+    } else if (Notification.permission === "granted") {
+      console.log("Notification permission is granted show notification");
+      const notification = new Notification("Hi there!");
+    } else if (Notification.permission !== "denied") {
+      console.log("Notification permission is not denied, request permission");
+      Notification.requestPermission().then((permission) => {
+        console.log("Notification permission", permission);
+        if (permission === "granted") {
+          console.log("Notification permission is granted show notification");
+          const notification = new Notification("Hi there!");
+        }
+      });
+    } else {
+      console.log("Notification permission is denied");
+      setNotificationError("Notification permission is denied");
     }
   };
 
