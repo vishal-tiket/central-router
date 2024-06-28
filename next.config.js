@@ -10,6 +10,10 @@ const nextConfig = {
         source: "/storage/index.html",
         destination: "/storage/index.html",
       },
+      {
+        source: "/event.ics",
+        destination: "/event.ics",
+      },
     ];
   },
   headers() {
@@ -17,6 +21,10 @@ const nextConfig = {
       {
         source: "/apple-app-site-association",
         headers: [{ key: "content-type", value: "application/json" }],
+      },
+      {
+        source: "/event.ics",
+        headers: [{ key: "content-type", value: "text/calendar" }],
       },
     ];
   },
