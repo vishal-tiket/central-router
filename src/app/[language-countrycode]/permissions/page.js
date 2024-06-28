@@ -95,16 +95,22 @@ export default function Permissions() {
   const getNotification = () => {
     console.log("getNotification");
     if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
       setNotificationError(
         "This browser does not support desktop notification"
       );
       if (Notification.permission === "granted") {
+        console.log("Permission granted");
         showNotification();
       } else if (Notification.permission !== "denied") {
+        console.log("Requesting permission");
         Notification.requestPermission().then((permission) => {
+          console.log("Permission", permission);
           if (permission === "granted") {
+            console.log("Permission granted");
             showNotification();
           } else {
+            console.log("Permission denied");
             setNotificationError("Permission denied");
           }
         });
