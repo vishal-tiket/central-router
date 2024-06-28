@@ -160,9 +160,15 @@ export default function Permissions() {
       <h3>Open Phone Dialer with given phone number</h3>
       <a href="tel:+91 1234567890">Call 1234567890</a>
 
+      <h3>Send Email</h3>
+      <a href="mailto: johndoe@gmail.com">send email to johndoe@gmail.com</a>
+
       <h3>Notification</h3>
       <button onClick={getNotification}>Show Notification</button>
       <div style={{ margin: "20px 0" }}>{notificationError}</div>
+
+      <h3>Set Calendar Events</h3>
+      <button></button>
     </>
   );
 }
