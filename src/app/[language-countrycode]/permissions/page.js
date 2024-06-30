@@ -10,6 +10,8 @@ export default function Permissions() {
   const [location, setLocation] = useState({});
   const [contacts, setContacts] = useState([]);
   const [notificationError, setNotificationError] = useState("");
+  const [clipboardData, setClipboardData] = useState("");
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const startCamera = async () => {
     console.log("startCamera");
@@ -115,6 +117,38 @@ export default function Permissions() {
     }
   };
 
+  const copyToClipboard = () => {
+    // Writing to the clipboard
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText("Hello, Clipboard!").then(
+        function () {
+          console.log("Text copied to clipboard");
+          setCopySuccess("Text copied to clipboard");
+        },
+        function (err) {
+          console.error("Could not copy text: ", err);
+          setCopySuccess(err);
+        }
+      );
+    }
+  };
+
+  const getClipboardData = () => {
+    // Reading from the clipboard
+    if ("clipboard" in navigator) {
+      navigator.clipboard.readText().then(
+        function (text) {
+          console.log("Pasted content: ", text);
+          setClipboardData(text);
+        },
+        function (err) {
+          console.error("Failed to read clipboard contents: ", err);
+          setClipboardData(err);
+        }
+      );
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -171,6 +205,16 @@ export default function Permissions() {
       <a href="webcal://drive.google.com/uc?export=download&id=1BMqfObNnwx-9BXWfwpyGTEL00F0UlyOt">
         Add to Calendar
       </a>
+
+      <h3>Clipboard</h3>
+      <button onClick={copyToClipboard}>Copy to Clipboard</button>
+      {copySuccess && (
+        <div style={{ margin: "20px 0" }}>{JSON.stringify(copySuccess)}</div>
+      )}
+      <button onClick={getClipboardData}>Paste from Clipboard</button>
+      {clipboardData && (
+        <div style={{ margin: "20px 0" }}>{JSON.stringify(clipboardData)}</div>
+      )}
     </>
   );
 }
