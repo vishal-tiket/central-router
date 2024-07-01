@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 
 export default function Permissions() {
@@ -12,6 +12,11 @@ export default function Permissions() {
   const [notificationError, setNotificationError] = useState("");
   const [clipboardData, setClipboardData] = useState("");
   const [copySuccess, setCopySuccess] = useState(false);
+  const [notificationPermission, setNotificationPermission] = useState("");
+
+  useEffect(() => {
+    setNotificationPermission(Notification.permission);
+  }, []);
 
   const startCamera = async () => {
     console.log("startCamera");
@@ -214,6 +219,11 @@ export default function Permissions() {
       {clipboardData && (
         <div style={{ margin: "20px 0" }}>{JSON.stringify(clipboardData)}</div>
       )}
+
+      <h3>Notification Status</h3>
+      <div style={{ margin: "20px 0" }}>
+        Notification Permission: {notificationPermission}
+      </div>
     </>
   );
 }
