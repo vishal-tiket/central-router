@@ -13,6 +13,7 @@ export default function Permissions() {
   const [clipboardData, setClipboardData] = useState("");
   const [copySuccess, setCopySuccess] = useState(false);
   const [notificationPermission, setNotificationPermission] = useState("");
+  const [multiplePermissions, setMultiplePermissions] = useState([]);
 
   useEffect(() => {
     if (!("Notification" in window)) return;
@@ -154,6 +155,25 @@ export default function Permissions() {
     }
   };
 
+  const getMultiplePermissions = async () => {
+    try {
+      const permissions = await navigator.permissions.query(
+        {
+          name: "geolocation",
+        },
+        { name: "camera" },
+        { name: "microphone" },
+        { name: "clipboard-read" },
+        { name: "clipboard-write" }
+      );
+      console.log("permissions", permissions);
+      setMultiplePermissions(permissions);
+    } catch (error) {
+      setMultiplePermissions(error);
+      console.error("Error accessing permissions.", error);
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -224,6 +244,12 @@ export default function Permissions() {
       <h3>Notification Status</h3>
       <div style={{ margin: "20px 0" }}>
         Notification Permission: {notificationPermission}
+      </div>
+
+      <h3>Multiple Permissions</h3>
+      <button onClick={getMultiplePermissions}>Get Multiple Permissions</button>
+      <div style={{ margin: "20px 0" }}>
+        {JSON.stringify(multiplePermissions)}
       </div>
     </>
   );
