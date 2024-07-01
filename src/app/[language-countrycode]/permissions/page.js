@@ -18,7 +18,6 @@ export default function Permissions() {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: true,
-        audio: true,
       });
       setCamera(mediaStream);
       if (videoRef.current) {
