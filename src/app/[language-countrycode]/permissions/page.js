@@ -190,15 +190,21 @@ export default function Permissions() {
 
   const getMultiplePermissions = async () => {
     try {
-      const permissionNames = [
-        getLocationPermission,
-        getCameraPermission,
-        getMicrophonePermission,
-      ];
-      const permissionsStatus = await Promise.all(
-        permissionNames.map((fn) => fn())
-      );
-      setMultiplePermissions(true);
+      const cameraPermission = await getCameraPermission();
+      if (cameraPermission !== "granted") return;
+      const microphonePermission = await getMicrophonePermission();
+      if (microphonePermission !== "granted") return;
+      const locationPermission = await getLocationPermission();
+      if (locationPermission !== "granted") return;
+      if (
+        cameraPermission === "granted" &&
+        microphonePermission === "granted" &&
+        locationPermission === "granted"
+      ) {
+        setMultiplePermissions("All permissions granted");
+      } else {
+        setMultiplePermissions("All permissions not granted");
+      }
     } catch (error) {
       console.error("Error fetching permissions", error);
       setMultiplePermissions(error);
