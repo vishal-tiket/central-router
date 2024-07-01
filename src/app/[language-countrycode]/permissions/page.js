@@ -15,9 +15,8 @@ export default function Permissions() {
   const [notificationPermission, setNotificationPermission] = useState("");
 
   useEffect(() => {
-    if ("Notifcation" in window) {
-      setNotificationPermission(Notification.permission);
-    }
+    if (!("Notification" in window)) return;
+    setNotificationPermission(Notification.permission);
   }, []);
 
   const startCamera = async () => {
