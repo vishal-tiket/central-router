@@ -157,24 +157,26 @@ export default function Permissions() {
 
   const getMultiplePermissions = async () => {
     try {
-      const permissionNames = [
-        "geolocation",
-        "camera",
-        "microphone",
-        "clipboard-read",
-        "clipboard-write",
-      ];
-      const permissionsStatus = await Promise.all(
-        permissionNames.map((name) => navigator.permissions.query({ name }))
-      );
+      if ("permissions" in navigator) {
+        const permissionNames = [
+          "geolocation",
+          "camera",
+          "microphone",
+          "clipboard-read",
+          "clipboard-write",
+        ];
+        const permissionsStatus = await Promise.all(
+          permissionNames.map((name) => navigator.permissions.query({ name }))
+        );
 
-      const permissions = permissionsStatus.reduce((acc, current, index) => {
-        acc[permissionNames[index]] = current;
-        return acc;
-      }, {});
+        const permissions = permissionsStatus.reduce((acc, current, index) => {
+          acc[permissionNames[index]] = current;
+          return acc;
+        }, {});
 
-      console.log("permissions", permissions);
-      setMultiplePermissions(permissions);
+        console.log("permissions", permissions);
+        setMultiplePermissions(permissions);
+      }
     } catch (error) {
       console.error("Error fetching permissions", error);
       setMultiplePermissions(error);
