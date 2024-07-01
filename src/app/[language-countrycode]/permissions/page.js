@@ -35,6 +35,30 @@ export default function Permissions() {
     }
   };
 
+  const getCameraPermission = async () => {
+    console.log("startCamera");
+    try {
+      const mediaStream = await navigator?.mediaDevices?.getUserMedia({
+        video: true,
+      });
+      return "granted";
+    } catch (error) {
+      console.error("Error accessing media devices.", error);
+    }
+  };
+
+  const getMicrophonePermission = async () => {
+    console.log("startMicrophone");
+    try {
+      const mediaStream = await navigator?.mediaDevices?.getUserMedia({
+        audio: true,
+      });
+      return "granted";
+    } catch (error) {
+      console.error("Error accessing audio devices.", error);
+    }
+  };
+
   const stopCamera = async () => {
     console.log("stopCamera");
     if (camera) {
@@ -71,6 +95,15 @@ export default function Permissions() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLocation(position);
+      });
+    }
+  };
+
+  const getLocationPermission = () => {
+    console.log("getLocation");
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        return "granted";
       });
     }
   };
@@ -157,26 +190,15 @@ export default function Permissions() {
 
   const getMultiplePermissions = async () => {
     try {
-      if ("permissions" in navigator) {
-        const permissionNames = [
-          "geolocation",
-          "camera",
-          "microphone",
-          "clipboard-read",
-          "clipboard-write",
-        ];
-        const permissionsStatus = await Promise.all(
-          permissionNames.map((name) => navigator.permissions.query({ name }))
-        );
-
-        const permissions = permissionsStatus.reduce((acc, current, index) => {
-          acc[permissionNames[index]] = current;
-          return acc;
-        }, {});
-
-        console.log("permissions", permissions);
-        setMultiplePermissions(permissions);
-      }
+      const permissionNames = [
+        getLocationPermission,
+        getCameraPermission,
+        getMicrophonePermission,
+      ];
+      const permissionsStatus = await Promise.all(
+        permissionNames.map((fn) => fn())
+      );
+      setMultiplePermissions(true);
     } catch (error) {
       console.error("Error fetching permissions", error);
       setMultiplePermissions(error);
