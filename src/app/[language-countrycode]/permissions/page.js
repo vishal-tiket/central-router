@@ -33,6 +33,7 @@ export default function Permissions() {
       setCamera(mediaStream);
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
+        console.log("videoRef srcobject", videoRef.current.srcObject);
       }
     } catch (error) {
       console.error("Error accessing media devices.", error);
