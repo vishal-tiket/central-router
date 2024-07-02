@@ -229,6 +229,24 @@ export default function Permissions() {
     }
   };
 
+  const handleShareButton = async () => {
+    const shareData = {
+      title: "Example Share",
+      text: "Check out this example share feature!",
+      url: "https://example.com",
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        console.log("Data was shared successfully");
+      } else {
+        console.log("Web Share API is not supported in your browser.");
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -320,6 +338,9 @@ export default function Permissions() {
 
       <h3>OTP AutoComplete</h3>
       <input autoComplete="one-time-code" placeholder="enter otp" />
+
+      <h3>Share Feature</h3>
+      <button onClick={handleShareButton}>Share Button</button>
     </>
   );
 }
