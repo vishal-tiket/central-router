@@ -87,7 +87,7 @@ export default function Permissions() {
       };
 
       mediaRecorder.current.onstop = () => {
-        const audioBlob = new Blob(audioChunks.current, { type: "audio/wav" });
+        const audioBlob = new Blob(audioChunks.current, { type: "audio/mp3" });
         const audioUrl = URL.createObjectURL(audioBlob);
         setAudioURL(audioUrl);
         audioChunks.current = [];
@@ -253,7 +253,7 @@ export default function Permissions() {
       {audioURL && (
         <div>
           <audio src={audioURL} controls style={{ marginTop: "20px" }}></audio>
-          <a href={audioURL} download="recording.wav">
+          <a href={audioURL} download="recording.mp3">
             Download recording
           </a>
         </div>
