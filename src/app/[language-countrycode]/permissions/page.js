@@ -317,6 +317,9 @@ export default function Permissions() {
       <div style={{ margin: "20px 0" }}>
         {JSON.stringify(multiplePermissions)}
       </div>
+
+      <h3>OTP AutoComplete</h3>
+      <input autoComplete="one-time-code" placeholder="enter otp" />
     </>
   );
 }
