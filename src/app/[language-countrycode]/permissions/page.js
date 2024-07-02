@@ -77,7 +77,9 @@ export default function Permissions() {
   const startMicrophone = async () => {
     console.log("startMicrophone");
     try {
-      const stream = await navigator?.mediaDevices?.getUserMedia({ audio: true });
+      const stream = await navigator?.mediaDevices?.getUserMedia({
+        audio: true,
+      });
       mediaRecorder.current = new MediaRecorder(stream);
 
       mediaRecorder.current.ondataavailable = (event) => {
@@ -250,7 +252,7 @@ export default function Permissions() {
       )}
       {audioURL && (
         <div>
-          <audio src={audioURL} controls></audio>
+          <audio src={audioURL} controls style={{ margin: "20px 0" }}></audio>
           <a href={audioURL} download="recording.wav">
             Download recording
           </a>
