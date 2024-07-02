@@ -252,7 +252,7 @@ export default function Permissions() {
       )}
       {audioURL && (
         <div>
-          <audio src={audioURL} controls style={{ margin: "20px 0" }}></audio>
+          <audio src={audioURL} controls style={{ marginTop: "20px" }}></audio>
           <a href={audioURL} download="recording.wav">
             Download recording
           </a>
