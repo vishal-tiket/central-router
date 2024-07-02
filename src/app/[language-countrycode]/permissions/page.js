@@ -14,6 +14,10 @@ export default function Permissions() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [notificationPermission, setNotificationPermission] = useState("");
   const [multiplePermissions, setMultiplePermissions] = useState([]);
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioURL, setAudioURL] = useState("");
+  const mediaRecorder = useRef(null);
+  const audioChunks = useRef([]);
 
   useEffect(() => {
     if (!("Notification" in window)) return;
@@ -73,21 +77,31 @@ export default function Permissions() {
   const startMicrophone = async () => {
     console.log("startMicrophone");
     try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
-      setMicrophone(mediaStream);
+      const stream = await navigator?.mediaDevices?.getUserMedia({ audio: true });
+      mediaRecorder.current = new MediaRecorder(stream);
+
+      mediaRecorder.current.ondataavailable = (event) => {
+        audioChunks.current.push(event.data);
+      };
+
+      mediaRecorder.current.onstop = () => {
+        const audioBlob = new Blob(audioChunks.current, { type: "audio/wav" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        setAudioURL(audioUrl);
+        audioChunks.current = [];
+      };
+
+      mediaRecorder.current.start();
+      setIsRecording(true);
     } catch (error) {
-      console.error("Error accessing audio devices.", error);
+      console.error("Error accessing the microphone", error);
     }
   };
 
   const stopMicrophone = async () => {
     console.log("stopMicrophone");
-    if (microphone) {
-      microphone.getTracks().forEach((track) => track.stop());
-      setMicrophone(null);
-    }
+    mediaRecorder.current.stop();
+    setIsRecording(false);
   };
 
   const getLocation = () => {
@@ -233,6 +247,14 @@ export default function Permissions() {
       <button onClick={stopMicrophone}>Pause</button>
       {microphone && (
         <div style={{ margin: "20px 0" }}>Microphone should be working</div>
+      )}
+      {audioURL && (
+        <div>
+          <audio src={audioURL} controls></audio>
+          <a href={audioURL} download="recording.wav">
+            Download recording
+          </a>
+        </div>
       )}
 
       <h3>Location</h3>
