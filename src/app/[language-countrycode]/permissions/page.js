@@ -288,7 +288,10 @@ export default function Permissions() {
       <div style={{ margin: "20px 0" }}>{notificationError}</div>
 
       <h3>Set Calendar Events</h3>
-      <a href="webcal://drive.google.com/uc?export=download&id=1BMqfObNnwx-9BXWfwpyGTEL00F0UlyOt">
+      {/* <a href="webcal://drive.google.com/uc?export=download&id=1BMqfObNnwx-9BXWfwpyGTEL00F0UlyOt">
+        Add to Calendar
+      </a> */}
+      <a href="webcal://m.vipul-pandit.in/api/webcal?start=20240630T073500Z&end=20240630T134100Z">
         Add to Calendar
       </a>
 
