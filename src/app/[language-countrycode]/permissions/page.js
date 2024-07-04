@@ -291,7 +291,7 @@ export default function Permissions() {
       )}
 
       <h3>File Upload</h3>
-      <input type="file" style={{ margin: "20px 0" }} />
+      <input type="file" style={{ margin: "20px 0" }} capture="user" />
 
       <h3>FE Contact Picker</h3>
       <button onClick={getContacts}>Get Contacts</button>
