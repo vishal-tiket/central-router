@@ -56,7 +56,7 @@ export default function NavigatorShare() {
         console.log("Sharing files is not supported");
       }
     } catch (error) {
-      console.log("Failed to share file", JSON.stringify(error));
+      console.log("Failed to share file", error);
     }
   };
 
