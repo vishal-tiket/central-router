@@ -47,6 +47,7 @@ export default function NavigatorShare() {
 
   const shareFile = async () => {
     const { file } = await getFileDataFromUrl();
+    console.log("[share feat]: file", file);
     try {
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
