@@ -4,75 +4,36 @@ import { Share } from "@tiket/react-common-navigator-permission";
 import { useEffect, useState } from "react";
 
 export default function JSIPerformance() {
-  const [smallContentJSI, setSmallContentJSI] = useState(0);
-  const [largeContentJSI, setLargeContentJSI] = useState(0);
   const [isSmallContentLoading, setIsSmallContentLoading] = useState(false);
   const [isLargeContentLoading, setIsLargeContentLoading] = useState(false);
 
-  const handleTimerForSmallContent = () => {
-    const endTime = new Date().getTime();
-    setSmallContentJSI((prev) => {
-      return endTime - prev;
-    });
-    setIsSmallContentLoading(false);
-  };
-
-  const handleTimerForLargeContent = () => {
-    const endTime = new Date().getTime();
-    setLargeContentJSI((prev) => {
-      return endTime - prev;
-    });
-    setIsLargeContentLoading(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("12345", handleTimerForSmallContent);
-
-    window.addEventListener("123456", handleTimerForLargeContent);
-
-    return () => {
-      window.removeEventListener("12345", handleTimerForSmallContent);
-      window.removeEventListener("123456", handleTimerForLargeContent);
-    };
-  }, []);
-
-  const callJSIWithSmallContent = () => {
-    const startTime = new Date().getTime();
+  const callJSIWithSmallContent = async () => {
     setIsSmallContentLoading(true);
-    setSmallContentJSI(startTime);
-    Share({
+    const res = await Share({
       files: [
         "https://images.unsplash.com/photo-1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       ],
     });
+    setIsSmallContentLoading(false);
   };
 
-  const callJSIWithLargeContent = () => {
-    const startTime = new Date().getTime();
+  const callJSIWithLargeContent = async () => {
     setIsLargeContentLoading(true);
-    setLargeContentJSI(startTime);
-    Share({
+    const res = await Share({
       files: [
         "https://drive.google.com/uc?export=download&id=1nJPkC6I2L9BfmYUSFLOhDye18878zQv8",
       ],
     });
+    setIsLargeContentLoading(false);
   };
 
   return (
     <div>
       <h3>JSI Performance</h3>
       <button onClick={callJSIWithSmallContent}>JSI with small content</button>
-      {isSmallContentLoading ? (
-        <div>Loading</div>
-      ) : (
-        <div>Time taken for small content = {smallContentJSI}</div>
-      )}
+      {isSmallContentLoading && <div>Loading</div>}
       <button onClick={callJSIWithLargeContent}>JSI with large content</button>
-      {isLargeContentLoading ? (
-        <div>Loading</div>
-      ) : (
-        <div>Time taken for large content = {largeContentJSI}</div>
-      )}
+      {isLargeContentLoading && <div>Loading</div>}
     </div>
   );
 }
