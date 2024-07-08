@@ -243,7 +243,16 @@ export const CentralRouter = ({
 
   return (
     <div>
-      <PageRenderPerformanceMarker respCode={code} message="Success" />
+      <PageRenderPerformanceMarker
+        respCode={code}
+        message="Success"
+        customData={{
+          airportRoute: "CGK - DPS",
+          departAirline: "QG - JT",
+          flightRouteType: "Round Trip",
+          totalPax: "2",
+        }}
+      />
       {handleBack && <button onClick={() => router.back()}>Back</button>}
       {handleBack && (
         <button onClick={() => history.back()}>Back using history.back</button>

@@ -1,5 +1,8 @@
 "use client";
-import { PageRenderPerformanceMarker, logWebApi } from "@tiket/react-common-jsi";
+import {
+  PageRenderPerformanceMarker,
+  logWebApi,
+} from "@tiket/react-common-jsi";
 import { useEffect, useState } from "react";
 
 export default function ErrorScreen() {
@@ -42,7 +45,16 @@ export default function ErrorScreen() {
 
   return (
     <>
-      <PageRenderPerformanceMarker respCode={code} message="Forbidden" />
+      <PageRenderPerformanceMarker
+        respCode={code}
+        message="Forbidden"
+        customData={{
+          airportRoute: "CGK - DPS",
+          departAirline: "QG - JT",
+          flightRouteType: "Round Trip",
+          totalPax: "3",
+        }}
+      />
       <h2>403 forbidden</h2>
       <button
         onClick={() => {

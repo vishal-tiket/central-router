@@ -22,7 +22,16 @@ export default function NotFound() {
       <h2>Not Found</h2>
       <p>Could not find requested resource</p>
       <button onClick={() => router.back()}>Go Back</button>
-      <PageRenderPerformanceMarker respCode={code} message={"page not found"} />
+      <PageRenderPerformanceMarker
+        respCode={code}
+        message={"page not found"}
+        customData={{
+          airportRoute: "CGK - DPS",
+          departAirline: "QG - JT",
+          flightRouteType: "Round Trip",
+          totalPax: "1",
+        }}
+      />
     </div>
   );
 }
