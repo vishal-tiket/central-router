@@ -17,6 +17,7 @@ export default function JSIPerformance() {
         },
       ],
     });
+    console.log(res);
     setIsSmallContentLoading(false);
   };
 
