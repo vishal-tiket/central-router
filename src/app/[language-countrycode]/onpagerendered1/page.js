@@ -75,7 +75,7 @@ export default function GenericJSI() {
         <PageRenderPerformanceMarker
           respCode={code}
           message={"page rendered successfully"}
-          customData={{
+          customFields={{
             airportRoute: "CGK - DPS",
             departAirline: "QG - JT",
             flightRouteType: "Round Trip",

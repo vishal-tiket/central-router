@@ -48,7 +48,7 @@ export default function ErrorScreen() {
       <PageRenderPerformanceMarker
         respCode={code}
         message="Forbidden"
-        customData={{
+        customFields={{
           airportRoute: "CGK - DPS",
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",

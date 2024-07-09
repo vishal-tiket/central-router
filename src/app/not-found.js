@@ -25,7 +25,7 @@ export default function NotFound() {
       <PageRenderPerformanceMarker
         respCode={code}
         message={"page not found"}
-        customData={{
+        customFields={{
           airportRoute: "CGK - DPS",
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",

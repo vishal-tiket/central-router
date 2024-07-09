@@ -246,7 +246,7 @@ export const CentralRouter = ({
       <PageRenderPerformanceMarker
         respCode={code}
         message="Success"
-        customData={{
+        customFields={{
           airportRoute: "CGK - DPS",
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",
