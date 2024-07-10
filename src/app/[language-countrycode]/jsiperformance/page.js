@@ -36,6 +36,7 @@ export default function JSIPerformance() {
           name: "sssssss6",
         },
       ]);
+      console.log("dsadasdasdasdasdA", response);
     } catch (e) {
       console.log("error caught");
     }
