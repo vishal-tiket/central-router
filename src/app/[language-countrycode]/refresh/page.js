@@ -42,6 +42,7 @@ export default function Refresh() {
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",
           totalPax: "5",
+          screenName: "flight",
         }}
       />
     </>

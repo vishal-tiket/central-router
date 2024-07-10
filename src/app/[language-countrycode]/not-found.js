@@ -30,6 +30,7 @@ export default function NotFound() {
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",
           totalPax: "1",
+          screenName: "flight",
         }}
       />
     </div>

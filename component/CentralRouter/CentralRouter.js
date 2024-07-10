@@ -251,6 +251,7 @@ export const CentralRouter = ({
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",
           totalPax: "2",
+          screenName: "flight",
         }}
       />
       {handleBack && <button onClick={() => router.back()}>Back</button>}
