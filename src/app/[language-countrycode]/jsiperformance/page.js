@@ -57,8 +57,13 @@ export default function JSIPerformance() {
   const download = async () => {
     try {
       const res = await fetch(
-        "https://images.unsnjnkjnkjnkjnplash.com/photo-1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        "https://images.unsplash.com/photo-15105056bb78115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       );
+      if (!res.ok) {
+        // Checks if status is outside 200-299
+        console.log("dasdasdasdas");
+        throw new Error(`HTTP error!: ${res.status}`);
+      }
       console.log(res);
     } catch (e) {
       throw new Error(e.message);
@@ -83,10 +88,10 @@ export default function JSIPerformance() {
 
   const errorHandler = async () => {
     try {
-      const res = await promiseHandler();
+      const res = await download();
     } catch (e) {
       console.log("outside errorHandler");
-      console.log(e);
+      console.log("dasda", e);
     }
   };
 
