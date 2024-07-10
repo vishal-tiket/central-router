@@ -83,7 +83,7 @@ export default function GenericJSI() {
           totalPax: "4",
           totalAdult: "2",
           totalChild: "1",
-          screenName: "flight",
+          screenName: "onPageRendered",
         }}
       />
     </>

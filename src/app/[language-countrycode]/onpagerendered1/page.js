@@ -80,7 +80,7 @@ export default function GenericJSI() {
             departAirline: "QG - JT",
             flightRouteType: "Round Trip",
             totalPax: "1",
-            screenName: "flight",
+            screenName: "onPageRendered1",
           }}
         />
       </>

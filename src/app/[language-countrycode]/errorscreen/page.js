@@ -53,7 +53,7 @@ export default function ErrorScreen() {
           departAirline: "QG - JT",
           flightRouteType: "Round Trip",
           totalPax: "3",
-          screenName: "flight",
+          screenName: "error screen",
         }}
       />
       <h2>403 forbidden</h2>
