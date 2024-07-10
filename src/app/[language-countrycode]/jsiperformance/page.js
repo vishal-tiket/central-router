@@ -7,7 +7,7 @@ export default function JSIPerformance() {
   const [isSmallContentLoading, setIsSmallContentLoading] = useState(false);
   const [isLargeContentLoading, setIsLargeContentLoading] = useState(false);
 
-  const callJSIWithSmallContent = async () => {
+  const callJSIWithSmallContent = () => {
     setIsSmallContentLoading(true);
     ShareDownloadableFiles([
       {
@@ -39,6 +39,7 @@ export default function JSIPerformance() {
         console.log(res);
       })
       .catch((e) => {
+        console.log("handle rejection");
         console.log(e);
       });
     setIsSmallContentLoading(false);
@@ -56,6 +57,42 @@ export default function JSIPerformance() {
     setIsLargeContentLoading(false);
   };
 
+  const download = async () => {
+    try {
+      const res = await fetch(
+        "https://images.unsnjnkjnkjnkjnplash.com/photo-1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      );
+      console.log(res);
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+
+  const promiseHandler = () => {
+    try {
+      return new Promise((res, rej) => {
+        try {
+          res(undefined);
+        } catch (e) {
+          console.log("inside promise");
+          rej(e);
+        }
+      });
+    } catch (e) {
+      console.log("outside promise");
+      console.log(e);
+    }
+  };
+
+  const errorHandler = async () => {
+    try {
+      const res = await promiseHandler();
+    } catch (e) {
+      console.log("outside errorHandler");
+      console.log(e);
+    }
+  };
+
   return (
     <div>
       <h3>JSI Performance</h3>
@@ -63,6 +100,7 @@ export default function JSIPerformance() {
       {isSmallContentLoading && <div>Loading</div>}
       <button onClick={callJSIWithLargeContent}>JSI with large content</button>
       {isLargeContentLoading && <div>Loading</div>}
+      <button onClick={errorHandler}>errorHandler</button>
     </div>
   );
 }
