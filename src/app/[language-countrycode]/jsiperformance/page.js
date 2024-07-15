@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function JSIPerformance() {
   const [multipleFileLoading, setMultipleFileLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const shareFiles = async () => {
     setMultipleFileLoading(true);
@@ -37,16 +38,22 @@ export default function JSIPerformance() {
       ]);
       console.log("dsadasdasdasdasdA", response);
     } catch (e) {
+      setMultipleFileLoading(false);
+      setError(e);
       console.log("error caught");
     }
-    setMultipleFileLoading(false);
   };
 
   return (
     <div>
       <h3>Share Wrapper</h3>
+      <h4>FE Error Case</h4>
       <button onClick={shareFiles}>Share Multiple Files</button>
-      {multipleFileLoading && <div>Loading</div>}
+      {multipleFileLoading ? (
+        <div>Loading</div>
+      ) : (
+        <div>{JSON.stringify(error)}</div>
+      )}
     </div>
   );
 }
