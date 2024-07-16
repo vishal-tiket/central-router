@@ -80,7 +80,7 @@ export default function GenericJSI() {
         next js redirect to error screen
       </Link>
 
-      <a href="/onpagerendered" style={{ display: "block" }}>
+      <a href="/onpagerendered1" style={{ display: "block" }}>
         normal router
       </a>
 
