@@ -76,11 +76,11 @@ export default function GenericJSI() {
           respCode={code}
           message={"page rendered successfully"}
           customFields={{
-            airportRoute: "CGK - DPS",
-            departAirline: "QG - JT",
-            flightRouteType: "Round Trip",
-            totalPax: "1",
-            screenName: "onPageRendered1",
+            airportRoute: "CGK - DPS - 3",
+            departAirline: "QG - JT - 3",
+            flightRouteType: "Round Trip - 3",
+            totalPax: "1 - 3",
+            screenName: "onPageRendered1 - 3",
           }}
         />
       </>
