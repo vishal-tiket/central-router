@@ -13,22 +13,40 @@ export default function JSIPerformance() {
 
   const share2FilesWithBrokenUrls = async () => {
     setLoading1(true);
-    try {
-      const response = await ShareDownloadableFiles([
-        {
-          url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          name: "image1",
-        },
-        {
-          url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          name: "image2",
-        },
-      ]);
-    } catch (e) {
-      console.log("error caught", e);
-    } finally {
-      setLoading1(false);
-    }
+    ShareDownloadableFiles([
+      {
+        url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        name: "image1",
+      },
+      {
+        url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        name: "image2",
+      },
+    ])
+      .then((response) => {
+        setLoading1(false);
+      })
+      .catch((e) => {
+        console.log("error caught", e);
+        setLoading1(false);
+      });
+
+    // try {
+    //   const response = await ShareDownloadableFiles([
+    //     {
+    //       url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //       name: "image1",
+    //     },
+    //     {
+    //       url: "https://images.unsplash.com/1510505678115-f2a7ae4cfea9?q=80&w=1681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //       name: "image2",
+    //     },
+    //   ]);
+    // } catch (e) {
+    //   console.log("error caught", e);
+    // } finally {
+    //   setLoading1(false);
+    // }
   };
 
   const share2FilesWithoutName = async () => {
