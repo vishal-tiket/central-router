@@ -4,11 +4,15 @@ import { ShareDownloadableFiles } from "@tiket/react-common-navigator-permission
 import { useState } from "react";
 
 export default function JSIPerformance() {
-  const [multipleFileLoading, setMultipleFileLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading4, setLoading4] = useState(false);
+  const [loading5, setLoading5] = useState(false);
   const [error, setError] = useState(null);
 
   const share2FilesWithBrokenUrls = async () => {
-    setMultipleFileLoading(true);
+    setLoading1(true);
     try {
       const response = await ShareDownloadableFiles([
         {
@@ -21,14 +25,14 @@ export default function JSIPerformance() {
         },
       ]);
     } catch (e) {
-      console.log("error caught");
+      console.log("error caught", e);
     } finally {
-      setMultipleFileLoading(false);
+      setLoading1(false);
     }
   };
 
   const share2FilesWithoutName = async () => {
-    setMultipleFileLoading(true);
+    setLoading2(true);
     try {
       const response = await ShareDownloadableFiles([
         {
@@ -39,14 +43,14 @@ export default function JSIPerformance() {
         },
       ]);
     } catch (e) {
-      console.log("error caught");
+      console.log("error caught", e);
     } finally {
-      setMultipleFileLoading(false);
+      setLoading2(false);
     }
   };
 
   const share2SameFiles = async () => {
-    setMultipleFileLoading(true);
+    setLoading3(true);
     try {
       const response = await ShareDownloadableFiles([
         {
@@ -59,14 +63,14 @@ export default function JSIPerformance() {
         },
       ]);
     } catch (e) {
-      console.log("error caught");
+      console.log("error caught", e);
     } finally {
-      setMultipleFileLoading(false);
+      setLoading3(false);
     }
   };
 
   const share100SameFiles = async () => {
-    setMultipleFileLoading(true);
+    setLoading4(true);
     try {
       const response = await ShareDownloadableFiles(
         Array.map({ length: 100 }, (_, i) => ({
@@ -75,14 +79,14 @@ export default function JSIPerformance() {
         }))
       );
     } catch (e) {
-      console.log("error caught");
+      console.log("error caught", e);
     } finally {
-      setMultipleFileLoading(false);
+      setLoading4(false);
     }
   };
 
   const share2FilesWithStrangeNames = async () => {
-    setMultipleFileLoading(true);
+    setLoading5(true);
     try {
       const response = await ShareDownloadableFiles([
         {
@@ -95,9 +99,9 @@ export default function JSIPerformance() {
         },
       ]);
     } catch (e) {
-      console.log("error caught");
+      console.log("error caught", e);
     } finally {
-      setMultipleFileLoading(false);
+      setLoading5(false);
     }
   };
 
@@ -107,20 +111,25 @@ export default function JSIPerformance() {
       <button onClick={share2FilesWithBrokenUrls}>
         Share 2 Images with Broken urls
       </button>
+      {loading1 && <p>Loading...</p>}
 
       <button onClick={share2FilesWithoutName}>
         Share 2 Images without name
       </button>
+      {loading2 && <p>Loading...</p>}
 
       <button onClick={share2SameFiles}>
         Share 2 Images With Same Urls And Name
       </button>
+      {loading3 && <p>Loading...</p>}
 
       <button onClick={share100SameFiles}>Share 100 Images</button>
+      {loading4 && <p>Loading...</p>}
 
       <button onClick={share2FilesWithStrangeNames}>
         Share Images with symbols in name
       </button>
+      {loading5 && <p>Loading...</p>}
     </div>
   );
 }
