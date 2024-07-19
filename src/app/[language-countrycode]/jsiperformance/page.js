@@ -9,7 +9,11 @@ export default function JSIPerformance() {
   const [loading3, setLoading3] = useState(false);
   const [loading4, setLoading4] = useState(false);
   const [loading5, setLoading5] = useState(false);
-  const [error, setError] = useState(null);
+  const [error1, setError1] = useState(null);
+  const [error2, setError2] = useState(null);
+  const [error3, setError3] = useState(null);
+  const [error4, setError4] = useState(null);
+  const [error5, setError5] = useState(null);
 
   const share2FilesWithBrokenUrls = async () => {
     setLoading1(true);
@@ -26,7 +30,7 @@ export default function JSIPerformance() {
       ]);
     } catch (e) {
       console.log("error caught", typeof e);
-      setError(e);
+      setError1(e);
     } finally {
       setLoading1(false);
     }
@@ -45,6 +49,7 @@ export default function JSIPerformance() {
       ]);
     } catch (e) {
       console.log("error caught", e);
+      setError2(e);
     } finally {
       setLoading2(false);
     }
@@ -65,6 +70,7 @@ export default function JSIPerformance() {
       ]);
     } catch (e) {
       console.log("error caught", e);
+      setError3(e);
     } finally {
       setLoading3(false);
     }
@@ -81,6 +87,7 @@ export default function JSIPerformance() {
       );
     } catch (e) {
       console.log("error caught", e);
+      setError4(e);
     } finally {
       setLoading4(false);
     }
@@ -101,6 +108,7 @@ export default function JSIPerformance() {
       ]);
     } catch (e) {
       console.log("error caught", e);
+      setError5(e);
     } finally {
       setLoading5(false);
     }
@@ -112,25 +120,25 @@ export default function JSIPerformance() {
       <button onClick={share2FilesWithBrokenUrls}>
         Share 2 Images with Broken urls
       </button>
-      {loading1 ? <p>Loading...</p> : error && <p>{error}</p>}
+      {loading1 ? <p>Loading...</p> : error1 && <p>{error1}</p>}
 
       <button onClick={share2FilesWithoutName}>
         Share 2 Images without name
       </button>
-      {loading2 && <p>Loading...</p>}
+      {loading2 ? <p>Loading...</p> : error2 && <p>{error2}</p>}
 
       <button onClick={share2SameFiles}>
         Share 2 Images With Same Urls And Name
       </button>
-      {loading3 && <p>Loading...</p>}
+      {loading3 ? <p>Loading...</p> : error3 && <p>{error3}</p>}
 
       <button onClick={share100SameFiles}>Share 100 Images</button>
-      {loading4 && <p>Loading...</p>}
+      {loading4 ? <p>Loading...</p> : error4 && <p>{error4}</p>}
 
       <button onClick={share2FilesWithStrangeNames}>
         Share Images with symbols in name
       </button>
-      {loading5 && <p>Loading...</p>}
+      {loading5 ? <p>Loading...</p> : error5 && <p>{error5}</p>}
     </div>
   );
 }
