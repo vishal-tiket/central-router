@@ -25,7 +25,7 @@ export default function JSIPerformance() {
         },
       ]);
     } catch (e) {
-      console.log("error caught", e);
+      console.log("error caught", typeof e);
       setError(e);
     } finally {
       setLoading1(false);
@@ -112,7 +112,7 @@ export default function JSIPerformance() {
       <button onClick={share2FilesWithBrokenUrls}>
         Share 2 Images with Broken urls
       </button>
-      {loading1 ? <p>Loading...</p> : error && <p>{error.message}</p>}
+      {loading1 ? <p>Loading...</p> : error && <p>{error}</p>}
 
       <button onClick={share2FilesWithoutName}>
         Share 2 Images without name
