@@ -9,11 +9,15 @@ export default function JSIPerformance() {
   const [loading3, setLoading3] = useState(false);
   const [loading4, setLoading4] = useState(false);
   const [loading5, setLoading5] = useState(false);
+  const [loading6, setLoading6] = useState(false);
+  const [loading7, setLoading7] = useState(false);
   const [error1, setError1] = useState(null);
   const [error2, setError2] = useState(null);
   const [error3, setError3] = useState(null);
   const [error4, setError4] = useState(null);
   const [error5, setError5] = useState(null);
+  const [error6, setError6] = useState(null);
+  const [error7, setError7] = useState(null);
 
   const share2FilesWithBrokenUrls = async () => {
     setLoading1(true);
@@ -114,6 +118,40 @@ export default function JSIPerformance() {
     }
   };
 
+  const shareAVIFFile = async () => {
+    setLoading6(true);
+    try {
+      const response = await ShareDownloadableFiles([
+        {
+          url: "https://i.postimg.cc/4NQRyC0d/photo-1510505678115-f2a7ae4cfea9.avif",
+          name: "image1",
+        },
+      ]);
+    } catch (e) {
+      console.log("error caught", e);
+      setError6(e);
+    } finally {
+      setLoading6(false);
+    }
+  };
+
+  const shareWebpFile = async () => {
+    setLoading7(true);
+    try {
+      const response = await ShareDownloadableFiles([
+        {
+          url: "https://i.postimg.cc/YSmX4YS3/0c7cf56a-a2c9-4106-b24d-424711909d89.webp",
+          name: "image1",
+        },
+      ]);
+    } catch (e) {
+      console.log("error caught", e);
+      setError7(e);
+    } finally {
+      setLoading7(false);
+    }
+  };
+
   return (
     <div>
       <h3>FE Share Wrapper</h3>
@@ -139,6 +177,12 @@ export default function JSIPerformance() {
         Share Images with symbols in name
       </button>
       {loading5 ? <p>Loading...</p> : error5 && <p>{error5}</p>}
+
+      <button onClick={shareAVIFFile}>Share AVIF Image</button>
+      {loading6 ? <p>Loading...</p> : error6 && <p>{error6}</p>}
+
+      <button onClick={shareWebpFile}>Share Webp Image</button>
+      {loading7 ? <p>Loading...</p> : error7 && <p>{error7}</p>}
     </div>
   );
 }
