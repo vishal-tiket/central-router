@@ -87,12 +87,6 @@ export const CentralRouter = ({
     (params && params?.["language-countrycode"]?.split("-")) || [];
 
   useEffect(() => {
-    // vertical side handleResponse implementation
-    window.handleResponse = () => {
-      console.log("this is vertical side handle response method !!");
-      return true;
-    };
-
     /** car properties mapping */
     window.CARProperties = {
       android: {
