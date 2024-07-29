@@ -23,6 +23,22 @@ export default function Permissions() {
   useEffect(() => {
     if (!("Notification" in window)) return;
     setNotificationPermission(Notification.permission);
+
+    window.CARProperties = {
+      android: {
+        "add-to-calendar": {
+          id: "id",
+          title: "title",
+          description: "description",
+          startTime: "beginTime",
+          endTime: "endTime",
+          allDay: "allDay",
+          remindIn: "allowedReminders",
+          location: "eventLocation",
+          organizer: "organizer",
+        },
+      },
+    };
   }, []);
 
   const startCamera = async () => {
