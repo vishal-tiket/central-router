@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
+import { AddToCalendar } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -247,6 +248,28 @@ export default function Permissions() {
     }
   };
 
+  const handleAddToCalendar = async () => {
+    try {
+      const res = await AddToCalendar({
+        title: "Meeting",
+        description: "Meeting with John",
+        startTime: "2024-06-30T07:35:00Z",
+        endTime: "2024-06-30T13:41:00Z",
+        location: {
+          name: "Office",
+          latitude: 37.7749,
+          longitude: -122.4194,
+        },
+        allDay: false,
+        organizer: "tiket",
+        id: "123456",
+        remindIn: "5",
+      });
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -317,6 +340,9 @@ export default function Permissions() {
       <a href="webcal://m.vipul-pandit.in/api/webcal?start=20240630T073500Z&end=20240630T134100Z">
         Add to Calendar
       </a>
+
+      <h3>Set Calendar Events (Cross App Routing)</h3>
+      <button onClick={handleAddToCalendar}>Add to calendar</button>
 
       <h3>Clipboard</h3>
       <button onClick={copyToClipboard}>Copy to Clipboard</button>
