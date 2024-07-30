@@ -23,29 +23,6 @@ export default function Permissions() {
   useEffect(() => {
     if (!("Notification" in window)) return;
     setNotificationPermission(Notification.permission);
-
-    window.CARProperties = {
-      android: {
-        "add-to-calendar": {
-          id: "id",
-          title: "title",
-          description: "description",
-          startTime: "beginTime",
-          endTime: "endTime",
-          allDay: "allDay",
-          remindIn: "allowedReminders",
-          location: "eventLocation",
-          organizer: "organizer",
-        },
-      },
-      web: {
-        "add-to-calendar": {
-          title: "text",
-          description: "details",
-          dates: "dates",
-        },
-      },
-    };
   }, []);
 
   const startCamera = async () => {
@@ -273,6 +250,28 @@ export default function Permissions() {
 
   const handleAddToCalendar = async () => {
     try {
+      window.CARProperties = {
+        android: {
+          "add-to-calendar": {
+            id: "id",
+            title: "title",
+            description: "description",
+            startTime: "beginTime",
+            endTime: "endTime",
+            allDay: "allDay",
+            remindIn: "allowedReminders",
+            location: "eventLocation",
+            organizer: "organizer",
+          },
+        },
+        web: {
+          "add-to-calendar": {
+            title: "text",
+            description: "details",
+            dates: "dates",
+          },
+        },
+      };
       const res = await AddToCalendar({
         title: "Meeting",
         description: "Meeting with John",
