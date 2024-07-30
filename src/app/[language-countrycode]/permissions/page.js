@@ -264,6 +264,19 @@ export default function Permissions() {
             organizer: "organizer",
           },
         },
+        ios: {
+          "add-to-calendar": {
+            id: "id",
+            title: "title",
+            description: "description",
+            startTime: "beginTime",
+            endTime: "endTime",
+            allDay: "allDay",
+            remindIn: "allowedReminders",
+            location: "eventLocation",
+            organizer: "organizer",
+          },
+        },
         web: {
           "add-to-calendar": {
             title: "text",
