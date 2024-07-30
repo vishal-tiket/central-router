@@ -291,7 +291,7 @@ export default function Permissions() {
         startTime: 1722407400000,
         endTime: 1722411000000,
         location: {
-          name: "Office",
+          name: "Office ",
           latitude: 37.7749,
           longitude: -122.4194,
         },
