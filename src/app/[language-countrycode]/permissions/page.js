@@ -37,11 +37,12 @@ export default function Permissions() {
           location: "eventLocation",
           organizer: "organizer",
         },
-        web: {
-          "add-to-calendar": {
-            title: "text",
-            description: "details",
-          },
+      },
+      web: {
+        "add-to-calendar": {
+          title: "text",
+          description: "details",
+          dates: "dates",
         },
       },
     };
