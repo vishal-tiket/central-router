@@ -283,7 +283,7 @@ export default function Permissions() {
           longitude: -122.4194,
         },
         allDay: false,
-        organizer: "tiket",
+        organizer: "vishal.kamra@tiket.com",
         id: "123456",
         remindIn: "5",
       });
