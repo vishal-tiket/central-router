@@ -276,17 +276,17 @@ export default function Permissions() {
       const res = await AddToCalendar({
         title: "Meeting",
         description: "Meeting with John",
-        // startTime: "2024-06-30T07:35:00Z",
-        // endTime: "2024-06-30T13:41:00Z",
-        // location: {
-        //   name: "Office",
-        //   latitude: 37.7749,
-        //   longitude: -122.4194,
-        // },
-        // allDay: false,
-        // organizer: "tiket",
-        // id: "123456",
-        // remindIn: "5",
+        startTime: 1722407400000,
+        endTime: 1722411000000,
+        location: {
+          name: "Office",
+          latitude: 37.7749,
+          longitude: -122.4194,
+        },
+        allDay: false,
+        organizer: "tiket",
+        id: "123456",
+        remindIn: "5",
       });
     } catch (e) {
       console.log("error", e);
