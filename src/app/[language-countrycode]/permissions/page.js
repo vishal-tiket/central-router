@@ -288,8 +288,8 @@ export default function Permissions() {
       const res = await AddToCalendar({
         title: "Meeting",
         description: "Meeting with John",
-        startTime: 1722407400000,
-        endTime: 1722411000000,
+        startTime: 1722414600000,
+        endTime: 1722418200000,
         location: {
           name: "Office ",
           latitude: 37.7749,
