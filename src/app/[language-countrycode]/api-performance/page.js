@@ -161,44 +161,23 @@ export default function ApiPerformance() {
   useEffect(() => {
     const handleNativeJSICallback = (e) => {
       console.log("stringify e.detail", JSON.stringify(e?.detail));
-      let data;
+      const data = JSON.parse(e?.detail?.response?.data);
+
       // get start time
       const startTimeInMs = window.JSIStartTime || 0;
       // end time
       const endTimeInMs = new Date().getTime();
 
-      try {
-        data = JSON.parse(e?.detail?.response?.data);
-        if (data?.userId) {
-          setJsiFetchData(
-            `jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`
-          );
-        } else {
-          setJsiFetchTiketData(
-            `jsi-fetch-tiket-api-duration: ${endTimeInMs - startTimeInMs}`
-          );
-        }
-      } catch (e) {
+      window.JSIStartTime = undefined;
+      if (data?.userId) {
+        setJsiFetchData(
+          `jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`
+        );
+      } else {
         setJsiFetchTiketData(
-          `Received handle native jsi callback: ${endTimeInMs - startTimeInMs}`
+          `jsi-fetch-tiket-api-duration: ${endTimeInMs - startTimeInMs}`
         );
       }
-
-      // // get start time
-      // const startTimeInMs = window.JSIStartTime || 0;
-      // // end time
-      // const endTimeInMs = new Date().getTime();
-
-      window.JSIStartTime = undefined;
-      // if (data?.userId) {
-      //   setJsiFetchData(
-      //     `jsi-fetch-api-duration: ${endTimeInMs - startTimeInMs}`
-      //   );
-      // } else {
-      //   setJsiFetchTiketData(
-      //     `jsi-fetch-tiket-api-duration: ${endTimeInMs - startTimeInMs}`
-      //   );
-      // }
 
       return;
     };
