@@ -49,11 +49,12 @@ export default function ErrorScreen() {
         respCode={code}
         message="Forbidden"
         customFields={{
-          airportRoute: "CGK - DPS",
-          departAirline: "QG - JT",
-          flightRouteType: "Round Trip",
-          totalPax: "3",
-          screenName: "error screen",
+          airportRoute: "CGK - DPS - 4",
+          departAirline: "QG - JT - 4",
+          flightRouteType: "Round Trip - 4",
+          totalPax: "3 - 4",
+          screenName: "error screen - 4",
+          totalAdult: "6 - 4",
         }}
       />
       <h2>403 forbidden</h2>
