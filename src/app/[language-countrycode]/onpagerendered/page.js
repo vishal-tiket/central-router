@@ -81,7 +81,7 @@ export default function GenericJSI() {
           departAirline: "QG - JT - 3",
           flightRouteType: "Round Trip - 3",
           totalPax: "4 - 3",
-          totalAdult,
+          totalAdult: undefined,
         }}
       />
     </>

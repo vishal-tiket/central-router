@@ -81,7 +81,7 @@ export default function GenericJSI() {
             flightRouteType: "Round Trip - 5",
             totalPax: "1 - 5",
             screenName: "onPageRendered1 - 5",
-            totalAdult,
+            totalAdult: undefined,
           }}
         />
       </>
