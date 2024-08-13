@@ -301,6 +301,7 @@ export default function Permissions() {
         id: "123456",
         remindIn: 5000,
       });
+      setTimeout(() => console.log("hello"), 2000);
       const endTime = new Date().getTime();
       console.log("promise resolved in", endTime - startTime, "ms");
     } catch (e) {
