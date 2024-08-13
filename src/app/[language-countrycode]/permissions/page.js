@@ -249,6 +249,7 @@ export default function Permissions() {
   };
 
   const handleAddToCalendar = async () => {
+    const startTime = new Date().getTime();
     try {
       window.CARProperties = {
         android: {
@@ -300,8 +301,11 @@ export default function Permissions() {
         id: "123456",
         remindIn: 5000,
       });
-      console.log("promise resolved");
+      const endTime = new Date().getTime();
+      console.log("promise resolved in", endTime - startTime, "ms");
     } catch (e) {
+      const endTime = new Date().getTime();
+      console.log("Promise rejected in", endTime - startTime, "ms");
       console.log("error", e);
     }
   };
