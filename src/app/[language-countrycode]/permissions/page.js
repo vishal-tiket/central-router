@@ -258,7 +258,7 @@ export default function Permissions() {
             description: "description",
             startTime: "beginTime",
             endTime: "endTime",
-            allDay: "allDay",
+            isAllDay: "allDay",
             remindIn: "allowedReminders",
             location: "eventLocation",
             organizer: "organizer",
@@ -266,15 +266,13 @@ export default function Permissions() {
         },
         ios: {
           "add-to-calendar": {
-            id: "id",
             title: "title",
-            description: "description",
-            startTime: "beginTime",
-            endTime: "endTime",
-            allDay: "allDay",
-            remindIn: "allowedReminders",
-            location: "eventLocation",
-            organizer: "organizer",
+            description: "notes",
+            startTime: "startDate",
+            endTime: "endDate",
+            isAllDay: "isAllDay",
+            remindIn: "alarm",
+            location: "structuredLocation",
           },
         },
         web: {
@@ -282,6 +280,8 @@ export default function Permissions() {
             title: "text",
             description: "details",
             dates: "dates",
+            isAllDay: "isAllDay",
+            location: "location",
           },
         },
       };
@@ -291,15 +291,16 @@ export default function Permissions() {
         startTime: 1722414600000,
         endTime: 1722418200000,
         location: {
-          name: "Office ",
+          name: "Office",
           latitude: 37.7749,
           longitude: -122.4194,
         },
-        allDay: false,
+        isAllDay: true,
         organizer: "vishal.kamra@tiket.com",
         id: "123456",
-        remindIn: "5",
+        remindIn: 5000,
       });
+      console.log("promise resolved");
     } catch (e) {
       console.log("error", e);
     }
