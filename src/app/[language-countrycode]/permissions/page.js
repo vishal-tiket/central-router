@@ -289,8 +289,8 @@ export default function Permissions() {
       const res = await AddToCalendar({
         title: "Meeting",
         description: "Meeting with John",
-        startTime: 1722414600000,
-        endTime: 1722418200000,
+        startTime: Math.floor(1722414600000 / 1000),
+        endTime: Math.floor(1722418200000 / 1000),
         location: {
           name: "Office",
           latitude: 37.7749,
@@ -299,7 +299,7 @@ export default function Permissions() {
         isAllDay: true,
         organizer: "vishal.kamra@tiket.com",
         id: "123456",
-        remindIn: 5000,
+        remindIn: 10,
       });
       setTimeout(() => console.log("hello"), 2000);
       const endTime = new Date().getTime();
