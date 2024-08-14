@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import { AddToCalendar } from "@tiket/react-common-navigator-permission";
+import { AddToCalendar, ContactPicker } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
