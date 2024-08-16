@@ -119,7 +119,10 @@ export default function Permissions() {
         (position) => {
           setLocation(position);
         },
-        (error) => console.log(error)
+        (error) => console.log(error),
+        {
+          timeout: 1000
+        }
       );
     }
   };
