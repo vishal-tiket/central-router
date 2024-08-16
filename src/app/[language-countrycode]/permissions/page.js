@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import { AddToCalendar, ContactPicker } from "@tiket/react-common-navigator-permission";
+import {
+  AddToCalendar,
+  ContactPicker,
+} from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -112,9 +115,12 @@ export default function Permissions() {
   const getLocation = () => {
     console.log("getLocation");
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation(position);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation(position);
+        },
+        (error) => console.log(error)
+      );
     }
   };
 
