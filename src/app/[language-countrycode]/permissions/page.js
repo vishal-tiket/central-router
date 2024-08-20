@@ -121,7 +121,7 @@ export default function Permissions() {
         },
         (error) => console.log(error),
         {
-          timeout: 1000
+          timeout: 1000,
         }
       );
     }
@@ -258,7 +258,6 @@ export default function Permissions() {
   };
 
   const handleAddToCalendar = async () => {
-    const startTime = new Date().getTime();
     try {
       window.CARProperties = {
         android: {
@@ -297,9 +296,9 @@ export default function Permissions() {
       };
       const res = await AddToCalendar({
         title: "Meeting",
-        description: "Meeting with John",
-        startTime: Math.floor(1722414600000 / 1000),
-        endTime: Math.floor(1722418200000 / 1000),
+        description: "Meeting with Vishal",
+        startTime: 1733034600000,
+        endTime: 1733041800000,
         location: {
           name: "Office",
           latitude: 37.7749,
@@ -308,15 +307,11 @@ export default function Permissions() {
         isAllDay: true,
         organizer: "vishal.kamra@tiket.com",
         id: "123456",
-        remindIn: 10,
+        remindIn: 600,
       });
-      setTimeout(() => console.log("hello"), 2000);
-      const endTime = new Date().getTime();
-      console.log("promise resolved in", endTime - startTime, "ms");
+      console.log("add-to-calendar promise resolved", res);
     } catch (e) {
-      const endTime = new Date().getTime();
-      console.log("Promise rejected in", endTime - startTime, "ms");
-      console.log("error", e);
+      console.log("add-to-calendar promise rejected", e);
     }
   };
 
