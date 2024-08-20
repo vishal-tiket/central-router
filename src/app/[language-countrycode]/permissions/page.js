@@ -258,6 +258,7 @@ export default function Permissions() {
   };
 
   const handleAddToCalendar = async () => {
+    console.log("handleAddToCalendar");
     try {
       window.CARProperties = {
         android: {
@@ -294,6 +295,7 @@ export default function Permissions() {
           },
         },
       };
+      console.log("add-to-calendar try");
       const res = await AddToCalendar({
         title: "Meeting",
         description: "Meeting with Vishal",
