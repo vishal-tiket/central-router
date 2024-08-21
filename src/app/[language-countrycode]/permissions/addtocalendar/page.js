@@ -140,7 +140,14 @@ export default function AddEventToCalendar() {
       <button onClick={failedToAddEvent}>
         Failed to add event (only for ios)
       </button>
-      <span>
+      <span
+        style={{
+          color: "black",
+          textAlign: "center",
+          padding: "5px 0",
+          display: "block",
+        }}
+      >
         Trying to pass undefined start date to fail the calendar event
       </span>
       <div className={showSnackBar ? `snackbar show` : `snackbar`}>
