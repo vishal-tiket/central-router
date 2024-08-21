@@ -71,11 +71,7 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar({
-        ...defaultEventDetails,
-        startTime: 1733034600000,
-        endTime: 1733041800000,
-      });
+      const res = await AddToCalendar(defaultEventDetails);
       console.log("add-to-calendar promise resolved", res);
       setSnackbarMessage(res?.data?.message || "Event added to calendar");
       handleSnackbar();
@@ -95,8 +91,6 @@ export default function AddEventToCalendar() {
       console.log("add-to-calendar try block");
       const res = await AddToCalendar({
         ...defaultEventDetails,
-        startTime: 1733034600000,
-        endTime: 1733041800000,
         isAllDay: true,
       });
       console.log("add-to-calendar promise resolved", res);
