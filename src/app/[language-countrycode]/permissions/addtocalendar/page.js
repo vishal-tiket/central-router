@@ -39,6 +39,22 @@ const CARMapping = {
   },
 };
 
+const defaultEventDetails = {
+  title: "Meeting",
+  description: "Meeting with Vishal",
+  startTime: 1733034600000,
+  endTime: 1733041800000,
+  location: {
+    name: "Office",
+    latitude: 37.7749,
+    longitude: -122.4194,
+  },
+  isAllDay: false,
+  organizer: "vishal.kamra@tiket.com",
+  id: "123456",
+  remindIn: 600,
+};
+
 export default function AddEventToCalendar() {
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -55,21 +71,7 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar({
-        title: "Meeting",
-        description: "Meeting with Vishal",
-        startTime: 1733034600000,
-        endTime: 1733041800000,
-        location: {
-          name: "Office",
-          latitude: 37.7749,
-          longitude: -122.4194,
-        },
-        isAllDay: false,
-        organizer: "vishal.kamra@tiket.com",
-        id: "123456",
-        remindIn: 600,
-      });
+      const res = await AddToCalendar(defaultEventDetails);
       console.log("add-to-calendar promise resolved", res);
       setSnackbarMessage(res?.data?.message || "Event added to calendar");
       handleSnackbar();
@@ -88,19 +90,29 @@ export default function AddEventToCalendar() {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
       const res = await AddToCalendar({
-        title: "Meeting",
-        description: "Meeting with Vishal",
-        startTime: 1733034600000,
-        endTime: 1733041800000,
-        location: {
-          name: "Office",
-          latitude: 37.7749,
-          longitude: -122.4194,
-        },
+        ...defaultEventDetails,
         isAllDay: true,
-        organizer: "vishal.kamra@tiket.com",
-        id: "123456",
-        remindIn: 600,
+      });
+      console.log("add-to-calendar promise resolved", res);
+      setSnackbarMessage(res?.data?.message || "Event added to calendar");
+      handleSnackbar();
+    } catch (e) {
+      console.log("add-to-calendar promise rejected", e);
+      setSnackbarMessage(
+        e?.error?.message || "Failed to add event to calendar"
+      );
+      handleSnackbar();
+    }
+  };
+
+  const failedToAddEvent = async (e) => {
+    console.log("add-to-calendar entry point");
+    try {
+      window.CARProperties = CARMapping;
+      console.log("add-to-calendar try block");
+      const res = await AddToCalendar({
+        ...defaultEventDetails,
+        startTime: undefined,
       });
       console.log("add-to-calendar promise resolved", res);
       setSnackbarMessage(res?.data?.message || "Event added to calendar");
@@ -119,6 +131,7 @@ export default function AddEventToCalendar() {
       <h3>Add Events To Calendar</h3>
       <button onClick={addCalendarEvent}>Add to calendar</button>
       <button onClick={addAllDayCalendarEvent}>Add to calendar All Day</button>
+      <button onClick={failedToAddEvent}>Failed to add event</button>
       <div className={showSnackBar ? `snackbar show` : `snackbar`}>
         {snackbarMessage}
       </div>
