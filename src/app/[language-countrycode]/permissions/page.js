@@ -2,10 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import {
-  AddToCalendar,
-  ContactPicker,
-} from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -257,66 +253,6 @@ export default function Permissions() {
     }
   };
 
-  const handleAddToCalendar = async () => {
-    console.log("handleAddToCalendar");
-    try {
-      window.CARProperties = {
-        android: {
-          "add-to-calendar": {
-            id: "id",
-            title: "title",
-            description: "description",
-            startTime: "beginTime",
-            endTime: "endTime",
-            isAllDay: "allDay",
-            remindIn: "allowedReminders",
-            location: "eventLocation",
-            organizer: "organizer",
-          },
-        },
-        ios: {
-          "add-to-calendar": {
-            title: "title",
-            description: "notes",
-            startTime: "startDate",
-            endTime: "endDate",
-            isAllDay: "isAllDay",
-            remindIn: "alarm",
-            location: "structuredLocation",
-          },
-        },
-        web: {
-          "add-to-calendar": {
-            title: "text",
-            description: "details",
-            dates: "dates",
-            isAllDay: "isAllDay",
-            location: "location",
-          },
-        },
-      };
-      console.log("add-to-calendar try");
-      const res = await AddToCalendar({
-        title: "Meeting",
-        description: "Meeting with Vishal",
-        startTime: 1733034600000,
-        endTime: 1733041800000,
-        location: {
-          name: "Office",
-          latitude: 37.7749,
-          longitude: -122.4194,
-        },
-        isAllDay: true,
-        organizer: "vishal.kamra@tiket.com",
-        id: "123456",
-        remindIn: 600,
-      });
-      console.log("add-to-calendar promise resolved", res);
-    } catch (e) {
-      console.log("add-to-calendar promise rejected", e);
-    }
-  };
-
   return (
     <>
       <h2>Permissions</h2>
@@ -387,9 +323,6 @@ export default function Permissions() {
       <a href="webcal://m.vipul-pandit.in/api/webcal?start=20240630T073500Z&end=20240630T134100Z">
         Add to Calendar
       </a>
-
-      <h3>Set Calendar Events (Cross App Routing)</h3>
-      <button onClick={handleAddToCalendar}>Add to calendar</button>
 
       <h3>Clipboard</h3>
       <button onClick={copyToClipboard}>Copy to Clipboard</button>
