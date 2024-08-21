@@ -131,7 +131,9 @@ export default function AddEventToCalendar() {
       <h3>Add Events To Calendar</h3>
       <button onClick={addCalendarEvent}>Add to calendar</button>
       <button onClick={addAllDayCalendarEvent}>Add to calendar All Day</button>
-      <button onClick={failedToAddEvent}>Failed to add event</button>
+      <button onClick={failedToAddEvent}>
+        Failed to add event (only for ios)
+      </button>
       <div className={showSnackBar ? `snackbar show` : `snackbar`}>
         {snackbarMessage}
       </div>
