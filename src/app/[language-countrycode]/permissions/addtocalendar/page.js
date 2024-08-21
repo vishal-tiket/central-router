@@ -71,7 +71,11 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar(defaultEventDetails);
+      const res = await AddToCalendar({
+        ...defaultEventDetails,
+        startTime: 1733034600000,
+        endTime: 1733041800000,
+      });
       console.log("add-to-calendar promise resolved", res);
       setSnackbarMessage(res?.data?.message || "Event added to calendar");
       handleSnackbar();
@@ -91,6 +95,8 @@ export default function AddEventToCalendar() {
       console.log("add-to-calendar try block");
       const res = await AddToCalendar({
         ...defaultEventDetails,
+        startTime: 1733034600000,
+        endTime: 1733041800000,
         isAllDay: true,
       });
       console.log("add-to-calendar promise resolved", res);
@@ -134,6 +140,9 @@ export default function AddEventToCalendar() {
       <button onClick={failedToAddEvent}>
         Failed to add event (only for ios)
       </button>
+      <span>
+        Trying to pass undefined start date to fail the calendar event
+      </span>
       <div className={showSnackBar ? `snackbar show` : `snackbar`}>
         {snackbarMessage}
       </div>
