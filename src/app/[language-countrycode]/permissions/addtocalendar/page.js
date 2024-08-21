@@ -76,7 +76,7 @@ export default function AddEventToCalendar() {
     } catch (e) {
       console.log("add-to-calendar promise rejected", e);
       setSnackbarMessage(
-        res?.error?.message || "Failed to add event to calendar"
+        e?.error?.message || "Failed to add event to calendar"
       );
       handleSnackbar();
     }
@@ -108,7 +108,7 @@ export default function AddEventToCalendar() {
     } catch (e) {
       console.log("add-to-calendar promise rejected", e);
       setSnackbarMessage(
-        res?.error?.message || "Failed to add event to calendar"
+        e?.error?.message || "Failed to add event to calendar"
       );
       handleSnackbar();
     }
