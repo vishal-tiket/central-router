@@ -63,7 +63,7 @@ export default function AddEventToCalendar() {
     setTimeout(() => {
       setShowSnackBar(false);
       setSnackbarMessage("");
-    }, 3000);
+    }, 4000);
   };
 
   const addCalendarEvent = async () => {
