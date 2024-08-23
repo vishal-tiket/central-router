@@ -117,7 +117,7 @@ export default function Permissions() {
         },
         (error) => console.log(error),
         {
-          timeout: 1000,
+          timeout: 5000,
         }
       );
     }
