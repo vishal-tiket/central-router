@@ -283,13 +283,15 @@ export default function Permissions() {
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
-      {Object.keys(location || {})?.length && (
+      {Object.keys(location || {})?.length ? (
         <div style={{ margin: "20px 0" }}>
           {JSON.stringify({
             latitude: location?.latitude,
             longitude: location?.longitude,
           })}
         </div>
+      ) : (
+        <></>
       )}
 
       <h3>File Upload with capture</h3>
