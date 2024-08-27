@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
+import { getCurrentLocation } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -108,18 +109,13 @@ export default function Permissions() {
     setIsRecording(false);
   };
 
-  const getLocation = () => {
-    console.log("getLocation");
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation(position);
-        },
-        (error) => console.log(error),
-        {
-          timeout: 5000,
-        }
-      );
+  const getLocation = async () => {
+    try {
+      const location = await getCurrentLocation();
+      console.log("location from core wrapper", location);
+      setLocation(location);
+    } catch (error) {
+      console.error("Error fetching location", error);
     }
   };
 
