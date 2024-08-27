@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import { getCurrentLocation } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -109,13 +108,18 @@ export default function Permissions() {
     setIsRecording(false);
   };
 
-  const getLocation = async () => {
-    try {
-      const location = await getCurrentLocation();
-      console.log("location from core wrapper", location);
-      setLocation(location);
-    } catch (error) {
-      console.error("Error fetching location", error);
+  const getLocation = () => {
+    console.log("getLocation");
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation(position);
+        },
+        (error) => console.log(error),
+        {
+          timeout: 5,
+        }
+      );
     }
   };
 
@@ -283,15 +287,13 @@ export default function Permissions() {
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
-      {Object.keys(location || {})?.length ? (
+      {location?.coords && (
         <div style={{ margin: "20px 0" }}>
           {JSON.stringify({
-            latitude: location?.latitude,
-            longitude: location?.longitude,
+            latitude: location?.coords?.latitude,
+            longitude: location?.coords?.longitude,
           })}
         </div>
-      ) : (
-        <></>
       )}
 
       <h3>File Upload with capture</h3>
