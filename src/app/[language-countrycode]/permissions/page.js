@@ -286,8 +286,8 @@ export default function Permissions() {
       {location?.coords && (
         <div style={{ margin: "20px 0" }}>
           {JSON.stringify({
-            latitude: location?.coords?.latitude,
-            longitude: location?.coords?.longitude,
+            latitude: location?.latitude,
+            longitude: location?.longitude,
           })}
         </div>
       )}
