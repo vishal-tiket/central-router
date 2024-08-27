@@ -1,5 +1,5 @@
 "use client";
-import { AddToCalendar } from "@tiket/react-common-navigator-permission";
+import { addToCalendar } from "@tiket/react-common-navigator-permission";
 import "./../style.css";
 import { useState } from "react";
 
@@ -71,7 +71,7 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar(defaultEventDetails);
+      const res = await addToCalendar(defaultEventDetails);
       console.log("add-to-calendar promise resolved", res);
       setSnackbarMessage(res?.data?.message || "Event added to calendar");
       handleSnackbar();
@@ -89,7 +89,7 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar({
+      const res = await addToCalendar({
         ...defaultEventDetails,
         isAllDay: true,
       });
@@ -110,7 +110,7 @@ export default function AddEventToCalendar() {
     try {
       window.CARProperties = CARMapping;
       console.log("add-to-calendar try block");
-      const res = await AddToCalendar({
+      const res = await addToCalendar({
         ...defaultEventDetails,
         startTime: undefined,
       });
