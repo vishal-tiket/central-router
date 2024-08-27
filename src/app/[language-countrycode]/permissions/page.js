@@ -283,7 +283,7 @@ export default function Permissions() {
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
-      {location?.coords && (
+      {Object.keys(location || {})?.length && (
         <div style={{ margin: "20px 0" }}>
           {JSON.stringify({
             latitude: location?.latitude,
