@@ -113,6 +113,7 @@ export default function Permissions() {
     console.log("getLocation");
     try {
       const location = getCurrentLocation();
+      console.log(location)
       setLocation(location);
     } catch (error) {
       console.error("Error fetching location", error);
