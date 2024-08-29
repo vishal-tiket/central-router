@@ -19,6 +19,7 @@ export default function Permissions() {
   const [audioURL, setAudioURL] = useState("");
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
+  const [locationWait, setLocationWait] = useState(undefined);
 
   useEffect(() => {
     if (!("Notification" in window)) return;
@@ -111,10 +112,14 @@ export default function Permissions() {
 
   const getLocation = async () => {
     console.log("getLocation");
+    setLocationWait(true);
     try {
       const location = await getCurrentLocation();
+      setLocationWait(false);
       setLocation(location);
     } catch (error) {
+      setLocationWait(false);
+      setLocation(JSON.stringify(error));
       console.error("Error fetching location", error);
     }
   };
@@ -283,14 +288,15 @@ export default function Permissions() {
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
-      {location?.latitude && (
-        <div style={{ margin: "20px 0" }}>
-          {JSON.stringify({
-            latitude: location?.latitude,
-            longitude: location?.longitude,
-          })}
-        </div>
-      )}
+      <div style={{ margin: "20px 0" }}>
+        {locationWait && "Fetching location..."}
+        {location?.latitude
+          ? JSON.stringify({
+              latitude: location?.latitude,
+              longitude: location?.longitude,
+            })
+          : JSON.stringify(location)}
+      </div>
 
       <h3>File Upload with capture</h3>
       <input type="file" style={{ margin: "20px 0" }} capture="user" />
