@@ -109,11 +109,10 @@ export default function Permissions() {
     setIsRecording(false);
   };
 
-  const getLocation = () => {
+  const getLocation = async () => {
     console.log("getLocation");
     try {
-      const location = getCurrentLocation();
-      console.log(location)
+      const location = await getCurrentLocation();
       setLocation(location);
     } catch (error) {
       console.error("Error fetching location", error);
