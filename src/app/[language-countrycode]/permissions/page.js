@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
+import { getCurrentLocation } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -110,16 +111,11 @@ export default function Permissions() {
 
   const getLocation = () => {
     console.log("getLocation");
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation(position);
-        },
-        (error) => console.log(error),
-        {
-          timeout: 5,
-        }
-      );
+    try {
+      const location = getCurrentLocation();
+      setLocation(location);
+    } catch (error) {
+      console.error("Error fetching location", error);
     }
   };
 
@@ -287,11 +283,11 @@ export default function Permissions() {
 
       <h3>Location</h3>
       <button onClick={getLocation}>Get Location</button>
-      {location?.coords && (
+      {location?.latitude && (
         <div style={{ margin: "20px 0" }}>
           {JSON.stringify({
-            latitude: location?.coords?.latitude,
-            longitude: location?.coords?.longitude,
+            latitude: location?.latitude,
+            longitude: location?.longitude,
           })}
         </div>
       )}
