@@ -257,6 +257,10 @@ export default function Permissions() {
   return (
     <>
       <h2>Permissions</h2>
+      <h3>Redirect to third party</h3>
+      <a href="https://permission-callback-web-page.vercel.app/main.html">
+        Third Party
+      </a>
       <h3>Camera</h3>
       <button onClick={startCamera}>Play</button>
       <button onClick={stopCamera}>Pause</button>
