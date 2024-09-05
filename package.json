@@ -11,7 +11,7 @@
   "dependencies": {
     "@tiket/react-common-eagle-eye": "^1.2.0",
     "@tiket/react-common-jsi": "^1.2.0",
-    "@tiket/react-common-navigator-permission": "^0.0.0-alpha-660-20240829062039",
+    "@tiket/react-common-navigator-permission": "^0.0.0-alpha-660-20240905072339",
     "@tiket/react-common-utilities": "^2.3.6",
     "add-to-calendar-button": "^2.6.14",
     "add-to-calendar-button-react": "^2.6.14",
