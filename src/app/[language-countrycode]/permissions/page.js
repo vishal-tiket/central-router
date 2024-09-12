@@ -22,6 +22,7 @@ export default function Permissions() {
   const [locationWait, setLocationWait] = useState(undefined);
 
   useEffect(() => {
+    window.getCurrentLocation = getLocation;
     if (!("Notification" in window)) return;
     setNotificationPermission(Notification.permission);
   }, []);
@@ -110,11 +111,11 @@ export default function Permissions() {
     setIsRecording(false);
   };
 
-  const getLocation = async () => {
-    console.log("getLocation");
+  const getLocation = async (options = {}) => {
+    console.log("getLocation with these options", options);
     setLocationWait(true);
     try {
-      const location = await getCurrentLocation();
+      const location = await getCurrentLocation(options);
       setLocationWait(false);
       setLocation(location);
     } catch (error) {
