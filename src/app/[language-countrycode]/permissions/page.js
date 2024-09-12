@@ -111,11 +111,11 @@ export default function Permissions() {
     setIsRecording(false);
   };
 
-  const getLocation = async (options = {}) => {
-    console.log("getLocation with these options", options);
+  const getLocation = async (opt = {}) => {
+    console.log("getLocation with these options", opt);
     setLocationWait(true);
     try {
-      const location = await getCurrentLocation(options);
+      const location = await getCurrentLocation(opt);
       setLocationWait(false);
       setLocation(location);
     } catch (error) {
