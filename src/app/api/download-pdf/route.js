@@ -1,46 +1,24 @@
-import chromium from 'chrome-aws-lambda'; // For serverless environments
-import puppeteer from 'puppeteer-core'; // Use puppeteer-core
+import fs from "fs";
+import path from "path";
 
 export async function GET() {
-  const htmlContent = `
-    <html>
-      <body>
-        <h1>Dummy PDF</h1>
-      </body>
-    </html>
-  `;
-
   try {
-    // Launch Puppeteer browser
-    const executablePath = await chromium.executablePath;
+    // Define the path to the PDF file
+    const filePath = path.resolve("public/static", "dummy.pdf");
 
-    const browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: executablePath || undefined,
-      headless: chromium.headless,
-    });
+    // Read the file into a buffer
+    const fileBuffer = fs.readFileSync(filePath);
 
-    const page = await browser.newPage();
-
-    // Set the HTML content
-    await page.setContent(htmlContent, { waitUntil: 'load' });
-
-    // Generate the PDF from the page
-    const pdfBuffer = await page.pdf({ format: 'A4' });
-
-    // Close the browser
-    await browser.close();
-
-    // Return the PDF buffer as a response
-    return new Response(pdfBuffer, {
+    // Return the file buffer as a response
+    return new Response(fileBuffer, {
       status: 200,
       headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="dummy.pdf"',
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="example.pdf"',
       },
     });
   } catch (error) {
-    console.error('Error generating PDF:', error);
-    return new Response('Error generating PDF', { status: 500 });
+    console.error("Error serving PDF:", error);
+    return new Response("Error serving PDF", { status: 500 });
   }
 }
