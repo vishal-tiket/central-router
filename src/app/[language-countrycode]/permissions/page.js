@@ -261,13 +261,32 @@ export default function Permissions() {
   const handleSharePDF = async () => {
     if (typeof window === "undefined") return;
     try {
-      console.log("download pdf", `${window.location.origin}/api/download-pdf`);
-      const result = await ShareDownloadableFiles([
-        {
-          url: `${window.location.origin}/api/download-pdf`,
-          name: "dummy-pdf.pdf",
-        },
-      ]);
+      const result = await ShareDownloadableFiles(
+        [
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+        ],
+        "share"
+      );
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleViewPDF = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await ShareDownloadableFiles(
+        [
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+        ],
+        "view"
+      );
     } catch (e) {
       console.log("error caught", e);
     }
@@ -378,6 +397,9 @@ export default function Permissions() {
 
       <h3>Share PDF</h3>
       <button onClick={handleSharePDF}>Share PDF</button>
+
+      <h3>View PDF</h3>
+      <button onClick={handleViewPDF}>View PDF</button>
     </>
   );
 }
