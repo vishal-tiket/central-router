@@ -259,10 +259,11 @@ export default function Permissions() {
   };
 
   const handleSharePDF = async () => {
+    if (typeof window === "undefined") return;
     try {
       const result = await ShareDownloadableFiles([
         {
-          url: "https://drive.google.com/uc?export=download&id=1eLlSqP70KYV3ONFYzHJ39CqS-av6kbvO",
+          url: `${window.location.origin}/uc?export=download&id=1eLlSqP70KYV3ONFYzHJ39CqS-av6kbvO`,
           name: "dummy-pdf.pdf",
         },
       ]);
