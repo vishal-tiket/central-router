@@ -263,7 +263,7 @@ export default function Permissions() {
     try {
       const result = await ShareDownloadableFiles([
         {
-          url: `https://tiket.slack.com/files/U037RBZD6MN/F07NR9FPU6L/get_started_with_smallpdf.pdf`,
+          url: `${window.location.origin}/api/download-pdf`,
           name: "dummy-pdf.pdf",
         },
       ]);
