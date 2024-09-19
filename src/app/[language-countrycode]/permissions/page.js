@@ -261,6 +261,7 @@ export default function Permissions() {
   const handleSharePDF = async () => {
     if (typeof window === "undefined") return;
     try {
+      console.log("download pdf", `${window.location.origin}/api/download-pdf`);
       const result = await ShareDownloadableFiles([
         {
           url: `${window.location.origin}/api/download-pdf`,
