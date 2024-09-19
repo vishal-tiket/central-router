@@ -262,7 +262,7 @@ export default function Permissions() {
     try {
       const result = await ShareDownloadableFiles([
         {
-          url: "https://tourism.gov.in/sites/default/files/2019-04/dummy-pdf_2.pdf",
+          url: "https://drive.google.com/uc?export=download&id=1eLlSqP70KYV3ONFYzHJ39CqS-av6kbvO",
           name: "dummy-pdf.pdf",
         },
       ]);
