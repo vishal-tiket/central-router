@@ -263,7 +263,7 @@ export default function Permissions() {
     try {
       const result = await ShareDownloadableFiles([
         {
-          url: `${window.location.origin}/uc?export=download&id=1eLlSqP70KYV3ONFYzHJ39CqS-av6kbvO`,
+          url: `https://drive.google.com/uc?export=download&id=1dBzrsHv9jVtM5875TsWsmd627w1DnGuM`,
           name: "dummy-pdf.pdf",
         },
       ]);

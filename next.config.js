@@ -14,11 +14,6 @@ const nextConfig = {
         source: "/event.ics",
         destination: "/event.ics",
       },
-      {
-        source: "/uc",
-        destination:
-          "https://drive.google.com/uc?export=download&id=1eLlSqP70KYV3ONFYzHJ39CqS-av6kbvO", // Matched parameters can be used in the destination
-      },
     ];
   },
   headers() {
