@@ -263,7 +263,7 @@ export default function Permissions() {
     try {
       const result = await ShareDownloadableFiles([
         {
-          url: `https://drive.google.com/uc?export=download&id=1dBzrsHv9jVtM5875TsWsmd627w1DnGuM`,
+          url: `https://tiket.slack.com/files/U037RBZD6MN/F07NR9FPU6L/get_started_with_smallpdf.pdf`,
           name: "dummy-pdf.pdf",
         },
       ]);
