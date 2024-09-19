@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import { getCurrentLocation } from "@tiket/react-common-navigator-permission";
+import {
+  getCurrentLocation,
+  ShareDownloadableFiles,
+} from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -255,6 +258,19 @@ export default function Permissions() {
     }
   };
 
+  const handleSharePDF = async () => {
+    try {
+      const result = await ShareDownloadableFiles([
+        {
+          url: "https://tourism.gov.in/sites/default/files/2019-04/dummy-pdf_2.pdf",
+          name: "dummy-pdf.pdf",
+        },
+      ]);
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -357,6 +373,9 @@ export default function Permissions() {
 
       <h3>Share Feature</h3>
       <button onClick={handleShareButton}>Share Button</button>
+
+      <h3>Share PDF</h3>
+      <button onClick={handleSharePDF}>Share PDF</button>
     </>
   );
 }
