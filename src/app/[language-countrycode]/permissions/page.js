@@ -283,6 +283,7 @@ export default function Permissions() {
           {
             url: `${window.location.origin}/api/download-pdf`,
             name: "dummy-pdf.pdf",
+            version: 1,
           },
         ],
         "view"
