@@ -294,7 +294,7 @@ export default function Permissions() {
   };
 
   return (
-    <>
+    <div className="safe-area">
       <h2>Permissions</h2>
       <h3>Redirect to third party</h3>
       <a href="https://permission-callback-web-page.vercel.app/main.html">
@@ -401,6 +401,6 @@ export default function Permissions() {
 
       <h3>View PDF</h3>
       <button onClick={handleViewPDF}>View PDF</button>
-    </>
+    </div>
   );
 }
