@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, viewport-fit=cover"
         />
         <link rel="preconnect" href="https://jsonplaceholder.typicode.com" />
         <link rel="preconnect" href="https://lb1-ms.tiket.com" />
