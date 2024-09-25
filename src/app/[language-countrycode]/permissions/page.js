@@ -398,7 +398,7 @@ export default function Permissions() {
 
       <h3>View/Share PDF via JSI</h3>
       <button onClick={() => handleViewPDF("view")}>View PDF</button>
-      <button onClick={() => handleViewPDF("share")}>View PDF</button>
+      <button onClick={() => handleViewPDF("share")}>Share PDF</button>
     </div>
   );
 }
