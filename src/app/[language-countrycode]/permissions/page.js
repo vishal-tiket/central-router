@@ -6,6 +6,7 @@ import {
   getCurrentLocation,
   ShareDownloadableFiles,
 } from "@tiket/react-common-navigator-permission";
+import { handleFileAction } from "@tiket/react-common-jsi";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -275,19 +276,15 @@ export default function Permissions() {
     }
   };
 
-  const handleViewPDF = async () => {
+  const handleViewPDF = (action) => {
     if (typeof window === "undefined") return;
     try {
-      const result = await ShareDownloadableFiles(
-        [
-          {
-            url: `${window.location.origin}/api/download-pdf`,
-            name: "dummy-pdf.pdf",
-          },
-        ],
-        "view",
-        1
-      );
+      const result = handleFileAction({
+        action: action,
+        url: `https://storage.googleapis.com/tix-receipt-testing/2024/09/25/EN/Receipt-1200895026-1727199155171.pdf?Expires=1727334338&GoogleAccessId=gke-app-receipt-go%40tk-test-micro.iam.gserviceaccount.com&Signature=H5dZhwnbfQy6FFBltkd4d7tt976z0ObEmwCgS2djYIbrnulCfgaZNmML7ITi7dv7km4u54YqRk8fuKPUUFCux1O5TWvSAVccBT%2BMXAmZtdhojrxDQyDeRmdKrIn6YxYeL8ifdUIQpayab%2FMkIozdkziB4ZXxgqsQnaEEubmHYi%2BfvbQAIxem0twqlSNxbGTLq49p9cDaNtwVjl4BBZWbtos1PaS61YWnzQPx9rTVB0yg8%2BLXlJXvjPml0bB1ZVhkL778lwFay5nL2g3H9Hig3x0vPpy14132eQBsOa8AhCVfNqW83CmqhCwChnze2ANGPKF7n%2Fa3uoSVISljXDgR%2Fg%3D%3D&response-content-type=application/pdf&order_id=1200895026&is_apps=1&lang=EN`,
+        version: 1,
+        fileName: "dummy",
+      });
     } catch (e) {
       console.log("error caught", e);
     }
@@ -399,8 +396,9 @@ export default function Permissions() {
       <h3>Share PDF</h3>
       <button onClick={handleSharePDF}>Share PDF</button>
 
-      <h3>View PDF</h3>
-      <button onClick={handleViewPDF}>View PDF</button>
+      <h3>View/Share PDF via JSI</h3>
+      <button onClick={() => handleViewPDF("view")}>View PDF</button>
+      <button onClick={() => handleViewPDF("share")}>View PDF</button>
     </div>
   );
 }
