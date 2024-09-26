@@ -281,7 +281,7 @@ export default function Permissions() {
     try {
       const result = handleFileAction({
         action: action,
-        url: `https://storage.googleapis.com/tix-receipt-testing/2024/09/25/EN/Receipt-1200895026-1727199155171.pdf?Expires=1727334338&GoogleAccessId=gke-app-receipt-go%40tk-test-micro.iam.gserviceaccount.com&Signature=H5dZhwnbfQy6FFBltkd4d7tt976z0ObEmwCgS2djYIbrnulCfgaZNmML7ITi7dv7km4u54YqRk8fuKPUUFCux1O5TWvSAVccBT%2BMXAmZtdhojrxDQyDeRmdKrIn6YxYeL8ifdUIQpayab%2FMkIozdkziB4ZXxgqsQnaEEubmHYi%2BfvbQAIxem0twqlSNxbGTLq49p9cDaNtwVjl4BBZWbtos1PaS61YWnzQPx9rTVB0yg8%2BLXlJXvjPml0bB1ZVhkL778lwFay5nL2g3H9Hig3x0vPpy14132eQBsOa8AhCVfNqW83CmqhCwChnze2ANGPKF7n%2Fa3uoSVISljXDgR%2Fg%3D%3D&response-content-type=application/pdf&order_id=1200895026&is_apps=1&lang=EN`,
+        url: `https://gatotkaca.tiket.com/voucher/d8fff2601366b87b3c04b9c6e82a5a31d70f08f958e4fe6108[…]1bbac2e1c8652e326d55233ff839704637948f678548271c8d71adb.pdf`,
         version: 1,
         fileName: "dummy",
       });
