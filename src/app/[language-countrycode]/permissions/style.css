@@ -1,7 +1,3 @@
-.safe-area {
-  padding-top: env(safe-area-inset-top);
-}
-
 h3 {
   margin-bottom: 0;
 }
