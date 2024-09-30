@@ -7,6 +7,7 @@ import {
   ShareDownloadableFiles,
 } from "@tiket/react-common-navigator-permission";
 import { handleFileAction } from "@tiket/react-common-jsi";
+import { handleFileAction as handleFileActionCAR } from "@tiket/react-common-navigator-permission";
 
 export default function Permissions() {
   const videoRef = useRef();
@@ -290,6 +291,20 @@ export default function Permissions() {
     }
   };
 
+  const handleViewPDFViaCAR = async (action) => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await handleFileActionCAR({
+        action,
+        fileName: "dummy",
+        url: "https://gatotkaca.tiket.com/voucher/d8fff2601366b87b3c04b9c6e82a5a31d70f08f958e4fe6108[…]1bbac2e1c8652e326d55233ff839704637948f678548271c8d71adb.pdf",
+        version: 1,
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
   return (
     <>
       <h2>Permissions</h2>
@@ -399,6 +414,10 @@ export default function Permissions() {
       <h3>View/Share PDF via JSI</h3>
       <button onClick={() => handleViewPDF("view")}>View PDF</button>
       <button onClick={() => handleViewPDF("share")}>Share PDF</button>
+
+      <h3>View/Share PDF via CAR</h3>
+      <button onClick={() => handleViewPDFViaCAR("view")}>View PDF</button>
+      <button onClick={() => handleViewPDFViaCAR("share")}>Share PDF</button>
     </>
   );
 }
