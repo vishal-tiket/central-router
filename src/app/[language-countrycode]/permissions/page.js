@@ -282,7 +282,7 @@ export default function Permissions() {
     try {
       const result = handleFileAction({
         action: action,
-        url: `https://gatotkaca.tiket.com/voucher/d8fff2601366b87b3c04b9c6e82a5a31d70f08f958e4fe6108[…]1bbac2e1c8652e326d55233ff839704637948f678548271c8d71adb.pdf`,
+        url: `https://resizemyimagebucket.s3.us-east-2.amazonaws.com/Event+E-voucher+-+Order+ID+_+1200214909+-+18092024.pdf`,
         version: 1,
         fileName: "dummy",
       });
@@ -297,7 +297,7 @@ export default function Permissions() {
       const result = await handleFileActionCAR({
         action,
         fileName: "dummy",
-        url: "https://gatotkaca.tiket.com/voucher/d8fff2601366b87b3c04b9c6e82a5a31d70f08f958e4fe6108[…]1bbac2e1c8652e326d55233ff839704637948f678548271c8d71adb.pdf",
+        url: "https://resizemyimagebucket.s3.us-east-2.amazonaws.com/Event+E-voucher+-+Order+ID+_+1200214909+-+18092024.pdf",
         version: 1,
       });
     } catch (e) {
