@@ -312,6 +312,18 @@ export default function Permissions() {
       <a href="https://resizemyimagebucket.s3.us-east-2.amazonaws.com/Event+E-voucher+-+Order+ID+_+1200214909+-+18092024.pdf?action=view&filename=dummy&version=1">
         Download / View File
       </a>
+      <h3>Download / View File without query param</h3>
+      <a href="https://resizemyimagebucket.s3.us-east-2.amazonaws.com/Event+E-voucher+-+Order+ID+_+1200214909+-+18092024.pdf">
+        Download / View File
+      </a>
+      <h3>View/Share PDF via JSI</h3>
+      <button onClick={() => handleViewPDF("view")}>View PDF</button>
+      <button onClick={() => handleViewPDF("share")}>Share PDF</button>
+
+      <h3>View/Share PDF via CAR</h3>
+      <button onClick={() => handleViewPDFViaCAR("view")}>View PDF</button>
+      <button onClick={() => handleViewPDFViaCAR("share")}>Share PDF</button>
+
       <h3>Redirect to third party</h3>
       <a href="https://permission-callback-web-page.vercel.app/main.html">
         Third Party
@@ -414,14 +426,6 @@ export default function Permissions() {
 
       <h3>Share PDF</h3>
       <button onClick={handleSharePDF}>Share PDF</button>
-
-      <h3>View/Share PDF via JSI</h3>
-      <button onClick={() => handleViewPDF("view")}>View PDF</button>
-      <button onClick={() => handleViewPDF("share")}>Share PDF</button>
-
-      <h3>View/Share PDF via CAR</h3>
-      <button onClick={() => handleViewPDFViaCAR("view")}>View PDF</button>
-      <button onClick={() => handleViewPDFViaCAR("share")}>Share PDF</button>
     </>
   );
 }
