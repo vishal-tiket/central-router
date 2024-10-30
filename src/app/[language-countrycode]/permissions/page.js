@@ -373,7 +373,7 @@ export default function Permissions() {
       <input type="file" style={{ margin: "20px 0" }} capture="user" />
 
       <h3>File Upload without capture</h3>
-      <input type="file" style={{ margin: "20px 0" }} />
+      <input type="file" style={{ margin: "20px 0" }} accept="image/*,.pdf" />
 
       <h3>FE Contact Picker</h3>
       <button onClick={getContacts}>Get Contacts</button>
