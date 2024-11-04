@@ -1,6 +1,9 @@
 export default function ImagePicker() {
   return (
     <>
+      {/* File upload with capture */}
+      <h3>File Upload with capture</h3>
+      <input type="file" style={{ margin: "20px 0" }} capture="user" />
       {/* Single Image Picker */}
       <h2>Single Image File Picker</h2>
       <input type="file" accept="image/*" />
