@@ -19,7 +19,13 @@ export default function ImagePicker() {
         capture="user"
         onChange={handleFileChange}
       />
-      <img src={image || "#"} alt="Image Preview" width={100} height={100} />
+      <img
+        src={image || "#"}
+        alt="Image Preview"
+        width={100}
+        height={100}
+        style={{ objectFit: "cover" }}
+      />
 
       {/* Single Image Picker */}
       <h2>Single Image File Picker</h2>
