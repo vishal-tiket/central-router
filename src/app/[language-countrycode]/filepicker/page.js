@@ -1,9 +1,26 @@
+"use client";
+import { useState } from "react";
+
 export default function ImagePicker() {
+  const [image, setImage] = useState(null);
+
+  const handleFileChange = (e) => {
+    const src = URL.createObjectURL(e.target.files[0]);
+    setImage(src);
+  };
+
   return (
     <>
       {/* File upload with capture */}
       <h3>File Upload with capture</h3>
-      <input type="file" style={{ margin: "20px 0" }} capture="user" />
+      <input
+        type="file"
+        style={{ margin: "20px 0" }}
+        capture="user"
+        onChange={handleFileChange}
+      />
+      <img src={image || "#"} alt="Image Preview" />
+
       {/* Single Image Picker */}
       <h2>Single Image File Picker</h2>
       <input type="file" accept="image/*" />
