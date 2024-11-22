@@ -18,6 +18,8 @@ export default function JSIPerformance() {
   const [error5, setError5] = useState(null);
   const [error6, setError6] = useState(null);
   const [error7, setError7] = useState(null);
+  const [loading8, setLoading8] = useState(false);
+  const [error8, setError8] = useState(null);
 
   const share2FilesWithBrokenUrls = async () => {
     setLoading1(true);
@@ -152,6 +154,23 @@ export default function JSIPerformance() {
     }
   };
 
+  const sharePDFFile = async () => {
+    setLoading8(true);
+    try {
+      const response = await ShareDownloadableFiles([
+        {
+          url: `${window.location.origin}/api/download-pdf`,
+          name: "dummy-pdf.pdf",
+        },
+      ]);
+    } catch (e) {
+      console.log("error caught", e);
+      setError8(e);
+    } finally {
+      setLoading8(false);
+    }
+  };
+
   return (
     <div>
       <h3>FE Share Wrapper</h3>
@@ -183,6 +202,9 @@ export default function JSIPerformance() {
 
       <button onClick={shareWebpFile}>Share Webp Image</button>
       {loading7 ? <p>Loading...</p> : error7 && <p>{error7}</p>}
+
+      <button onClick={sharePDFFile}>Share PDF</button>
+      {loading8 ? <p>Loading...</p> : error8 && <p>{error8}</p>}
     </div>
   );
 }
