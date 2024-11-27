@@ -5,6 +5,7 @@ import "./style.css";
 import {
   getCurrentLocation,
   ShareDownloadableFiles,
+  SharefilesWithContent,
 } from "@tiket/react-common-navigator-permission";
 import { handleFileAction } from "@tiket/react-common-jsi";
 import { handleFileAction as handleFileActionCAR } from "@tiket/react-common-navigator-permission";
@@ -277,6 +278,35 @@ export default function Permissions() {
     }
   };
 
+  const handleShareSheet = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await SharefilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+        ],
+        message: "This title \nThis message \nhttps://google.com/",
+        analytic: {
+          event: "click",
+          eventCategory: "shareWin",
+          eventLabel: "shareButtonChooseApp",
+          campaignName: "WinterPromo2024",
+          url: "onelink.tiket.com/shareoct",
+          campaignStatus: "Active",
+          eventAction: "clickBack",
+          screenName: "shareWin",
+          screenOwner: "memeber",
+          vertical: "memeber",
+        },
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
   const handleViewPDF = (action) => {
     if (typeof window === "undefined") return;
     try {
@@ -426,6 +456,9 @@ export default function Permissions() {
 
       <h3>Share PDF</h3>
       <button onClick={handleSharePDF}>Share PDF</button>
+
+      <h3>Share Sheet</h3>
+      <button onClick={handleShareSheet}>Share Sheet</button>
     </>
   );
 }
