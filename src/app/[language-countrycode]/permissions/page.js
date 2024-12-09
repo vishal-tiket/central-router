@@ -5,7 +5,6 @@ import "./style.css";
 import {
   getCurrentLocation,
   ShareDownloadableFiles,
-  SharefilesWithContent,
 } from "@tiket/react-common-navigator-permission";
 import { handleFileAction } from "@tiket/react-common-jsi";
 import { handleFileAction as handleFileActionCAR } from "@tiket/react-common-navigator-permission";

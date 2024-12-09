@@ -18,18 +18,6 @@ export default function ShareSheetTesting() {
           },
         ],
         message: "This title \nThis message \nhttps://google.com/",
-        analytic: {
-          event: "click",
-          eventCategory: "shareWin",
-          eventLabel: "shareButtonChooseApp",
-          campaignName: "WinterPromo2024",
-          url: "onelink.tiket.com/shareoct",
-          campaignStatus: "Active",
-          eventAction: "clickBack",
-          screenName: "shareWin",
-          screenOwner: "memeber",
-          vertical: "memeber",
-        },
       });
     } catch (e) {
       console.log("error caught", e);
@@ -42,14 +30,6 @@ export default function ShareSheetTesting() {
       const result = await SharefilesWithContent({
         mimeType: "text/plain",
         message: "This title \nThis message \nhttps://google.com/",
-        analytic: {
-          event: "click",
-          eventCategory: "shareWin",
-          campaignStatus: "Active",
-          eventAction: "clickBack",
-          screenName: "shareWin",
-          vertical: "memeber",
-        },
       });
     } catch (e) {
       console.log("error caught", e);
@@ -68,14 +48,6 @@ export default function ShareSheetTesting() {
         ],
         mimeType: "image/*",
         message: "This title \nThis message \nhttps://google.com/",
-        analytic: {
-          event: "click",
-          eventCategory: "shareWin",
-          campaignStatus: "Active",
-          eventAction: "clickBack",
-          screenName: "shareWin",
-          vertical: "memeber",
-        },
       });
     } catch (e) {
       console.log("error caught", e);
@@ -93,14 +65,6 @@ export default function ShareSheetTesting() {
           },
         ],
         mimeType: "image/*",
-        analytic: {
-          event: "click",
-          eventCategory: "shareWin",
-          campaignStatus: "Active",
-          eventAction: "clickBack",
-          screenName: "shareWin",
-          vertical: "memeber",
-        },
       });
     } catch (e) {
       console.log("error caught", e);
