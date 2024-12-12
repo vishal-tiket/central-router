@@ -4,8 +4,6 @@ import { SharefilesWithContent } from "@tiket/react-common-navigator-permission"
 
 export default function ShareSheetTesting() {
   const handleShareSheett = async () => {
-    console.log("share sheet");
-
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
