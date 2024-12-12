@@ -13,7 +13,7 @@ export async function GET() {
     return new Response(fileBuffer, {
       status: 200,
       headers: {
-        "Content-Type": "image/jpg , image/png , image/gif",
+        "Content-Type": "image/png",
         "Content-Disposition": 'attachment; filename="example.jpg"',
       },
     });

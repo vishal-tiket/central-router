@@ -3,9 +3,22 @@
 import { SharefilesWithContent } from "@tiket/react-common-navigator-permission";
 
 export default function ShareSheetTesting() {
+  const handleShareSheet0 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await SharefilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+        ],
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
   const handleShareSheet = async () => {
-    console.log("Share Sheet with PDF , Image and Message");
-
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -27,8 +40,6 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet1 = async () => {
-    console.log("Share Sheet with Message Only");
-
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -41,8 +52,6 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet2 = async () => {
-    console.log("Share Sheet with Image and Message");
-
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -61,8 +70,6 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet3 = async () => {
-    console.log("Share Sheet with Image Only");
-
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -80,6 +87,8 @@ export default function ShareSheetTesting() {
   };
   return (
     <div>
+      <h1>Share PDF only</h1>
+      <button onlick={handleShareSheet0}>Share Sheet</button>
       <h1>Testing for Share Sheet Buttons</h1>
       <h3>Share Sheet with PDF , Image and Message </h3>
       <button onClick={handleShareSheet}>Share Sheet</button>
