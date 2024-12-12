@@ -3,7 +3,9 @@
 import { SharefilesWithContent } from "@tiket/react-common-navigator-permission";
 
 export default function ShareSheetTesting() {
-  const handleShareSheet0 = async () => {
+  const handleShareSheett = async () => {
+    console.log("share sheet");
+
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -87,9 +89,9 @@ export default function ShareSheetTesting() {
   };
   return (
     <div>
-      <h1>Share PDF only</h1>
-      <button onlick={handleShareSheet0}>Share Sheet</button>
       <h1>Testing for Share Sheet Buttons</h1>
+      <h3>Share PDF only</h3>
+      <button onClick={handleShareSheett}>Share Sheet</button>
       <h3>Share Sheet with PDF , Image and Message </h3>
       <button onClick={handleShareSheet}>Share Sheet</button>
       <h3>Share Sheet with Message Only </h3>
