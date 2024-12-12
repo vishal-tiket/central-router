@@ -4,6 +4,8 @@ import { SharefilesWithContent } from "@tiket/react-common-navigator-permission"
 
 export default function ShareSheetTesting() {
   const handleShareSheet = async () => {
+    console.log("Share Sheet with PDF , Image and Message");
+
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -25,6 +27,8 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet1 = async () => {
+    console.log("Share Sheet with Message Only");
+
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -37,6 +41,8 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet2 = async () => {
+    console.log("Share Sheet with Image and Message");
+
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
@@ -55,6 +61,8 @@ export default function ShareSheetTesting() {
   };
 
   const handleShareSheet3 = async () => {
+    console.log("Share Sheet with Image Only");
+
     if (typeof window === "undefined") return;
     try {
       const result = await SharefilesWithContent({
