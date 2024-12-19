@@ -1,12 +1,12 @@
 "use client";
 
-import { shareFilesWithContent } from "@tiket/react-common-navigator-permission";
+import { SharefilesWithContent } from "@tiket/react-common-navigator-permission";
 
 export default function ShareSheetTesting() {
   const handleShareSheett = async () => {
     if (typeof window === "undefined") return;
     try {
-      const result = await shareFilesWithContent({
+      const result = await SharefilesWithContent({
         files: [
           {
             url: `${window.location.origin}/api/download-pdf`,
@@ -21,7 +21,7 @@ export default function ShareSheetTesting() {
   const handleShareSheet = async () => {
     if (typeof window === "undefined") return;
     try {
-      const result = await shareFilesWithContent({
+      const result = await SharefilesWithContent({
         files: [
           {
             url: `${window.location.origin}/api/download-pdf`,
@@ -42,7 +42,7 @@ export default function ShareSheetTesting() {
   const handleShareSheet1 = async () => {
     if (typeof window === "undefined") return;
     try {
-      const result = await shareFilesWithContent({
+      const result = await SharefilesWithContent({
         mimeType: "text/plain",
         message: "This title \nThis message \nhttps://google.com/",
       });
@@ -54,7 +54,7 @@ export default function ShareSheetTesting() {
   const handleShareSheet2 = async () => {
     if (typeof window === "undefined") return;
     try {
-      const result = await shareFilesWithContent({
+      const result = await SharefilesWithContent({
         files: [
           {
             url: `${window.location.origin}/api/download-img`,
@@ -72,7 +72,7 @@ export default function ShareSheetTesting() {
   const handleShareSheet3 = async () => {
     if (typeof window === "undefined") return;
     try {
-      const result = await shareFilesWithContent({
+      const result = await SharefilesWithContent({
         files: [
           {
             url: `${window.location.origin}/api/download-img`,
