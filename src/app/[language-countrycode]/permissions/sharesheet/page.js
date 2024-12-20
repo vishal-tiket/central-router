@@ -169,6 +169,38 @@ export default function ShareSheetTesting() {
     }
   };
 
+  const handleShareSheet9 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: `empty.png`,
+            name: null,
+          },
+        ],
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleShareSheet10 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: "",
+            name: "",
+          },
+        ],
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
   return (
     <div>
       <h1>Testing for Share Sheet Buttons</h1>
@@ -202,6 +234,12 @@ export default function ShareSheetTesting() {
 
       <h3>Share Sheet with a Image with null or undefined filename</h3>
       <button onClick={handleShareSheet8}>Share Sheet</button>
+
+      <h3>Share Sheet with invalid png </h3>
+      <button onClick={handleShareSheet9}>Share Sheet</button>
+
+      <h3>Share Sheet with empty png </h3>
+      <button onClick={handleShareSheet10}>Share Sheet</button>
     </div>
   );
 }
