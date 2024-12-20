@@ -85,19 +85,123 @@ export default function ShareSheetTesting() {
       console.log("error caught", e);
     }
   };
+
+  const handleShareSheet4 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({});
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleShareSheet5 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-img`,
+            name: "dummy-image.png",
+          },
+          {
+            url: `${window.location.origin}/api/download-img`,
+            name: "dummy-image.png",
+          },
+        ],
+        message: "This title \nThis message \nhttps://google.com/",
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleShareSheet6 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+          {
+            url: `${window.location.origin}/api/download-pdf`,
+            name: "dummy-pdf.pdf",
+          },
+        ],
+        message: "This title \nThis message \nhttps://google.com/",
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleShareSheet7 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-img`,
+            name: "",
+          },
+        ],
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
+  const handleShareSheet8 = async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const result = await shareFilesWithContent({
+        files: [
+          {
+            url: `${window.location.origin}/api/download-img`,
+            name: null,
+          },
+        ],
+      });
+    } catch (e) {
+      console.log("error caught", e);
+    }
+  };
+
   return (
     <div>
       <h1>Testing for Share Sheet Buttons</h1>
+
       <h3>Share PDF only</h3>
       <button onClick={handleShareSheett}>Share Sheet</button>
-      <h3>Share Sheet with PDF , Image and Message </h3>
+
+      <h3>Share Sheet with PDF , Image and Message</h3>
       <button onClick={handleShareSheet}>Share Sheet</button>
-      <h3>Share Sheet with Message Only </h3>
+
+      <h3>Share Sheet with Message Only</h3>
       <button onClick={handleShareSheet1}>Share Sheet</button>
-      <h3>Share Sheet with Image and Message </h3>
+
+      <h3>Share Sheet with Image and Message</h3>
       <button onClick={handleShareSheet2}>Share Sheet</button>
-      <h3>Share Sheet with Image Only </h3>
+
+      <h3>Share Sheet with Image Only</h3>
       <button onClick={handleShareSheet3}>Share Sheet</button>
+
+      <h3>Share Sheet with empty files</h3>
+      <button onClick={handleShareSheet4}>Share Sheet</button>
+
+      <h3>Share Sheet with 2 images and a Text</h3>
+      <button onClick={handleShareSheet5}>Share Sheet</button>
+
+      <h3>Share Sheet with 2 PDFs and a Text</h3>
+      <button onClick={handleShareSheet6}>Share Sheet</button>
+
+      <h3>Share Sheet with a Image but empty file name</h3>
+      <button onClick={handleShareSheet7}>Share Sheet</button>
+
+      <h3>Share Sheet with a Image with null or undefined filename</h3>
+      <button onClick={handleShareSheet8}>Share Sheet</button>
     </div>
   );
 }
