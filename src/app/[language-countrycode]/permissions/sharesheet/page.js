@@ -179,6 +179,7 @@ export default function ShareSheetTesting() {
             name: null,
           },
         ],
+        mimeType: "image/*",
       });
     } catch (e) {
       console.log("error caught", e);
@@ -195,6 +196,7 @@ export default function ShareSheetTesting() {
             name: "",
           },
         ],
+        mimeType: "image/*",
       });
     } catch (e) {
       console.log("error caught", e);
